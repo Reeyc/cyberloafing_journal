@@ -15,10 +15,10 @@ module.exports = {
       { text: "Typescript", link: "/Typescript/" }
     ],
     sidebar: {
-      sidebarDepth: 2,
       "/Javascript/": [
         {
           title: "Javascript基础",
+          sidebarDepth: 2,
           collapsable: false,
           children: [
             "/Javascript/base_data_type",
@@ -36,6 +36,7 @@ module.exports = {
         },
         {
           title: "Javascript进阶",
+          sidebarDepth: 2,
           collapsable: false,
           children: [
             "/Javascript/prototype",
@@ -50,4 +51,11 @@ module.exports = {
       ]
     }
   }
+  // configureWebpack: {
+  //   resolve: {
+  //     alias: {
+  //       "@img": "/.vuepress/public/assets/img"
+  //     }
+  //   }
+  // }
 }
