@@ -1,4 +1,5 @@
 module.exports = {
+  base: "/cyberloafing_journal/",
   title: "Cyberloafing Journal",
   description: "Cyberloafing Journal",
   head: [["link", { rel: "shortcut icon", type: "image/x-icon", href: "/assets/img/logo.png" }]],
