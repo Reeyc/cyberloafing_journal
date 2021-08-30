@@ -63,8 +63,8 @@ document.cookie = `c=d;path=/;expires=${d};`
 ```
 
 ### cookie跨域
-如果 **访问页** 和 **cookie页** 不在同一个域名下则无法访问\
-比如<u>www.a.com</u>默认无法访问<u>www.b.com</u>下的cookie，如果想让<u>www.a.com</u>能访问<u>www.b.com</u>下的cookie，需要设置cookie的`domain`属性，
+如果 **访问页** 和 **cookie页** 不在同一个域名下则无法访问，比如 <u>www.a.com</u> 默认无法访问 <u>www.b.com</u> 下的cookie。\
+如果想让 <u>www.a.com</u> 能访问 <u>www.b.com</u> 下的cookie，需要设置cookie的`domain`属性，
 `domain`属性是cookie的域名地址，将其修改后别的地址也能访问。
 ```js
 document.cookie = `a=b;path=/;domain=a.com;expires=${d};`

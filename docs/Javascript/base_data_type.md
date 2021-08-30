@@ -23,8 +23,8 @@ var variable = string; //string是变量
 console.log('\\'); //显示 /
 console.log('\"'); //显示 "
 console.log('\''); //显示 '
-console.log('\n'); //换行
-console.log('\t'); //制表符
+console.log('\n'); //显示 换行
+console.log('\t'); //显示 制表符
 
 // ...还有更多
 ```
@@ -33,14 +33,14 @@ console.log('\t'); //制表符
 
 所有不加引号的数字都是`Number`类型，包括整数，小数，负数
 ``` js
-console.log(100); //number
-console.log(0); //number
+console.log(100);  //number
+console.log(0);    //number
 console.log(0.99); //number
 console.log(-100); //number
 ```
 
-* `Number.MAX_VALUE`表示数字的最大值，如果超过这个值，那么就会返回一个 `infinity`，也就是无穷大
-* `Number.MIN_VALUE`表示数字的最小值，如果超过这个值，那么就会返回一个 `-infinity`，也就是无穷小
+* `Number.MAX_VALUE`表示数字的最大值，如果超过这个值，会返回一个`infinity`代表无穷大
+* `Number.MIN_VALUE`表示数字的最小值，如果超过这个值，会返回一个`-infinity`代表无穷小
 ``` js
 console.log(Number.MAX_VALUE); //数字的最大值终点
 console.log(Number.MIN_VALUE); //数字的最小值终点
@@ -74,8 +74,8 @@ console.log(a + a !== b); //false
 在对象中，任何对象都是`true`，只有`null`和`undefined`是`false`
 ``` js
 Boolean(new Object()); //true
-Boolean(null); //false
-Boolean(undefined); //false
+Boolean(null);         //false
+Boolean(undefined);    //false
 ```
 
 
@@ -83,7 +83,7 @@ Boolean(undefined); //false
 * `null`的数据类型只有一个，那就是`null`，意思就是空指针对象
 * `undefined`的数据类型也只有一个，那就是`undefined`，意思就是未定义的值
 ``` js
-Object.prototype.toString.call(null); //[object Null]
+Object.prototype.toString.call(null);      //[object Null]
 Object.prototype.toString.call(undefined); //[object Undefined]
 ```
 
@@ -91,25 +91,24 @@ Object.prototype.toString.call(undefined); //[object Undefined]
 ## 数据类型查询
 使用 typeof 运算符来查询某个数据的类型
 ``` js
-console.log(typeof ''); //string
-console.log(typeof 0); //number
+console.log(typeof '');   //string
+console.log(typeof 0);    //number
 console.log(typeof true); //boolean
-console.log(typeof {}); //object
+console.log(typeof {});   //object
 ```
 ::: warning
 `typeof`无法准确判断`null`、`Array`、`Set`、`Map`等数据类型
 建议使用`Object.prototype.toString.call`来判断
 :::
 ``` js
-console.log(typeof null); //object
-console.log(typeof []); //object
+console.log(typeof null);        //object
+console.log(typeof []);          //object
 console.log(typeof new Set([])); //object
 console.log(typeof new Map([])); //object
 ```
 
 ## 包装类的概念
-`String`、`Number`、`Boolean`这种构造函数称之为**包装类**或者**工具类**，这种工具类主要是给JS解释器使用的
-众所周知，基本数据类型是无法调用API的，只有引用类型才可以。当我们使用基本类型的数据来调用API时，JS解释器会将这个基本数据类型传递进`String`、`Number`、`Boolean`里面，暂时将它们转为引用类型，来得以调用API，当API调用完毕，JS解释器又会将这些数据转为基本数据类型
+`String`、`Number`、`Boolean`这种构造函数称之为**包装类**或者**工具类**，这种工具类主要是给JS解释器使用的。众所周知，基本数据类型是无法调用API的，只有引用类型才可以。当我们使用基本类型的数据来调用API时，JS解释器会将这个基本数据类型传递进`String`、`Number`、`Boolean`里面，暂时将它们转为引用类型，来得以调用API，当API调用完毕，JS解释器又会将这些数据转为基本数据类型
 ``` js
 var helloWorld = 'Hello World';
 helloWorld = helloWorld.split('').reverse().join('');
@@ -123,7 +122,7 @@ console.log(typeof helloWorld); //string
 
 ## 数据类型转换
 ### 转string
-* #### 方案一：toString
+* #### toString
 `toString`存在于`Object`构造函数的`prototype`上，它的返回值是字符串类型的实例，根据原型链的指向，所有对象都可以使用`Object`构造函数`prototype`上的方法
 ``` js
 new Number(100).__proto__ === Number.prototype; //true
@@ -138,7 +137,7 @@ new Number(100).toString(); //'100'
 :::
 
 
-* #### 方案二：包装类 String
+* #### 包装类 String
 **String**构造函数的返回值是字符串数据类型，它的实现效果和`toString`是一致的
 ``` js
 console.log(String(100)); //'100'
@@ -147,7 +146,7 @@ console.log(String(null)); //'null'
 console.log(new Object()); //[object Object]
 ```
 
-* #### 方案三：加号运算符 <Badge text="推荐"/> 
+* #### 加号运算符 <Badge text="推荐"/> 
 在JavaScript中，数字使用`+`号跟我们数学中的加号效果是一样的。\
 但如果是两个字符串使用`+`号运算的话，会把这两个字符串 **拼串** 起来。\
 而如果一方是字符串，另一方不是字符串的话，非字符串的一方会被转成字符串，再进行 **拼串** 操作。\
@@ -161,13 +160,13 @@ console.log(new Object() + ''); //'[object Object]'
 ### 转number
 字符串中含有数值类型的字符可以转为**number**，如：`"100"`或`"100abc"`。\
 布尔值也可以转为**number**，`true`会转为1，`false`会转为0。其他类型一律不行。
-* #### 方案一：包装类 Number
+* #### 包装类 Number
 ``` js
 console.log(typeof Number('100')); //number
 console.log(typeof Number('-100')); //number
 console.log(typeof Number('')); //number
 ```
-* #### 方案二：parseInt / parseFloat
+* #### parseInt / parseFloat
 `parseInt`和`parseFloat`是全局对象`window`的API，所以我们在何处都可以调用。\
 `parseInt`会取出一个`String`、`Number`类型中的整数。\
 `parseInt`从前往后扫描，遇到非**number**类型的字符就停止，因此，如果字符串中首位字符是非**number**类型的话，会取到`NaN`
@@ -178,7 +177,7 @@ console.log(typeof parseInt('abc100')); //NaN number
 ```
 `parseFloat`和`parseInt`大同小异，`parseFloat`会取整数+小数，`parseInt`用于取整数。
 
-* #### 方案三：减 乘 除号 运算符 <Badge text="推荐"/> 
+* #### 减 乘 除号 运算符 <Badge text="推荐"/> 
 使用 - * / 运算符对含有**number**字符的字符串进行运算的时候，会把该字符转换为**number**类型再进行运算，为了运算后的结果与原来的一样，我们可以使用 -0 *1 /1 的方式进行运行，这样就实现了转换**number**类型，且不影响原值。
 ``` js
 console.log('100' - 0); //100 number
@@ -186,7 +185,7 @@ console.log('100' * 1); //100 number
 console.log('100' / 1); //100 number
 ```
 
-* #### 方案四：正负运算符 <Badge text="推荐"/> 
+* #### 正负运算符 <Badge text="推荐"/> 
 正负运算符就是一个加号`+`和`-`。但是不要把它跟算数运算符的 + - 混淆。\
 它必须写在数据的前面，可以接收只有一个运算的数据，把该数据隐性转为**number**，例如：`+'100'`\
 而算数运算符必须有两个运算的数据，把数据拼为一个字符串，例如：`'100'+''`
@@ -204,7 +203,7 @@ console.log(-'99'); //-99 number
 * 数值除了0和`NaN`外，转为**boolean**都是`true`，0和**NaN**转为`false`
 * 对象转为**boolean**都是`true`
 * **null**和**undefined**转为`false`
-* #### 方案一：包装类 Boolean
+* #### 包装类 Boolean
 ``` js
 console.log(Boolean('Hello World')); //true
 console.log(Boolean('')); //false
@@ -219,7 +218,7 @@ console.log(Boolean(null)); //false
 console.log(Boolean(undefined)); //false
 ```
 
-* #### 方案二：非运算符 <Badge text="推荐"/> 
+* #### 非运算符 <Badge text="推荐"/> 
 非运算符`!`会将一个数据类型隐形转换为布尔值**boolean**并取反，同理，使用两个非运算符就可以转回来了。
 ``` js
 console.log(!!'Hello World'); //true
