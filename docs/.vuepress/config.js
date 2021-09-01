@@ -48,6 +48,26 @@ module.exports = {
             "/Javascript/render"
           ]
         }
+      ],
+      "/ES6/": [
+        {
+          title: "ECMAScript 6.0",
+          sidebarDepth: 2,
+          collapsable: false,
+          children: [
+            "/ES6/declaration",
+            "/ES6/deconstruction",
+            "/ES6/extend",
+            "/ES6/stringExtend",
+            "/ES6/arrayExtend",
+            "/ES6/functionExtend",
+            "/ES6/objectExtend",
+            "/ES6/regExpExtend",
+            "/ES6/symbol",
+            "/ES6/setMap",
+            "/ES6/iterator"
+          ]
+        }
       ]
     }
   }

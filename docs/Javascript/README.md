@@ -1,6 +1,4 @@
-# JavaScript系统学习指南
-
-****
+## Cyberloafing Journal - Javascript
 
 * [基本数据类型](/Javascript/base_data_type.md)
 * [运算符](/Javascript/operator.md)
