@@ -65,17 +65,11 @@ module.exports = {
             "/ES6/regExpExtend",
             "/ES6/symbol",
             "/ES6/setMap",
-            "/ES6/iterator"
+            "/ES6/iterator",
+            "/ES6/promise"
           ]
         }
       ]
     }
   }
-  // configureWebpack: {
-  //   resolve: {
-  //     alias: {
-  //       "@img": "/.vuepress/public/assets/img"
-  //     }
-  //   }
-  // }
 }

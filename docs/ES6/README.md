@@ -11,4 +11,5 @@
 * [Symbol](/ES6/symbol.md)
 * [Set & Map](/ES6/setMap.md)
 * [Iterator](/ES6/iterator.md)
+* [Promise](/ES6/promise.md)
 
