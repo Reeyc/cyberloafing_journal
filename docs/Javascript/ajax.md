@@ -16,12 +16,12 @@ web程序的最初目的就是将数据放到服务器上，让所有网络用�
 var xhr = new XMLHttpRequest();
 ```
 :::warning
-IE6及以下不支持`XMLHttpRequest`
-:::
+IE6及以下不支持`XMLHttpRequest`。\
 需要通过`ActiveXObject`构造函数来创建，并传递一个字符串参数`"Microsoft.XMLHTTP"`
 ```js
 var xhr = new ActiveXObject("Microsoft.XMLHTTP");
 ```
+:::
 
 ### 2. 创建http请求
 ```js
@@ -41,7 +41,7 @@ xhr.send();
 xhr.send('foo=bar&kay=value'); //POST方式传递参数
 ```
 ::: warning
-`ajax`发送`post`请求的请求体默认是 **payload格式** 的，这在服务端无法有效获取到数据
+`ajax`发送`post`请求的请求体默认是 **payload格式** 的，这在服务端无法有效获取到数据。\
 :::
 
 通过`setRequestHeader()`设置请求头的属性

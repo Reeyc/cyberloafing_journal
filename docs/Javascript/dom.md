@@ -173,12 +173,11 @@ div.style.width = "300px";
 ```
 ::: warning
 在css中，凡是带有`-`的在js中都不合法，应该用驼峰命名法，去掉`-`，`-`后面的第一个字母用大写表示。
-:::
-
 ```js
 background-color = "yellow"; //Bad
 backgroundColor = "yellow";  //Good
 ```
+:::
 通过这种方式修改的是**内联样式**，读取时，也是只读**内联样式**，无法读取样式表的样式
 
 ```html

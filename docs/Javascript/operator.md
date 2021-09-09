@@ -12,12 +12,12 @@ console.log(new Object - {}); //NaN
 ```
 ::: warning
 **拼串现象：**+号运算符的特殊情况，如果运算的某一方是字符串，会作拼串操作，如另一方非字符串，会将其转为字符串再拼串
-:::
 ```js
 console.log('Hello' + ' World'); //'Hello World'
 console.log('Hi ' + {}); //'Hi [object Object]'
 console.log(1 + '99'); //'199'
 ```
+:::
 ### 取模
 * <u>**\%**</u>
 
@@ -189,12 +189,10 @@ console.log('99' <= Number.MAX_VALUE); //true
 任何值跟`NaN`运算，都返回`false`
 :::
 
+两个字符串作比较时，比较的是它们的Unicode编码，一位一位的进行比较，如果这边的第一位编码大于另一边第一位的编码，那么不会再检查第二位。
 ``` js
 console.log('我' > '你'); //true
 ```
-::: tip
-两个字符串作比较时，比较的是它们的Unicode编码，一位一位的进行比较，如果这边的第一位编码大于另一边第一位的编码，那么不会再检查第二位。
-:::
 
 ## 比较运算符
 * <u>**\==&nbsp;&nbsp;&nbsp;&nbsp;\!=&nbsp;&nbsp;&nbsp;&nbsp;\===&nbsp;&nbsp;&nbsp;&nbsp;\!==**</u>
@@ -215,7 +213,6 @@ console.log(1000 !== 1000); //false
 ::: tip
 引用类型比较的是引用地址，因此两个对象无论如何比较，都是不相等\
 但是对象的属性比较的是值，对象属性可以是相等情况
-:::
 ``` js
 var obj = { age: 18 };
 var obj2 = { age: 18 };
@@ -223,6 +220,7 @@ var obj2 = { age: 18 };
 console.log(obj == obj2); //false
 console.log(obj2.age === obj2.age); //true
 ```
+:::
 
 ## 三元运算符
 * <u>**\?&nbsp;&nbsp;:**</u>

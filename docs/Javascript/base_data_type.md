@@ -99,13 +99,13 @@ console.log(typeof {});   //object
 ::: warning
 `typeof`无法准确判断`null`、`Array`、`Set`、`Map`等数据类型
 建议使用`Object.prototype.toString.call`来判断
-:::
 ``` js
 console.log(typeof null);        //object
 console.log(typeof []);          //object
 console.log(typeof new Set([])); //object
 console.log(typeof new Map([])); //object
 ```
+:::
 
 ## 包装类的概念
 `String`、`Number`、`Boolean`这种构造函数称之为**包装类**或者**工具类**，这种工具类主要是给JS解释器使用的。众所周知，基本数据类型是无法调用API的，只有引用类型才可以。当我们使用基本类型的数据来调用API时，JS解释器会将这个基本数据类型传递进`String`、`Number`、`Boolean`里面，暂时将它们转为引用类型，来得以调用API，当API调用完毕，JS解释器又会将这些数据转为基本数据类型

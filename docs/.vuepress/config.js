@@ -6,7 +6,7 @@ module.exports = {
   markdown: {
     lineNumbers: false // 代码块显示行号
   },
-  plugins: ["@vuepress/nprogress", "@vuepress/back-to-top"],
+  plugins: ["@vuepress/nprogress", "@vuepress/back-to-top", "reading-progress"],
   themeConfig: {
     logo: "/assets/img/logo.png",
     nav: [

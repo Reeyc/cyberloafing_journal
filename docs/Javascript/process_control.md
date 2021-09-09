@@ -233,10 +233,6 @@ if(num){
 }
 ```
 `break`是永远退出循环，而`continue`是退出当次循环，下一轮继续
-::: tip
-`continue`不能单独用作于`if`或者`switch`之中
-:::
-
 ```js
 for (var i = 0; i < 5; i++) {
   document.write("外循环<br>");
@@ -246,3 +242,6 @@ for (var i = 0; i < 5; i++) {
   }
 }
 ```
+::: tip
+`continue`不能单独用作于`if`或者`switch`之中
+:::
