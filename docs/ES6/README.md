@@ -12,4 +12,9 @@
 * [Set & Map](/ES6/setMap.md)
 * [Iterator](/ES6/iterator.md)
 * [Promise](/ES6/promise.md)
+* [Generator](/ES6/generator.md)
+* [Async](/ES6/async.md)
+* [Class](/ES6/class.md)
+* [Proxy](/ES6/proxy.md)
+* [Module](/ES6/module.md)
 

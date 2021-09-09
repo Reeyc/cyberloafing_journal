@@ -6,13 +6,15 @@ module.exports = {
   markdown: {
     lineNumbers: false // 代码块显示行号
   },
+  plugins: ["@vuepress/nprogress", "@vuepress/back-to-top"],
   themeConfig: {
     logo: "/assets/img/logo.png",
     nav: [
       { text: "Javascript", link: "/Javascript/" },
       { text: "ES6+", link: "/ES6/" },
       { text: "Vue", link: "/Vue/" },
-      { text: "Typescript", link: "/Typescript/" }
+      { text: "Typescript", link: "/Typescript/" },
+      { text: "Github", link: "https://github.com/Reeyc/cyberloafing_journal" }
     ],
     sidebar: {
       "/Javascript/": [
@@ -66,7 +68,12 @@ module.exports = {
             "/ES6/symbol",
             "/ES6/setMap",
             "/ES6/iterator",
-            "/ES6/promise"
+            "/ES6/promise",
+            "/ES6/generator",
+            "/ES6/async",
+            "/ES6/class",
+            "/ES6/proxy",
+            "/ES6/module"
           ]
         }
       ]
