@@ -72,8 +72,25 @@ module.exports = {
             "/ES6/generator",
             "/ES6/async",
             "/ES6/class",
-            "/ES6/proxy",
             "/ES6/module"
+          ]
+        }
+      ],
+      "/Vue/": [
+        {
+          title: "Vue",
+          sidebarDepth: 2,
+          collapsable: false,
+          children: [
+            "/Vue/direct.md",
+            "/Vue/class_style.md",
+            "/Vue/instance_prop.md",
+            "/Vue/life_cycle.md",
+            "/Vue/components.md",
+            "/Vue/original_component.md",
+            "/Vue/animate.md",
+            "/Vue/vue_router.md",
+            "/Vue/vuex.md"
           ]
         }
       ]

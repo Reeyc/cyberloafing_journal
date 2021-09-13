@@ -1,4 +1,4 @@
-## Cyberloafing Journal - Javascript ES6+
+## ECMAScript6.0+
 
 * [块级作用域](/ES6/declaration.md)
 * [解构赋值](/ES6/deconstruction.md)
@@ -15,6 +15,4 @@
 * [Generator](/ES6/generator.md)
 * [Async](/ES6/async.md)
 * [Class](/ES6/class.md)
-* [Proxy](/ES6/proxy.md)
 * [Module](/ES6/module.md)
-
