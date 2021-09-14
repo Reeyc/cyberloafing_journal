@@ -2,11 +2,11 @@
 
 ## 绑定class
 * **传递字符串**
-```html
+```vue
 <div :class='"myString"'></div>
 ```
 class不可以取值为数值类型，但是可以取值为字符串类型的数字
-```html
+```vue
 <div :class='100'></div>   <!--Bad -->
 <div :class='"100"'></div> <!--Good -->
 ```
@@ -41,7 +41,7 @@ export default {
 传递对象只有`class`和`style`属性允许，其他普通的属性不允许。对象内的每个`value`会转化为布尔值。
 * 当布尔值为`true`，将`key`当做绑定的值绑定上去。
 * 当布尔值为`false`，不绑定该属性。
-```html
+```vue
 <div :class='{ a: true, b: 100, c: false, d: null }'></div> <!--Good -->
 <div :prop='{ a: true, b: 100, c: false, d: null }'></div>  <!--Bad -->
 ```
@@ -99,7 +99,7 @@ export default {
 
 对象的`key`就是css的属性，属性用原生JS的驼峰命名法。\
 对象的`value`就是css的属性值，属性值可以手写，也可以用`data`对象的`key`值表示，取值为对应的`value`值。
-```html
+```vue
 <div :style='{ fontSize: 30 + "px", backgroundColor: "red" }'></div>
 ```
 当然，对象写在模板中不利于模板的结构清晰，也可以跟绑定class一样，将对象写在`data`中

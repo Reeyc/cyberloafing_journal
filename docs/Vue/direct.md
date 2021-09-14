@@ -140,7 +140,7 @@ export default {
 
 ## v-for
 用于遍历对象或者数组并渲染到页面上，语法：
-```html
+```vue
 <div v-for='(item, index) in data'></div>
 
 <!-- in 关键字也可以换成 of -->
@@ -181,7 +181,7 @@ export default {
 
 ## v-bind
 绑定数据的指令，它通过冒号绑定一个数据，例如：
-```html
+```vue
 <h1 v-bind:index='1'></h1>
 ```
 上面例子中，`index`就是`v-bind`要绑定到元素上的属性，`1`就是绑定的值。
