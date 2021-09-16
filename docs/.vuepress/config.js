@@ -82,21 +82,41 @@ module.exports = {
           sidebarDepth: 2,
           collapsable: false,
           children: [
-            "/Vue/direct.md",
-            "/Vue/class_style.md",
-            "/Vue/instance_prop.md",
-            "/Vue/life_cycle.md",
-            "/Vue/components.md",
-            "/Vue/original_component.md",
-            "/Vue/animate.md",
-            "/Vue/vue_router.md",
-            "/Vue/vuex.md"
+            "/Vue/direct",
+            "/Vue/class_style",
+            "/Vue/instance_prop",
+            "/Vue/life_cycle",
+            "/Vue/components",
+            "/Vue/original_component",
+            "/Vue/animate",
+            "/Vue/vue_router",
+            "/Vue/vuex"
           ]
         },
         {
           sidebarDepth: 2,
           collapsable: false,
-          children: ["/Vue/communication.md", "/Vue/pack.md", "/Vue/reactive.md"]
+          children: ["/Vue/communication", "/Vue/pack", "/Vue/reactive"]
+        }
+      ],
+      "/TypeScript/": [
+        {
+          title: "TypeScript",
+          sidebarDepth: 2,
+          collapsable: false,
+          children: [
+            "/TypeScript/base",
+            "/TypeScript/tuple",
+            "/TypeScript/enum",
+            "/TypeScript/function",
+            "/TypeScript/advanced",
+            "/TypeScript/assertion",
+            "/TypeScript/class",
+            "/TypeScript/interface",
+            "/TypeScript/generic",
+            "/TypeScript/operator",
+            "/TypeScript/decorator"
+          ]
         }
       ]
     }
