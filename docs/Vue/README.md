@@ -9,3 +9,9 @@
 * [动画](/Vue/animate.md)
 * [VueRouter](/Vue/vue_router.md)
 * [Vuex](/Vue/vuex.md)
+
+---
+
+* [组件通信汇总](/Vue/communication.md)
+* [打包优化汇总](/Vue/pack.md)
+* [Vue响应式原理](/Vue/reactive.md)

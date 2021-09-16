@@ -92,6 +92,11 @@ module.exports = {
             "/Vue/vue_router.md",
             "/Vue/vuex.md"
           ]
+        },
+        {
+          sidebarDepth: 2,
+          collapsable: false,
+          children: ["/Vue/communication.md", "/Vue/pack.md", "/Vue/reactive.md"]
         }
       ]
     }
