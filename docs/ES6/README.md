@@ -1,4 +1,4 @@
-## ECMAScript6.0+
+## ECMAScript6.0
 
 * [块级作用域](/ES6/declaration.md)
 * [解构赋值](/ES6/deconstruction.md)

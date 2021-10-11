@@ -11,7 +11,7 @@ module.exports = {
     logo: "/assets/img/logo.png",
     nav: [
       { text: "Javascript", link: "/Javascript/" },
-      { text: "ES6+", link: "/ES6/" },
+      { text: "ES6", link: "/ES6/" },
       { text: "Vue", link: "/Vue/" },
       { text: "Typescript", link: "/Typescript/" },
       { text: "Github", link: "https://github.com/Reeyc/cyberloafing_journal" }
