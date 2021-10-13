@@ -20,7 +20,7 @@ var variable = string; //string是变量
 
 字符串中，有一些特殊字符不能直接显示，需要在这个特殊字符的前面加 \ 为转义字符
 ``` js
-console.log('\\'); //显示 /
+console.log('\\'); //显示 \
 console.log('\"'); //显示 "
 console.log('\''); //显示 '
 console.log('\n'); //显示 换行
@@ -71,7 +71,7 @@ var b = 2;
 console.log(a + a === b); //true
 console.log(a + a !== b); //false
 ```
-在对象中，任何对象都是`true`，只有`null`和`undefined`是`false`
+在对象中，任何对象都是`true`，`null`和`undefined`是`false`
 ``` js
 Boolean(new Object()); //true
 Boolean(null);         //false
@@ -80,8 +80,8 @@ Boolean(undefined);    //false
 
 
 ## Null & Undefined
-* `null`的数据类型只有一个，那就是`null`，意思就是空指针对象
-* `undefined`的数据类型也只有一个，那就是`undefined`，意思就是未定义的值
+* `null`的数据类型只有一个，那就是`null`，表示空指针对象
+* `undefined`的数据类型也只有一个，那就是`undefined`，表示未定义的值
 ``` js
 Object.prototype.toString.call(null);      //[object Null]
 Object.prototype.toString.call(undefined); //[object Undefined]
@@ -89,7 +89,7 @@ Object.prototype.toString.call(undefined); //[object Undefined]
 
 
 ## 数据类型查询
-使用 typeof 运算符来查询某个数据的类型
+使用`typeof`运算符来查询某个数据的类型
 ``` js
 console.log(typeof '');   //string
 console.log(typeof 0);    //number
@@ -97,8 +97,7 @@ console.log(typeof true); //boolean
 console.log(typeof {});   //object
 ```
 ::: warning
-`typeof`无法准确判断`null`、`Array`、`Set`、`Map`等数据类型
-建议使用`Object.prototype.toString.call`来判断
+`typeof`无法准确判断`null`、`Array`、`Set`、`Map`等数据类型。推荐使用`Object.prototype.toString.call`来判断这些数据类型。
 ``` js
 console.log(typeof null);        //object
 console.log(typeof []);          //object
@@ -108,7 +107,7 @@ console.log(typeof new Map([])); //object
 :::
 
 ## 包装类的概念
-`String`、`Number`、`Boolean`这种构造函数称之为**包装类**或者**工具类**，这种工具类主要是给JS解释器使用的。众所周知，基本数据类型是无法调用API的，只有引用类型才可以。当我们使用基本类型的数据来调用API时，JS解释器会将这个基本数据类型传递进`String`、`Number`、`Boolean`里面，暂时将它们转为引用类型，来得以调用API，当API调用完毕，JS解释器又会将这些数据转为基本数据类型
+`String`、`Number`、`Boolean`这种构造函数称之为**包装类**或者**工具类**，这种工具类主要是给JS解释器使用的。众所周知，基本数据类型是无法调用API的，只有引用类型才可以。当使用基本类型的数据来调用API时，JS解释器会将这个基本数据类型传递进`String`、`Number`、`Boolean`里面，暂时将它们转为引用类型，来得以调用API，当API调用完毕，JS解释器又会将这些数据转为基本数据类型
 ``` js
 var helloWorld = 'Hello World';
 helloWorld = helloWorld.split('').reverse().join('');
@@ -117,8 +116,7 @@ console.log(helloWorld); //dlroW olleH
 
 console.log(typeof helloWorld); //string
 ```
-上述例子，helloWorld本是字符串，为什么它可以使用引用类型的`spilt`、`reverse`、`join`方法呢？
-原因就是我们所说的JS引擎内部调用了包装类`String`，将其暂时转为引用类型，而后才将它转回来
+上述例子，helloWorld本是字符串，却可以使用引用类型的`spilt`、`reverse`、`join`方法。原因就是JS引擎内部调用了包装类`String`，将其暂时转为引用类型，而后才将它转回来
 
 ## 数据类型转换
 ### 转string
@@ -147,10 +145,9 @@ console.log(new Object()); //[object Object]
 ```
 
 * #### 加号运算符 <Badge text="推荐"/> 
-在JavaScript中，数字使用`+`号跟我们数学中的加号效果是一样的。\
-但如果是两个字符串使用`+`号运算的话，会把这两个字符串 **拼串** 起来。\
-而如果一方是字符串，另一方不是字符串的话，非字符串的一方会被转成字符串，再进行 **拼串** 操作。\
-所以，我们可以使用一个空串`+`要转换的数据类型，就会将其转为字符串了。
+在JavaScript中，数字使用`+`号跟数学中的加号效果是一样的。\
+但如果是两个字符串使用`+`号运算的话，会把这两个字符串 **拼串** 起来。而如果一方是字符串，另一方不是字符串的话，非字符串的一方会被转成字符串，再进行 **拼串** 操作。\
+所以，将一个数据类型`+`一个空串，就会将其转为字符串了。
 ``` js
 console.log('Hello' + ' World'); //Hello World
 console.log(100 + ''); //'100'
@@ -167,7 +164,7 @@ console.log(typeof Number('-100')); //number
 console.log(typeof Number('')); //number
 ```
 * #### parseInt / parseFloat
-`parseInt`和`parseFloat`是全局对象`window`的API，所以我们在何处都可以调用。\
+`parseInt`和`parseFloat`是全局对象`window`的API，在何处都可以调用。\
 `parseInt`会取出一个`String`、`Number`类型中的整数。\
 `parseInt`从前往后扫描，遇到非**number**类型的字符就停止，因此，如果字符串中首位字符是非**number**类型的话，会取到`NaN`
 ``` js
@@ -175,10 +172,10 @@ console.log(typeof parseInt('100')); //100 number
 console.log(typeof parseInt('10abc99')); //10 number
 console.log(typeof parseInt('abc100')); //NaN number
 ```
-`parseFloat`和`parseInt`大同小异，`parseFloat`会取整数+小数，`parseInt`用于取整数。
+`parseFloat`和`parseInt`大同小异，`parseFloat`会取整数与小数，`parseInt`用于取整数。
 
 * #### 减 乘 除号 运算符 <Badge text="推荐"/> 
-使用 - * / 运算符对含有**number**字符的字符串进行运算的时候，会把该字符转换为**number**类型再进行运算，为了运算后的结果与原来的一样，我们可以使用 -0 *1 /1 的方式进行运行，这样就实现了转换**number**类型，且不影响原值。
+使用 - * / 运算符对含有**number**字符的字符串进行运算的时候，会把该字符转换为**number**类型再进行运算，为了运算后的结果与原来的一样，可以使用 -0 *1 /1 的方式进行运行，这样就实现了转换**number**类型，且不影响原值。
 ``` js
 console.log('100' - 0); //100 number
 console.log('100' * 1); //100 number
