@@ -6,6 +6,7 @@
 * [生命周期](/Vue/life_cycle.md)
 * [组件化](/Vue/components.md)
 * [内置组件](/Vue/original_component.md)
+* [组合、复用](/Vue/multiplex.md)
 * [动画](/Vue/animate.md)
 * [VueRouter](/Vue/vue_router.md)
 * [Vuex](/Vue/vuex.md)

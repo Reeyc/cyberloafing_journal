@@ -88,6 +88,7 @@ module.exports = {
             "/Vue/life_cycle",
             "/Vue/components",
             "/Vue/original_component",
+            "/Vue/multiplex",
             "/Vue/animate",
             "/Vue/vue_router",
             "/Vue/vuex"
