@@ -23,10 +23,11 @@ const arr6: Array<any> = [true, 100, undefined, null, 'hello']
 ```
 
 ## 元组
-ts中的元组类型就是对数组的扩展，元组严格限制类型、长度。
+ts中的元组类型就是对数组的扩展，元组严格限制类型、长度、位置。
 ```ts
 let arr1: [boolean, string, number] = [true, 'hello', 123456]
 
 arr1 = [1, 'hello', 123456] //Error 类型报错
 arr1 = [true, 'hello', 123456, undefined] //Error 长度报错
+arr1 = [true, 123456, 'hello'] //Error 位置报错
 ```
