@@ -78,26 +78,39 @@ module.exports = {
       ],
       "/Vue/": [
         {
-          title: "Vue",
+          title: "Vue2",
           sidebarDepth: 2,
           collapsable: false,
           children: [
-            "/Vue/direct",
-            "/Vue/class_style",
-            "/Vue/instance_prop",
-            "/Vue/life_cycle",
-            "/Vue/components",
-            "/Vue/original_component",
-            "/Vue/multiplex",
-            "/Vue/animate",
-            "/Vue/vue_router",
-            "/Vue/vuex"
+            "/Vue/vue2/direct",
+            "/Vue/vue2/class_style",
+            "/Vue/vue2/instance_prop",
+            "/Vue/vue2/life_cycle",
+            "/Vue/vue2/components",
+            "/Vue/vue2/original_component",
+            "/Vue/vue2/multiplex",
+            "/Vue/vue2/animate",
+            "/Vue/vue2/vue_router",
+            "/Vue/vue2/vuex",
+            "/Vue/vue2/communication",
+            "/Vue/vue2/pack",
+            "/Vue/vue2/reactive"
           ]
         },
         {
+          title: "Vue3",
           sidebarDepth: 2,
           collapsable: false,
-          children: ["/Vue/communication", "/Vue/pack", "/Vue/reactive"]
+          children: [
+            "/Vue/vue3/personality",
+            "/Vue/vue3/life_cycle",
+            "/Vue/vue3/reactive",
+            "/Vue/vue3/ref",
+            "/Vue/vue3/other",
+            "/Vue/vue3/listen",
+            "/Vue/vue3/hook",
+            "/Vue/vue3/internal"
+          ]
         }
       ],
       "/TypeScript/": [
