@@ -252,7 +252,6 @@ export default function <T>(value: T, delay = 200) {
           value = newVal
           trigger() //告诉vue更新界面
         }, delay)
-        trigger()
       }
     }
   })

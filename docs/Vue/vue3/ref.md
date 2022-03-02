@@ -42,10 +42,10 @@ console.log(user.children) // Proxy {}
 ```
 
 ## ref
-ref会将接收的数据转换为一个 **`ref对象`**。注意，ref对象并不是Proxy对象，ref对象仅仅有一个 **`value`属性**，属性值为传递进来的数据。value属性是响应式的，vue内部使用`get`和`set`劫持了 **`value`属性**。
+ref会将接收的数据转换为一个 **`ref对象`**。注意，ref对象并不是Proxy对象，ref对象仅仅有一个 **`value`** 属性，属性值为传递进来的数据。**`value`** 属性是响应式的，vue内部使用`get`和`set`劫持了 **`value`** 属性。
 
-* 当我们在JS中，读取或者修改时，都应该**操作value属性**。
-* 当我们在模板中使用时，可以**免写`.value`**，vue为了顶层变量做了解套处理。
+* 当我们在JS中，读取或者修改时，都应该**操作value**属性。
+* 当我们在模板中使用时，可以免写 **`.value`**，vue为了顶层变量做了解套处理。
 
 ```vue
 <template lang="">
