@@ -14,6 +14,7 @@ module.exports = {
       { text: "ES6", link: "/ES6/" },
       { text: "Vue", link: "/Vue/" },
       { text: "Typescript", link: "/Typescript/" },
+      { text: "面经", link: "/Interview/" },
       { text: "Github", link: "https://github.com/Reeyc/cyberloafing_journal" }
     ],
     sidebar: {
@@ -131,6 +132,14 @@ module.exports = {
             "/TypeScript/operator",
             "/TypeScript/decorator"
           ]
+        }
+      ],
+      "/Interview/": [
+        {
+          title: "面试题",
+          sidebarDepth: 2,
+          collapsable: false,
+          children: ["/Interview/vue"]
         }
       ]
     }
