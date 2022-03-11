@@ -139,7 +139,7 @@ module.exports = {
           title: "面试题",
           sidebarDepth: 2,
           collapsable: false,
-          children: ["/Interview/vue"]
+          children: ["/Interview/css", "/Interview/js", "/Interview/vue", "/Interview/broswer"]
         }
       ]
     }

@@ -1,6 +1,6 @@
 ## 面试题
 
-* [浏览器](/Interview/vue.md)
-* [CSS](/Interview/vue.md)
-* [JS](/Interview/vue.md)
+* [浏览器](/Interview/broswer.md)
+* [CSS](/Interview/css.md)
+* [JS](/Interview/js.md)
 * [Vue](/Interview/vue.md)
