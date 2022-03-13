@@ -1,7 +1,7 @@
 module.exports = {
   // base: "/cyberloafing_journal/",
   title: "Cyberloafing Journal",
-  description: "Cyberloafing Journal",
+  description: "网络闲散日志",
   head: [["link", { rel: "shortcut icon", type: "image/x-icon", href: "/assets/img/logo.png" }]],
   markdown: {
     lineNumbers: false // 代码块显示行号
