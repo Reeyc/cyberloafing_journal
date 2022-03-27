@@ -109,13 +109,12 @@ console.log(res)
 ```
 
 ## 泛型约束
-泛型约束就是给泛型加接口条件，指定满足特定接口条件的类型才可通过检查。
+泛型约束就是给泛型加接口条件，指定满足特定接口条件的类型才可通过检查。下面代码中，泛型`T`必须满足`LengthInterface`接口条件
 ```ts
 interface LengthInterface {
   length: number
 }
 
-//定义一个泛型T，该泛型的类型必须满足LengthInterface接口条件
 function createArray<T extends LengthInterface>(len: number, val: T): T[] {
   return new Array(len).fill(val)
 }
@@ -124,11 +123,9 @@ createArray<string>(5, 'hello') //Good
 createArray<number>(5, 'hello') //Error: number类型没有length属性，不满足接口条件
 ```
 
-## 使用类型参数
-一个泛型被另一个泛型所约束，这就叫在泛型中使用类型参数，也就是说被约束的泛型必须存在主泛型的key中。
-语法：`<被约束的泛型 extends keyof 主泛型>`
+### 使用类型参数
+在泛型约束时，还可以使用类型参数，下面代码中，被约束的泛型`K`必须存在主泛型`T`的key中。语法：`<被约束的泛型 extends keyof 主泛型>`
 ```ts
-//K必须存在T的key中
 function getProps<T, K extends keyof T>(obj: T, key: K): any {
   return obj[key]
 }
@@ -146,16 +143,17 @@ Typescript 内置了一些工具泛型，不需要任何依赖就可以直接使
 type Person = {
   name: string
   age: number
+  gender?: 1 | 2
 }
 
-// { name?: string; age?: number; }
+// { name?: string; age?: number; gender?: 1 | 2 }
 type newPerson = Partial<Person>
 
-// { name: string; age: number; }
+// { name: string; age: number; gender: 1 | 2 }
 type newPerson2 = Required<Person>
 
 const p: newPerson = { age: 18 }
-const p2: newPerson2 = { name: "Lucy", age: 20 }
+const p2: newPerson2 = { name: "Lucy", age: 20, gender: 1 }
 ```
 
 * **`Pick<T, K extends keyof T>`**：提取接口的某几个属性。

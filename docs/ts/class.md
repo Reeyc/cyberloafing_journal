@@ -1,6 +1,23 @@
 # 类
 
-ts中的类，以及实例属性、实例方法、镜头属性、静态方法。
+ts中的类也是一种类型，实例化对象的类型默认是这个类。
+```ts
+class Person {
+  sayHello(): void {
+    console.log("hello ts")
+  }
+}
+
+// 跟下面是一样的
+const p = new Person()
+// const p: Person = new Person()
+
+p.sayHello()
+```
+
+---
+
+类中的实例属性、实例方法、镜头属性、静态方法。
 ```ts
 class Person {
   name: string //实例属性
@@ -21,7 +38,7 @@ class Person {
 }
 ```
 
-## 实例属性/实例方法修饰符
+## 属性/方法修饰符
 TS为class里面的实例属性和实例方法添加了4种修饰符。
 * **`public`（公开的）**：基类 / 子类 / 实例都能访问（默认修饰符）。
 * **`protected`（受保护的）**：基类 / 子类能访问（只能在基类和子类内部访问）。
@@ -78,7 +95,7 @@ console.log("实例：", c.score) //Bad
 
 c.score = 300 //Bad
 ```
-### 属性也可以在构造函数中初始化
+### 属性在构造函数中初始化
 ```ts
 class Person {
   constructor(public name: string, private gender: string) {}
