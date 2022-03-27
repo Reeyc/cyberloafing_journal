@@ -11,7 +11,7 @@ function* demo() {
 }
 let iterator = demo() //指针对象 Iterator接口
 ```
-调用Generator函数，函数并不会执行，而是返回一个[Iterator迭代器对象](/ES6/iterator.html)。
+调用Generator函数，函数并不会执行，而是返回一个[Iterator迭代器对象](/es6/iterator.html)。
 ```js
 // Genarator函数作为对象方法
 let obj = {
@@ -56,7 +56,7 @@ iterator.next() // return结束
 ```
 
 ## 状态
-每一个`yield`后面的表达式的值就是当前阶段的状态，该状态保存在 [Iterator](/ES6/iterator.html) 接口的信息对象的`value`属性中。\
+每一个`yield`后面的表达式的值就是当前阶段的状态，该状态保存在 [Iterator](/es6/iterator.html) 接口的信息对象的`value`属性中。\
 `done`属性则是一个Boolean值，它代表状态的遍历是否结束，`false`表示未结束，`true`表示已结束，当遇到`return`或者没有`return`且执行到最后一个`yield`时，它变为`true`。
 ```js
 function* demo(num) {

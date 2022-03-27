@@ -75,7 +75,7 @@ iterator.next(); // { value: undefined, fone: true }
 每一次调用`next`，指针对象`iterator`的指针就指向数据结构的下一个成员，直到数据结构结束，`value`的值变成`undefined`，`done`变为`true`
 
 ## 默认Iterator接口
-有一些数据默认已经部署了`Iterator`接口，而不需要我们手动去部署，这个接口部署在数据结构的`Symbol.iterator`属性上。换言之，只要某个数据拥有`Symbol.iterator`属性，那么这个数据就是可迭代的。当使用[某些特定的手段](/ES6/iterator.html#for-of)去迭代具有Iterator接口的数据时，默认就会调用一次该数据的`Symbol.iterator`属性。
+有一些数据默认已经部署了`Iterator`接口，而不需要我们手动去部署，这个接口部署在数据结构的`Symbol.iterator`属性上。换言之，只要某个数据拥有`Symbol.iterator`属性，那么这个数据就是可迭代的。当使用[某些特定的手段](/es6/iterator.html#for-of)去迭代具有Iterator接口的数据时，默认就会调用一次该数据的`Symbol.iterator`属性。
 
 :::tip
 `Symbol.iterator`是一个表达式，返回的是一个独一无二的Symbol数据类型，因此只能放在`[ ]`内，而不能用`.`的方式
