@@ -293,7 +293,7 @@ Vue.directive("permission", {
 
 当我们开发一套可复用的功能发布到**github**或者**npm**时，使用插件的方式来开发才是最合适的。如果多次注册相同插件，Vue会自动规避掉相同的，届时多次调用`Vue.use()`也只会注册一次该插件。
 
-像我们常用的 [VueRouter](/Vue/vue_router.md)、[Vuex](/Vue/vuex.md) 都是以插件的形式开发的。
+像我们常用的 [VueRouter](/vue/vue2/vue_router.md)、[Vuex](/vue/vue2/vuex.md) 都是以插件的形式开发的。
 
 ### 使用插件
 ---

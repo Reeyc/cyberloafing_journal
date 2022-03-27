@@ -137,3 +137,67 @@ const obj = { a: 'a', b: 'b' }
 getProps(obj, 'b') //Good
 getProps(obj, 'c') //Error
 ```
+
+## 工具泛型
+Typescript 内置了一些工具泛型，不需要任何依赖就可以直接使用。这里介绍几种常用的：
+* **`Partial<T>`**：将接口的所有属性设置为可选状态。
+* **`Required<T>`**：将接口中所有可选的属性改为必须的。
+```ts
+type Person = {
+  name: string
+  age: number
+}
+
+// { name?: string; age?: number; }
+type newPerson = Partial<Person>
+
+// { name: string; age: number; }
+type newPerson2 = Required<Person>
+
+const p: newPerson = { age: 18 }
+const p2: newPerson2 = { name: "Lucy", age: 20 }
+```
+
+* **`Pick<T, K extends keyof T>`**：提取接口的某几个属性。
+* **`Omit<T, K extends keyof T>`**：剔除接口的某几个属性。
+```ts
+type Person = {
+  name: string
+  age: number
+  gender: 1 | 2
+}
+
+// { name: string; gender: 1 | 2 }
+type newPerson = Pick<Person, "name" | "gender">
+
+// { name: string; age: number; }
+type newPerson2 = Omit<Person, "gender">
+
+const p: newPerson = { name: "Lucy", gender: 1 }
+const p2: newPerson2 = { name: "Lucy", age: 20 }
+```
+
+* **`Extract<T, U>`**：提取`T`和`U`中相同的类型。
+* **`Exclude<T, U>`**：提取`T`中存在，但`U`中不存在的类型。
+```ts
+interface Worker {
+  name: string
+  age: number
+  salary: string
+}
+
+interface Student {
+  name: string
+  age: number
+  grade: number
+}
+
+// 'name' | 'age'
+type ExtractKeys = Extract<keyof Worker, keyof Student>
+
+// 'salary'
+type ExcludeKeys = Exclude<keyof Worker, keyof Student>
+
+const key1: ExtractKeys = "age"
+const key2: ExcludeKeys = "salary"
+```

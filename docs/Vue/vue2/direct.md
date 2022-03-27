@@ -204,7 +204,7 @@ export default {
 </script>
 ```
 * Vue为`v-bind`提供了一个简写，就是一个冒号`:`
-* `v-bind`绑定的属性还可以接收一个对象，不过这仅在属性为 [style、class](/Vue/class_style.html) 时生效。
+* `v-bind`绑定的属性还可以接收一个对象，不过这仅在属性为 [style、class](/vue/vue2/class_style.html) 时生效。
 
 ---
 

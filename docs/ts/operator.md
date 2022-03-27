@@ -1,7 +1,7 @@
 # 操作符
 
 ## typeof
-在TypeScript 中，`typeof`操作符可以用来获取一个变量声明或对象的类型。
+`typeof`操作符可以用来获取一个变量声明或对象的类型。
 ```ts
 interface Person {
   name: string
@@ -30,29 +30,32 @@ const getScore: Func = function (x: number): number[] {
 }
 ```
 
-## keyof
-`keyof`操作符可以用于获取某种类型的所有键，其返回类型是联合类型。
+## instanceof
+`instanceof`用于判断一个实例是否属于某个类。
 ```ts
-interface Person {
-  name: string
-  age: number
+class Man {
+  handsome = "handsome"
 }
 
-//字面量："name" | "age"
-type K1 = keyof Person
-const tom: K1 = "name"
+class Woman {
+  beautiful = "beautiful"
+}
 
-//字面量："length" | "toString" | "pop" | "push" | "concat" | "join"
-type K2 = keyof Person[]
-const tom2: K2 = "length"
+function Human(arg: Man | Woman) {
+  if (arg instanceof Man) {
+    console.log(arg.handsome)
+  } else {
+    console.log(arg.beautiful)
+  }
+}
 
-//索引签名：string | number
-type K3 = keyof { [x: string]: Person }
-const tom3: K3 = "hello"
+Human(new Man())
+Human(new Woman())
 ```
 
+
 ## in
-`in`既可以像JS中，用来判断某个属性是否存在于对象中，也可以用来遍历枚举类型和字面量类型。
+`in`用来判断某个属性是否存在于对象中，也可以用来遍历枚举类型和字面量类型。
 ```ts
 //遍历枚举类型
 enum Test {
@@ -85,4 +88,25 @@ const obj3 = {
   prop: "hello world"
 }
 console.log("prop" in obj3) //true
+```
+
+## keyof
+`keyof`操作符用于获取某种类型的所有键，其返回类型是联合类型。
+```ts
+interface Person {
+  name: string
+  age: number
+}
+
+//字面量："name" | "age"
+type K1 = keyof Person
+const tom: K1 = "name"
+
+//字面量："length" | "toString" | "pop" | "push" | "concat" | "join"
+type K2 = keyof Person[]
+const tom2: K2 = "length"
+
+//索引签名：string | number
+type K3 = keyof { [x: string]: Person }
+const tom3: K3 = "hello"
 ```

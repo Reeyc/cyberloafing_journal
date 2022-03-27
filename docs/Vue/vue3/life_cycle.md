@@ -102,7 +102,7 @@ export default {
 </script>
 ```
 :::warning
-当setup作为一个`async`函数时，该组件会变为一个 **[异步组件](/Vue/vue3/internal.html#suspense)**，因为`async`函数返回的是`Promise`对象。
+当setup作为一个`async`函数时，该组件会变为一个 <u>**[异步组件](/vue/vue3/internal.html#suspense)**</u>，因为`async`函数返回的是`Promise`对象。
 :::
 
 ### setup的参数

@@ -2,7 +2,7 @@
 在vue3的选项式API中，vue2的`computed`和`watch`这两个选项同样被保存了下来，就不过多介绍了，主要看看vue3中的`computed`和`watch`。
 
 ## computed
-在vue3中，`computed`是vue导出的一个函数API，函数的返回值就是当前的计算属性对象，它是一个**ref对象**。
+在vue3中，`computed`是vue导出的一个函数API，函数的返回值就是当前的计算属性对象，它是一个 [ref对象](/vue/vue3/ref.md#ref) 。
 
 * 当传入一个**回调函数**时，该函数就是该计算属性的`getter`。
 ```vue
