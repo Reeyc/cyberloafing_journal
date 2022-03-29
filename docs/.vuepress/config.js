@@ -8,12 +8,12 @@ module.exports = {
       {
         rel: "shortcut icon",
         type: "image/x-icon",
-        href: "/assets/img/logo.png",
-      },
-    ],
+        href: "/assets/img/logo.png"
+      }
+    ]
   ],
   markdown: {
-    lineNumbers: false, // 代码块显示行号
+    lineNumbers: false // 代码块显示行号
   },
   plugins: ["@vuepress/nprogress", "@vuepress/back-to-top", "reading-progress"],
   themeConfig: {
@@ -23,8 +23,8 @@ module.exports = {
       { text: "ES6", link: "/es6/" },
       { text: "Vue", link: "/vue/" },
       { text: "React", link: "/react/" },
-      { text: "Typescript", link: "/ts/" },
-      { text: "面经", link: "/Interview/" },
+      { text: "Typescript", link: "/ts/" }
+      // { text: "面经", link: "/Interview/" },
       // { text: "Github", link: "https://github.com/Reeyc/cyberloafing_journal" }
     ],
     sidebar: {
@@ -44,8 +44,8 @@ module.exports = {
             "/js/event",
             "/js/bom",
             "/js/ajax",
-            "/js/localstore",
-          ],
+            "/js/localstore"
+          ]
         },
         {
           title: "Javascript进阶",
@@ -58,9 +58,9 @@ module.exports = {
             "/js/execution_context",
             "/js/event_loop",
             "/js/memory_reclamation",
-            "/js/render",
-          ],
-        },
+            "/js/render"
+          ]
+        }
       ],
       "/es6/": [
         {
@@ -83,9 +83,9 @@ module.exports = {
             "/es6/generator",
             "/es6/async",
             "/es6/class",
-            "/es6/module",
-          ],
-        },
+            "/es6/module"
+          ]
+        }
       ],
       "/vue/": [
         {
@@ -105,8 +105,8 @@ module.exports = {
             "/vue/vue2/vuex",
             "/vue/vue2/communication",
             "/vue/vue2/pack",
-            "/vue/vue2/reactive",
-          ],
+            "/vue/vue2/reactive"
+          ]
         },
         {
           title: "Vue3",
@@ -120,9 +120,9 @@ module.exports = {
             "/vue/vue3/other",
             "/vue/vue3/listen",
             "/vue/vue3/hook",
-            "/vue/vue3/internal",
-          ],
-        },
+            "/vue/vue3/internal"
+          ]
+        }
       ],
       "/react/": [
         {
@@ -141,8 +141,9 @@ module.exports = {
             "/react/animate",
             "/react/router",
             "/react/redux",
-          ],
-        },
+            "/react/hooks"
+          ]
+        }
       ],
       "/ts/": [
         {
@@ -160,23 +161,18 @@ module.exports = {
             "/ts/interface",
             "/ts/generic",
             "/ts/operator",
-            "/ts/decorator",
-          ],
-        },
+            "/ts/decorator"
+          ]
+        }
       ],
       "/Interview/": [
         {
           title: "面试题",
           sidebarDepth: 2,
           collapsable: false,
-          children: [
-            "/Interview/css",
-            "/Interview/js",
-            "/Interview/vue",
-            "/Interview/broswer",
-          ],
-        },
-      ],
-    },
-  },
-};
+          children: ["/Interview/css", "/Interview/js", "/Interview/vue", "/Interview/broswer"]
+        }
+      ]
+    }
+  }
+}
