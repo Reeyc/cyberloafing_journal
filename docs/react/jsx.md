@@ -37,7 +37,7 @@ const App = React.createElement(
 
 ## JSX 介绍
 
-JSX 是 **`Javascript XML`** 的简写，表示在 Javascript 中编写 XML 格式的代码。它是 JS 的一种语法扩展，一种形似 HTML 的标签语法，其通过`@babel/preset-react`编译之后，才能够运行在浏览器中，create-react-app 脚手架中已经默认有该配置，无需手动配置。
+JSX 是 **`Javascript XML`** 的简写，表示在 Javascript 中编写 XML 格式的代码。它是 JS 的一种语法扩展，一种形似 HTML 的标签语法，其通过`@babel/preset-react`编译之后，才能够运行在浏览器中，`create-react-app` 脚手架中已经默认有该配置，无需手动配置。
 
 JSX 能够解决`createElement`带来的弊端，推荐使用 JSX 的语法来编写 React 元素。
 
@@ -54,6 +54,7 @@ const App = (
 );
 ```
 
+:::warning
 JSX 使用的**注意点**：
 
 - React 元素的属性名使用驼峰命名法。
@@ -62,22 +63,13 @@ JSX 使用的**注意点**：
 const App = <h1 testProp="hello">hello</h1>;
 ```
 
-- 特殊属性名：`class` 更改为 `className`，`for` 更改为 `htmlFor`，因为 `class` 和 `for` 都是 js 中的保留字。
+- 特殊属性名 `class` 更改为 `className`，`for` 更改为 `htmlFor`，因为 `class` 和 `for` 都是 js 中的保留字。
 
 ```jsx
 const App = <h1 className="hello">hello</h1>; //添加一个hello的css类名
 ```
 
 - 没有子节点的任意 React 元素都可以以 `/>` 结尾。
-
-```jsx
-const App = (
-  <h1 className="hello">
-    <span />
-  </h1>
-);
-```
-
 - 建议使用小括号包裹 JSX，将其看作一个整体，避免编辑器自动插入分号。
 
 ```jsx
@@ -87,6 +79,8 @@ const App = (
   </h1>
 );
 ```
+
+:::
 
 ### 插入 JS 表达式
 
@@ -157,7 +151,7 @@ ReactDOM.render(
 
 ## 条件渲染
 
-JSX 的条件渲染无法想 Vue 一样提供`v-if`指令直接在模板内部进行。而是需要在外部定义函数来判断条件，在模板内调用函数来实现条件渲染。
+JSX 的条件渲染无法像 Vue 一样提供`v-if`指令直接在模板内部进行。而是需要在外部定义函数来判断条件，在模板内调用函数来实现条件渲染。
 
 ```jsx
 let isLoading = true;
