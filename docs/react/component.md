@@ -19,13 +19,10 @@ React 中创建组件的两种方式：
 - 函数必须有**返回值**，如果不需要渲染 JSX，可以返回`null`，不可以返回`undefined`。
 
 ```jsx
-//函数组件，组件名首字母必须为大写
 function Hello() {
-  //将JSX作为组件结构返回，如不想渲染JSX可以返回null
   return <div>hello world</div>;
 }
 
-//组件可以用单闭合标签或双闭合标签使用
 ReactDOM.render(<Hello />, document.getElementById("root"));
 ```
 

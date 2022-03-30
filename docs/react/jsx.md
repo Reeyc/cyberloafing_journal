@@ -84,7 +84,7 @@ const App = (
 
 ### 插入 JS 表达式
 
-JSX 也可以像 Vue 的`template`模板一样，插入简单的 JS 表达式。区别在于 Vue 的插值语法是双大括号 `{{ }}`，而 JSX 中则是单大括号 `{ }`。
+JSX 也可以像 Vue 的`template`模板一样，插入简单的 JS 表达式。区别在于 Vue 的插值语法是双大括号 `{{}}` ，而 JSX 中则是单大括号 `{}`。
 
 ```jsx
 const name = "zs";
@@ -207,13 +207,15 @@ ReactDOM.render(
 - **`className`** 为元素绑定 CSS 类，再去 css 文件中书写样式，并引入该文件执行。 <Badge text="推荐"/>
 
 ```jsx
-import "../css/index.css" //引入样式文件并执行
+import "../css/index.css"; //引入样式文件并执行
 
 ReactDOM.render(
   <h1 className="title"> hello React </h1>,
   document.getElementById("root")
-)
+);
+```
 
+```css
 /* index.css */
 .title {
   color: red;
