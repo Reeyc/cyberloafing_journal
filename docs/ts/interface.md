@@ -249,3 +249,5 @@ console.log(wangCai)
 
 wangCai.eat()
 ```
+
+<Vssue />

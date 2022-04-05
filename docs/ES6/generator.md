@@ -412,3 +412,5 @@ for (let key of obj) {
 
 console.log(obj.a, obj.b, obj.c) //100,200,300
 ```
+
+<Vssue />

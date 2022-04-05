@@ -267,3 +267,5 @@ new Vue({
 ---
 
 Vue还有更多实例的属性，需要请上[Vue](https://cn.vuejs.org/v2/api/#data)官网查阅。
+
+<Vssue />

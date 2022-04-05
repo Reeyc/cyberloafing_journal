@@ -245,3 +245,5 @@ for (var i = 0; i < 5; i++) {
 ::: tip
 `continue`不能单独用作于`if`或者`switch`之中
 :::
+
+<Vssue />

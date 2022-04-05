@@ -318,3 +318,5 @@ export default {
 </script>
 ```
 双向绑定其实通过`v-bind`结合`v-on`也能实现，监听表单项的`input`、`change`事件，当其发生变化时，即时的将变化返回到数据上。不过这种方式显然不如`v-model`方便。
+
+<Vssue />

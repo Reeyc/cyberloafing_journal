@@ -8,14 +8,30 @@ module.exports = {
       {
         rel: "shortcut icon",
         type: "image/x-icon",
-        href: "/assets/img/logo.png",
-      },
-    ],
+        href: "/assets/img/logo.png"
+      }
+    ]
   ],
   markdown: {
-    lineNumbers: true, // 代码块显示行号
+    lineNumbers: true // 代码块显示行号
   },
-  plugins: ["@vuepress/nprogress", "@vuepress/back-to-top", "reading-progress"],
+  plugins: [
+    ["@vuepress/nprogress"],
+    ["@vuepress/back-to-top"],
+    ["reading-progress"],
+    [
+      "@vssue/vuepress-plugin-vssue",
+      {
+        platform: "github", //v3的platform是github，v4的是github-v4
+        locale: "zh", //语言
+        owner: "Reeyc", //github账户名
+        repo: "cyberloafing_journal", //github一个项目的名称
+        clientId: "065e72b5ff237807bdc0", //注册的Client ID
+        clientSecret: "62b07d3fc7997d0a42fdaddd93c7fa58fb8b7220", //注册的Client Secret
+        autoCreateIssue: true // 自动创建评论，默认是false，最好开启，这样首次进入页面的时候就不用去点击创建评论的按钮了。
+      }
+    ]
+  ],
   themeConfig: {
     logo: "/assets/img/logo.png",
     nav: [
@@ -23,7 +39,7 @@ module.exports = {
       { text: "ES6", link: "/es6/" },
       { text: "Vue", link: "/vue/" },
       { text: "React", link: "/react/" },
-      { text: "Typescript", link: "/ts/" },
+      { text: "Typescript", link: "/ts/" }
       // { text: "面经", link: "/Interview/" },
       // { text: "Github", link: "https://github.com/Reeyc/cyberloafing_journal" }
     ],
@@ -44,8 +60,8 @@ module.exports = {
             "/js/event",
             "/js/bom",
             "/js/ajax",
-            "/js/localstore",
-          ],
+            "/js/localstore"
+          ]
         },
         {
           title: "Javascript进阶",
@@ -58,9 +74,9 @@ module.exports = {
             "/js/execution_context",
             "/js/event_loop",
             "/js/memory_reclamation",
-            "/js/render",
-          ],
-        },
+            "/js/render"
+          ]
+        }
       ],
       "/es6/": [
         {
@@ -83,9 +99,9 @@ module.exports = {
             "/es6/generator",
             "/es6/async",
             "/es6/class",
-            "/es6/module",
-          ],
-        },
+            "/es6/module"
+          ]
+        }
       ],
       "/vue/": [
         {
@@ -105,8 +121,8 @@ module.exports = {
             "/vue/vue2/vuex",
             "/vue/vue2/communication",
             "/vue/vue2/pack",
-            "/vue/vue2/reactive",
-          ],
+            "/vue/vue2/reactive"
+          ]
         },
         {
           title: "Vue3",
@@ -120,9 +136,9 @@ module.exports = {
             "/vue/vue3/other",
             "/vue/vue3/listen",
             "/vue/vue3/hook",
-            "/vue/vue3/internal",
-          ],
-        },
+            "/vue/vue3/internal"
+          ]
+        }
       ],
       "/react/": [
         {
@@ -141,9 +157,9 @@ module.exports = {
             "/react/animate",
             "/react/router",
             "/react/redux",
-            "/react/hooks",
-          ],
-        },
+            "/react/hooks"
+          ]
+        }
       ],
       "/ts/": [
         {
@@ -161,23 +177,18 @@ module.exports = {
             "/ts/interface",
             "/ts/generic",
             "/ts/operator",
-            "/ts/decorator",
-          ],
-        },
+            "/ts/decorator"
+          ]
+        }
       ],
       "/Interview/": [
         {
           title: "面试题",
           sidebarDepth: 2,
           collapsable: false,
-          children: [
-            "/Interview/css",
-            "/Interview/js",
-            "/Interview/vue",
-            "/Interview/broswer",
-          ],
-        },
-      ],
-    },
-  },
-};
+          children: ["/Interview/css", "/Interview/js", "/Interview/vue", "/Interview/broswer"]
+        }
+      ]
+    }
+  }
+}

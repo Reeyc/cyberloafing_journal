@@ -143,3 +143,5 @@ const Foo = (age, gender) => {
 
 const test = new Foo() //Foo is not a constructor
 ```
+
+<Vssue />

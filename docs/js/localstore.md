@@ -141,3 +141,5 @@ sessionStorage.clear()
 ::: tip
 如果是对象会储存为`[object Object]`，可以用JSON形式存对象
 :::
+
+<Vssue />

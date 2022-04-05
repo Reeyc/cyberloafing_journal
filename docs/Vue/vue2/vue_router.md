@@ -497,3 +497,5 @@ beforeRouteEnter(to, from, next) {
 :::warning
 以上除了全局的`afterRouter()`没有`next()`参数以外，所有的守卫都拥有`next()`参数，守卫内必须调用`next()`才会放行，也就是路由才会跳转，否则路由将会卡在这里。
 :::
+
+<Vssue />

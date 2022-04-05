@@ -469,3 +469,5 @@ var obj = {
 }
 obj.fun() //有人调用，this是obj这个对象
 ```
+
+<Vssue />

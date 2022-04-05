@@ -45,3 +45,5 @@ console.log(val.test('\uD83D\uDC2A')) //true
 //Unicode模式，正确识别
 console.log(Uval.test('\uD83D\uDC2A')) //false
 ```
+
+<Vssue />

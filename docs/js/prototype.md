@@ -194,3 +194,5 @@ Function.prototype.__proto__.__proto__ //null
 其实就像一根链子，链子的每一个环都是原型对象`prototype`，而衔接每一个环的地方就是指针`__proto__`。就形成了所谓的原型链，下图就是一个默认的原型链。
 
 ![prototype](/assets/img/prototype2.png)
+
+<Vssue />

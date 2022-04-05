@@ -349,3 +349,5 @@ export default MyPlugin
 import MyPlugin from "@/plugins/MyPlugin"
 Vue.use(MyPlugin)
 ```
+
+<Vssue />

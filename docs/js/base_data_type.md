@@ -230,3 +230,5 @@ console.log(!!new Object()); //true
 console.log(!!null); //false
 console.log(!!undefined); //false
 ```
+
+<Vssue />

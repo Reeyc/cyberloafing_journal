@@ -31,3 +31,5 @@ arr1 = [1, 'hello', 123456] //Error 类型报错
 arr1 = [true, 'hello', 123456, undefined] //Error 长度报错
 arr1 = [true, 123456, 'hello'] //Error 位置报错
 ```
+
+<Vssue />

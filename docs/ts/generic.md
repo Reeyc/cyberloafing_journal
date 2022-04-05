@@ -199,3 +199,5 @@ type ExcludeKeys = Exclude<keyof Worker, keyof Student>
 const key1: ExtractKeys = "age"
 const key2: ExcludeKeys = "salary"
 ```
+
+<Vssue />

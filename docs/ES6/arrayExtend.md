@@ -124,3 +124,5 @@ let flag2 = arr.findIndex(function (e, i, a) {
 console.log(flag2) //返回第一个元素索引: 1
 ```
 更多数组ES6+ API请自行查阅
+
+<Vssue />

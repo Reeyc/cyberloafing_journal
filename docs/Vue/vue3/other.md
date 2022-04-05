@@ -293,3 +293,5 @@ console.log(isReadonly(objForReactive), isReadonly(objForReadonly)) // false tru
 console.log(isProxy(objForRef), isProxy(objForReactive), isProxy(objForReadonly)) // false true true
 </script>
 ```
+
+<Vssue />

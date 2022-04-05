@@ -88,3 +88,5 @@ function getArray(val: any): any[] {
 console.log(getArray('hello world'))
 console.log(getArray(10))
 ```
+
+<Vssue />

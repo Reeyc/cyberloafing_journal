@@ -162,3 +162,5 @@ Person.prototype.init.prototype === Person.prototype  //true
 console.log(xh.age); // undefined 封装了 由原型方法产生实例对象，故而类内部的属性实例无法访问
 console.log(xh.key); // value 但是原型内的属性可以正常访问
 ```
+
+<Vssue />

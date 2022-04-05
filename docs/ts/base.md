@@ -132,3 +132,5 @@ str = 100 //Type 'number' is not assignable to type 'string'.
 let str: string = "hello" //ts把该变量推测为string类型
 str = 100
 ```
+
+<Vssue />

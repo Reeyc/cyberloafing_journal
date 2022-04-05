@@ -153,3 +153,5 @@ set.delete(item) //根据完整元素
 map.delete('t') //根据key值
 ```
 建议使用**Map**跟**Set**存储数据，将来放弃数组和对象，如果要求数据的唯一性就用Set，其他情况用Map。
+
+<Vssue />

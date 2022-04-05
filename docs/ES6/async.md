@@ -156,3 +156,5 @@ async function init() {
 init()
 ```
 上面代码中，`getHeaderData`、`getMainData`和`getFooterData`是三个独立的异步操作，之间互不依赖，可以采用并发的方式让它们同时触发来提高效率。
+
+<Vssue />

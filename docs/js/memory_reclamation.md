@@ -199,3 +199,5 @@ closure = null; //闭包设置断开引用，内部数据被销毁，释放内�
 
 closure(); //closure not a function
 ```
+
+<Vssue />

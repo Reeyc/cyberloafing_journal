@@ -76,3 +76,5 @@ function test() {
 let [, , , , c] = test()
 console.log(c) //5
 ```
+
+<Vssue />

@@ -90,3 +90,5 @@ function withMouse(WrappedComponent) {
   return Mouse
 }
 ```
+
+<Vssue />

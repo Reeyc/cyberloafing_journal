@@ -110,3 +110,5 @@ const tom2: K2 = "length"
 type K3 = keyof { [x: string]: Person }
 const tom3: K3 = "hello"
 ```
+
+<Vssue />

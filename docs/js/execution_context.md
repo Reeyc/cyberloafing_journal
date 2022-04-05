@@ -261,3 +261,5 @@ let obj = {
 }
 obj.foo();
 ```
+
+<Vssue />
