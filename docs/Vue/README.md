@@ -24,3 +24,4 @@
 * [computed & watch](/vue/vue3/listen.md)
 * [hook的概念](/vue/vue3/hook.md)
 * [内置组件](/vue/vue3/internal.md)
+* [Pinia](/vue/vue3/pinia.md)

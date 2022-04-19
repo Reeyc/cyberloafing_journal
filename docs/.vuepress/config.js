@@ -136,7 +136,8 @@ module.exports = {
             "/vue/vue3/other",
             "/vue/vue3/listen",
             "/vue/vue3/hook",
-            "/vue/vue3/internal"
+            "/vue/vue3/internal",
+            "/vue/vue3/pinia"
           ]
         }
       ],
