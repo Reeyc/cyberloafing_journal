@@ -95,7 +95,7 @@ window.onload = function() {
 | ------------------------ | ------------------ |
 | createElement   | 创建元素节点                  |
 | createTextNode  | 创建文本节点                  |
-| createAtttibute | 创建属性节点                  |
+| createAttribute | 创建属性节点                  |
 | cloneNode       | 克隆元素节点                  |
 | appendChild     | 把新的子节点添加到指定节点       |
 | removeChild     | 删除子节点                    |

@@ -1,3 +1,5 @@
+const path = require("path")
+
 module.exports = {
   // base: "/cyberloafing_journal/",
   title: "Cyberloafing Journal",
@@ -12,6 +14,7 @@ module.exports = {
       }
     ]
   ],
+  clientRootMixin: path.resolve(__dirname, "mixin.js"),
   markdown: {
     lineNumbers: true // 代码块显示行号
   },

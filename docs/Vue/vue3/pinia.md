@@ -66,24 +66,31 @@ Pinia是实现了上述需求的新一代状态管理库，当然 [Vuex](/vue/vu
 
 ### 挂载Pinia
 ```ts
-// src/main.ts
+// @/store/index.ts
+import { createPinia } from "pinia"
+
+const store = createPinia()
+
+export default store
+```
+
+```ts
+// @/main.ts
 import { createApp } from 'vue'
 import App from './App.vue'
-import { createPinia } from 'pinia'
+import store from "./store"
 
-const pinia = createPinia()
 const app = createApp(App)
 
-app.use(pinia)
-app.mount('#app')
+app.use(store).mount('#app')
 ```
 
 ## State
 
-#### 定义State
+### 定义State
 使用`defineStore()`函数创建一个store实例，函数接收一个唯一的id来标识该store。
 ```ts
-//src/store/user.ts
+// @/store/user.ts
 import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore('user', {
@@ -95,12 +102,13 @@ export const useUserStore = defineStore('user', {
 })
 ```
 
-#### 获取State
+### 获取State
 先获取导出的store实例，通过`store.xxx`的方式可以直接获取到state里的属性。
 ```vue
 <script lang="ts" setup>
 import { useUserStore } from '@/store/user'
 
+// 获取userStore实例
 const userStore = useUserStore()
 
 // 也可以结合 computed 获取
@@ -113,8 +121,8 @@ const name = computed(() => userStore.name)
 </template>
 ```
 
-#### 修改State
-修改state数据，可以直接通过 `store.属性名` 来修改。
+### 修改State
+修改state数据，可以直接通过 `store.xxx` 来修改。
 ```ts
 userStore.name = '鲨鱼辣椒'
 ```
@@ -127,7 +135,7 @@ export const useUserStore = defineStore('user', {
     }
   },
   actions: {
-    updateName(name) {
+    updateName(name: string) {
       this.name = name
     }
   }
@@ -140,6 +148,25 @@ import { useUserStore } from '@/store/user'
 const userStore = useUserStore()
 userStore.updateName('鲨鱼辣椒')
 ```
+
+:::warning
+如果通过解构的方式来获取State，会造成响应式的丢失，正确的方式应该解构 pinia 提供的 `storeToRefs` 函数返回值。
+```vue
+<script lang="ts" setup>
+import { storeToRefs } from 'pinia'
+import { useUserStore } from '@/store/user'
+
+const userStore = useUserStore()
+const { name } = storeToRefs(userStore)
+
+useUserStore.updateName('鲨鱼辣椒')
+</script>
+
+<template>
+  <div>{{ name }}</div>
+</template>
+```
+:::
 
 ## Getters
 Pinia 的 `Getters` 在获取 `State` 值之前做一些逻辑处理，和 Vue 中的计算属性几乎一样，`getter` 中的值有缓存特性，如果值没有改变，多次使用也只会调用一次。
@@ -234,7 +261,7 @@ npm i pinia-plugin-persist --save
 
 #### 使用
 ```ts
-// src/store/index.ts
+// @/store/index.ts
 import { createPinia } from 'pinia'
 import piniaPluginPersist from 'pinia-plugin-persist'
 
@@ -284,3 +311,5 @@ export const useUserStore = defineStore('user', {
   }
 })
 ```
+
+<Vssue />

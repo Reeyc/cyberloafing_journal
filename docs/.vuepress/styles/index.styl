@@ -1,3 +1,56 @@
 .theme-default-content code  
   padding .1rem 0.4rem
   color: #d32a55  
+
+/************************/
+
+.navbar 
+  white-space nowrap
+
+._wechat 
+  position relative
+  display inline-block
+  margin-left 20px
+  font-weight 600
+  color #0285e3
+  cursor pointer
+
+._wechat .icon-weixin
+  color: #28c445
+
+._wechat ._wechat-img 
+  width 160px
+  height 160px
+  position absolute
+  display none
+  justify-content center
+  align-items center
+  background-color #fff
+  box-shadow 0 1px 10px 0 #d0bfbf
+  border-radius 10px
+
+._wechat ._wechat-img img
+  width 90%
+  height 90%
+
+@font-face 
+  font-family "iconfont" /* Project id 3341976 */
+  src url('//at.alicdn.com/t/font_3341976_cy8c9rrcg04.woff2?t=1650363582700') format('woff2'),
+       url('//at.alicdn.com/t/font_3341976_cy8c9rrcg04.woff?t=1650363582700') format('woff'),
+       url('//at.alicdn.com/t/font_3341976_cy8c9rrcg04.ttf?t=1650363582700') format('truetype')
+
+
+.iconfont 
+  font-family "iconfont" !important
+  font-size 16px
+  font-style normal
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+
+
+.icon-weixin:before 
+  content "\e607"
+
+
+.icon-copy:before 
+  content "\e617"
