@@ -40,9 +40,18 @@ module.exports = {
     nav: [
       { text: "Javascript", link: "/js/" },
       { text: "ES6", link: "/es6/" },
+      { text: "jQuery", link: "/jquery/" },
       { text: "Vue", link: "/vue/" },
       { text: "React", link: "/react/" },
-      { text: "Typescript", link: "/ts/" }
+      { text: "Typescript", link: "/ts/" },
+      {
+        text: "工程化",
+        ariaLabel: "Language Menu",
+        items: [
+          { text: "Webpack", link: "/guide/" },
+          { text: "Vite", link: "/guide/" }
+        ]
+      }
       // { text: "面经", link: "/Interview/" },
       // { text: "Github", link: "https://github.com/Reeyc/cyberloafing_journal" }
     ],
@@ -104,6 +113,29 @@ module.exports = {
             "/es6/class",
             "/es6/module"
           ]
+        }
+      ],
+      "/jquery/": [
+        {
+          title: "jQuery基本使用",
+          sidebarDepth: 2,
+          collapsable: false,
+          children: [
+            "/jquery/base/instance",
+            "/jquery/base/load",
+            "/jquery/base/static",
+            "/jquery/base/handleEle",
+            "/jquery/base/handleProp",
+            "/jquery/base/handleCss",
+            "/jquery/base/handleEvent",
+            "/jquery/base/handleAnimate"
+          ]
+        },
+        {
+          title: "jQuery实现原理",
+          sidebarDepth: 2,
+          collapsable: false,
+          children: ["/jquery/achieve/core"]
         }
       ],
       "/vue/": [
