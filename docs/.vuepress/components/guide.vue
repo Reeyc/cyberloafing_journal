@@ -1,26 +1,25 @@
 <template>
   <div class="guide-page">
-    <!-- @click="$router.push(item.link)" -->
-    <div v-for="(item, index) of classifyList" :key="index" class="guide-item">
+    <div v-for="(item, index) of classifyList" :key="index" class="guide-item" @click="$router.push(item.link)">
       <img :src="item.img" alt="" />
       <div class="guide-info">
         <div class="title">{{ item.title }}</div>
-        <!-- <div class="desc" :title="item.desc">{{ item.desc }}</div> -->
-
-        <div class="desc">
-          <div class="text">
-            {{ item.desc }}
-            <label class="btn" for="exp"></label>
-          </div>
-        </div>
+        <v-clamp :max-lines="2" class="desc">
+          {{ item.desc }}
+          <template #after="{ toggle, expanded, clamped }">
+            <span v-show="expanded || clamped" class="toggle iconfont" :class="expanded ? 'icon-close' : 'icon-open'" @click.stop="toggle">
+            </span>
+          </template>
+        </v-clamp>
       </div>
     </div>
-    <input id="exp" class="exp" type="checkbox" />
   </div>
 </template>
 
 <script>
+import VClamp from "vue-clamp"
 export default {
+  components: { VClamp },
   data() {
     return {
       classifyList: [
@@ -88,8 +87,7 @@ export default {
   .guide-item
     display: flex;
     align-items: center;
-    width: 90%;
-    height: 120px;
+    min-height: 120px;
     margin-bottom: 15px;
     border-radius: 4px;
     padding: 10px 20px;
@@ -109,68 +107,23 @@ export default {
         border-bottom 1px solid #dedede
         color: #2c3e50
       .desc
+        position relative
+        z-index 5
         font-size 14px
         padding-top 5px
         color: #999
-        /* 文字溢出2行展示省略号 */
-        overflow: hidden
-        text-overflow: ellipsis
-        display: -webkit-box
-        -webkit-line-clamp: 2
-        -webkit-box-orient: vertical
-</style>
-
-<!--展开收起效果-->
-<style scoped lang="stylus">
-.desc
-  width 100%
-  display: flex;
-  // width: 800px;
-  overflow: hidden;
-  .text
-    position: relative;
-    text-overflow: ellipsis;
-    text-align: justify;
-    /* display: flex; */
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    &::before
-      content: '';
-      float: right;
-      height: calc(100% - 24px);
-    // &::after
-    //   content: '';
-    //   width: 999vw;
-    //   height: 999vw;
-    //   position: absolute;
-    //   box-shadow: inset calc(100px - 999vw) calc(30px - 999vw) 0 0 #fff;
-    //   margin-left: -100px;
-.btn
-  float: right;
-  clear: both;
-  margin-left: 10px;
-  padding: 0 8px;
-  border-radius: 4px;
-  color:  #fff;
-  background: #3F51B5;
-  cursor: pointer;
-  /* margin-top: -30px; */
-.btn::before
-  content: '展开';
-
-.exp
-  display: none;
-
-.exp:checked + .text
-  -webkit-line-clamp: 999;
-
-.exp:checked + .text::after
-  visibility: hidden;
-
-.exp:checked + .text .btn::before
-  content: '收起';
+        .toggle
+          position relative
+          font-size: 14px
+          vertical-align: middle
+          padding-left 10px
+          &::after
+            content: ""
+            position absolute
+            left -30px
+            right -30px
+            top -30px
+            bottom -30px
 </style>
 
 <!--hover边框效果-->

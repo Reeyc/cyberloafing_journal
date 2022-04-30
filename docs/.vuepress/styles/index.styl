@@ -42,24 +42,29 @@
   width 90%
   height 90%
 
-@font-face 
-  font-family "iconfont" /* Project id 3341976 */
-  src url('//at.alicdn.com/t/font_3341976_cy8c9rrcg04.woff2?t=1650363582700') format('woff2'),
-       url('//at.alicdn.com/t/font_3341976_cy8c9rrcg04.woff?t=1650363582700') format('woff'),
-       url('//at.alicdn.com/t/font_3341976_cy8c9rrcg04.ttf?t=1650363582700') format('truetype')
+/*******************************/
 
+@font-face 
+  font-family:"iconfont";
+  /* Project id 3341976 */
+  src: url('//at.alicdn.com/t/font_3341976_ap79afcic0g.woff2?t=1651154016340') format('woff2'), url('//at.alicdn.com/t/font_3341976_ap79afcic0g.woff?t=1651154016340') format('woff'), url('//at.alicdn.com/t/font_3341976_ap79afcic0g.ttf?t=1651154016340') format('truetype');
 
 .iconfont 
-  font-family "iconfont" !important
-  font-size 16px
-  font-style normal
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
+  font-family:"iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
+.icon-close:before 
+  content:"\eb8a";
+
+.icon-open:before 
+  content:"\eb8b";
 
 .icon-weixin:before 
-  content "\e607"
-
+  content:"\e607";
 
 .icon-copy:before 
-  content "\e617"
+  content:"\e617";
+
