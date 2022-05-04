@@ -62,17 +62,17 @@ module.exports = {
           sidebarDepth: 2,
           collapsable: false,
           children: [
-            "/js/base_data_type",
-            "/js/operator",
-            "/js/process_control",
-            "/js/object",
-            "/js/function",
-            "/js/array",
-            "/js/dom",
-            "/js/event",
-            "/js/bom",
-            "/js/ajax",
-            "/js/localstore"
+            "/js/base/base_data_type",
+            "/js/base/operator",
+            "/js/base/process_control",
+            "/js/base/object",
+            "/js/base/function",
+            "/js/base/array",
+            "/js/base/dom",
+            "/js/base/event",
+            "/js/base/bom",
+            "/js/base/ajax",
+            "/js/base/localstore"
           ]
         },
         {
@@ -80,13 +80,13 @@ module.exports = {
           sidebarDepth: 2,
           collapsable: false,
           children: [
-            "/js/prototype",
-            "/js/class",
-            "/js/inherit",
-            "/js/execution_context",
-            "/js/event_loop",
-            "/js/memory_reclamation",
-            "/js/render"
+            "/js/advanced/prototype",
+            "/js/advanced/class",
+            "/js/advanced/inherit",
+            "/js/advanced/execution_context",
+            "/js/advanced/event_loop",
+            "/js/advanced/memory_reclamation",
+            "/js/advanced/render"
           ]
         }
       ],
@@ -122,20 +122,24 @@ module.exports = {
           collapsable: false,
           children: [
             "/jquery/base/instance",
+            "/jquery/base/core",
             "/jquery/base/load",
             "/jquery/base/static",
-            "/jquery/base/handleEle",
-            "/jquery/base/handleProp",
-            "/jquery/base/handleCss",
-            "/jquery/base/handleEvent",
-            "/jquery/base/handleAnimate"
+            "/jquery/base/element",
+            "/jquery/base/property",
+            "/jquery/base/text",
+            "/jquery/base/css",
+            "/jquery/base/filter",
+            "/jquery/base/event",
+            "/jquery/base/animate",
+            "/jquery/base/ajax"
           ]
         },
         {
           title: "jQuery实现原理",
           sidebarDepth: 2,
           collapsable: false,
-          children: ["/jquery/achieve/core"]
+          children: ["/jquery/achieve/structure", "/jquery/achieve/extend", "/jquery/achieve/utils", "/jquery/achieve/core"]
         }
       ],
       "/vue/": [

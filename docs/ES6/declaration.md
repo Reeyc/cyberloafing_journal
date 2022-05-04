@@ -43,7 +43,7 @@ console.log(global, inner1, inner2, inner3)
 ## 暂时性死区
 **暂时性死区**TDZ，当程序在块级作用域进行实例化时，在此作用域中通过`let`、`const`声明的变量会先在作用域中被创建出来，但因此时还未进行词法绑定，所以是不能被访问的，如果访问就会抛出错误。因此，在这运行流程进入**作用域创建变量**，到**变量可以被访问**之间的这一段时间，就称之为**暂时性死区**。
 
-而其中通过`var`、`function`的声明并不会出现暂时死区，因为其具有[预解析](/Javascript/function.html#预解析)的特性。
+而其中通过`var`、`function`的声明并不会出现暂时死区，因为其具有[预解析](/js/base/function.html#预解析)的特性。
 
 ```js
 console.log(variable1) // undefined
