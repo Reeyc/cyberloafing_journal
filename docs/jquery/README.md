@@ -21,3 +21,6 @@
 * [jQuery插件机制](/jquery/achieve/extend.md)
 * [静态工具方法实现](/jquery/achieve/utils.md)
 * [核心函数实现原理](/jquery/achieve/core.md)
+* [常用API实现（上）](/jquery/achieve/commonApi.md)
+* [常用API实现（中）](/jquery/achieve/commonApi2.md)
+* [常用API实现（下）](/jquery/achieve/commonApi3.md)

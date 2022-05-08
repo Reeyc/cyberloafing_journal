@@ -161,33 +161,27 @@ document.attachEvent("onreadystatechange", function () {
 })
 ```
 
-能够监听DOM的加载，接下来就可以实现jQuery的入口函数了。需要注意的是，jQuery的方法`ready`的回调也能监听DOM的加载，因此可以在`ready`中实现，`init`中直接调用`ready`就行了：
+能够监听DOM的加载，接下来就可以实现jQuery的入口函数了。需要注意的是，实例方法`ready`的回调也能监听DOM的加载，因此可以在`ready`中实现，`init`中直接调用`ready`就行了：
 ```js
-function ready(callBack) {
-  // DOM已经加载完毕
-  if (document.readyState == "complete") {
-    callBack()
-  } else if (document.addEventListener) {
-    // 支持addEventListener
-    document.addEventListener("DOMContentLoaded", callBack, false)
-  } else {
-    // 支持attachEvent
+jQuery.fn.extend({
+  ready: function (callBack) {
+    // DOM已经加载完毕
     if (document.readyState == "complete") {
-      document.attachEvent("onreadystatechange", callBack)
+      callBack()
+    } else if (document.addEventListener) {
+      // 支持addEventListener
+      document.addEventListener("DOMContentLoaded", callBack, false)
+    } else {
+      // 支持attachEvent
+      if (document.readyState == "complete") {
+        document.attachEvent("onreadystatechange", callBack)
+      }
     }
   }
-}
-
-jQuery.extend({
-  ready: ready
-})
-
-jQuery.fn.extend({
-  ready: ready
 })
 ```
 
-在init方法中：
+在`init`方法中：
 
 ```js
 function init(selector) {
@@ -195,7 +189,7 @@ function init(selector) {
    * ...
    */
   if (jQuery.isFunction(selector)) { // 函数
-    jQuery.ready(selector)
+    this.ready(selector)
   }
 }
 ```
@@ -243,7 +237,7 @@ function init(selector) {
     var arr = [].slice.call(selector)
     ;[].push.apply(this, arr)
   } else if (jQuery.isFunction(selector)) { // 函数
-    jQuery.ready(selector)
+    this.ready(selector)
   } else { // 剩余类型
     this[0] = selector
     this.length = 1

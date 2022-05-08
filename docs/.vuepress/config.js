@@ -48,8 +48,8 @@ module.exports = {
         text: "工程化",
         ariaLabel: "Language Menu",
         items: [
-          { text: "Webpack", link: "/guide/" },
-          { text: "Vite", link: "/guide/" }
+          { text: "Webpack", link: "/engineering/webpack" },
+          { text: "Vite", link: "/engineering/vite" }
         ]
       }
       // { text: "面经", link: "/Interview/" },
@@ -139,7 +139,15 @@ module.exports = {
           title: "jQuery实现原理",
           sidebarDepth: 2,
           collapsable: false,
-          children: ["/jquery/achieve/structure", "/jquery/achieve/extend", "/jquery/achieve/utils", "/jquery/achieve/core"]
+          children: [
+            "/jquery/achieve/structure",
+            "/jquery/achieve/extend",
+            "/jquery/achieve/utils",
+            "/jquery/achieve/core",
+            "/jquery/achieve/commonApi",
+            "/jquery/achieve/commonApi2",
+            "/jquery/achieve/commonApi3"
+          ]
         }
       ],
       "/vue/": [
@@ -219,6 +227,14 @@ module.exports = {
             "/ts/operator",
             "/ts/decorator"
           ]
+        }
+      ],
+      "/engineering/": [
+        {
+          title: "前端工程化",
+          sidebarDepth: 2,
+          collapsable: false,
+          children: ["/engineering/webpack", "/engineering/vite"]
         }
       ],
       "/Interview/": [

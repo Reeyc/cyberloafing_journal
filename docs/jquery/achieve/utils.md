@@ -1,9 +1,7 @@
 # 静态工具方法实现
 
-仅实现部分，这些工具方法都是写到jQuery类中。
-
 :::warning
-注意：有的浏览器不支持`trim()`方法，可以用原生js的`string.replace()`方法来替换成空串。
+仅实现部分，这些工具方法都是写到jQuery类中。
 :::
 
 ```js
@@ -47,14 +45,11 @@ jQuery.extend({
   },
   trim: function (str) {
     if (!jQuery.isString(str)) {
-      // 非字符串则直接返回
       return str
     }
     if (str.trim) {
-      // 支持trim则用trim()方法处理
       return str.trim()
     } else {
-      // 不支持则用原生js的replace()方法处理
       return str.replace(/^\s+|\s+$/g, "")
     }
   }

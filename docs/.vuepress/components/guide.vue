@@ -70,12 +70,14 @@ export default {
         {
           title: "Webpack",
           desc: "webpack 是一个用于现代 JavaScript 应用程序的静态模块打包工具。",
-          img: require("../public/assets/icon/webpack.png")
+          img: require("../public/assets/icon/webpack.png"),
+          link: "/engineering/"
         },
         {
           title: "Vite",
           desc: "一种面向现代浏览器的一个更轻、更快的前端构建工具，能够显著提升前端的开发体验。",
-          img: require("../public/assets/icon/vite.png")
+          img: require("../public/assets/icon/vite.png"),
+          link: "/engineering/"
         }
       ]
     }
