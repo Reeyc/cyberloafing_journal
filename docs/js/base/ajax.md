@@ -41,7 +41,7 @@ xhr.send();
 xhr.send('foo=bar&kay=value'); //POST方式传递参数
 ```
 ::: warning
-`ajax`发送`post`请求的请求体默认是 **payload格式** 的，这在服务端无法有效获取到数据。\
+`ajax`发送`post`请求的请求体默认是 **payload格式** 的，这在服务端无法有效获取到数据。
 :::
 
 通过`setRequestHeader()`设置请求头的属性

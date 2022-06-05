@@ -175,8 +175,8 @@ jQuery.fn.extend({
               // 给当前的类补上空格
               var tempClassName = ""
               var firstStr = " " + n // 用于检索第一个类
-              var lastStr = " " + n // 用于检索最后一个类
-              var middleStr = " " + n // 用于检索中间类
+              var lastStr = n + " " // 用于检索最后一个类
+              var middleStr = " " + n + " " // 用于检索中间类
               if (tempClassNames.indexOf(firstStr) >= 0) { 
                 tempClassName = firstStr
               } else if (tempClassNames.lastIndexOf(lastStr) >= 0) { 
@@ -362,7 +362,7 @@ jQuery.fn.extend({
 
 ### ajax
 
-jQuery的 `ajax()` 接受的参数比较多，并且不用考虑顺序问题，所以采用对象的方式进行传递，因为对象可以保存无序数据。
+jQuery的 `ajax()` 接受的参数比较多，并且不用考虑顺序问题，所以采用对象的方式进行传递，因为对象本身就是无序数据的集合。
 
 补充知识点：
 1. IE6等低版本浏览器认为，请求同一个URL只能有一个结果，换言之，只要每次请求的URL没有变化，就永远只能获取到原来那份数据。解决方案是，让每次请求的URL都携带一个不同的字符参数，建议使用时间戳。
@@ -382,14 +382,14 @@ jQuery的 `ajax()` 接受的参数比较多，并且不用考虑顺序问题，�
 | body | 请求体 |
 
 :::warning 注意
-ajax发送post请求的请求体默认是 **payload格式** 的，`xhr.setRequestHeader()` 可以请求头的属性，在此设置请求体为 **urlencoded格式** 。
+ajax发送post请求的请求体默认是 **payload格式** 的，`xhr.setRequestHeader()` 用于设置请求头的属性，可以在此设置请求体为 **urlencoded格式** 。
 ```js
 // urlencoded格式
 xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
 ```
 :::
 
-5. `xhr.abort()` 方法用于中断http请求。
+5. `xhr.abort()` 方法用于取消http请求。
 6. `xhr.onreadystatechange()` 事件用于监听http状态的变化。
 7. `xhr.readyState` 返回http请求的状态值。
 
