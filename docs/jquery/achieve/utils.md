@@ -1,8 +1,6 @@
 # 静态工具方法实现
 
-:::warning
-仅实现部分，这些工具方法都是写到jQuery类中。
-:::
+仅实现一部分静态工具方法，这些方法都是写入到jQuery类中。这里提前实现是为了方面后面实现核心函数和各种API。
 
 ```js
 jQuery.extend({
@@ -25,8 +23,8 @@ jQuery.extend({
     function verifyAllProp(obj) {
       var flag = true
       for (var key in obj) {
-        if (key !== "length") {
-          if (isNaN(+key) || typeof +key !== "number") {
+        if (obj.hasOwnProperty(key)) {
+          if (key !== "length" && key !== "selector" && typeof +key !== "number") {
             flag = false
             break
           }
@@ -34,11 +32,7 @@ jQuery.extend({
       }
       return flag
     }
-    if (jQuery.isObject(obj) && !jQuery.isWindow(obj) && "length" in obj && verifyAllProp(obj)) {
-      return true
-    } else {
-      return false
-    }
+    return ycQuery.isObject(obj) && !ycQuery.isWindow(obj) && "length" in obj && verifyAllProp(obj)
   },
   isFunction: function (fun) {
     return typeof fun === "function"

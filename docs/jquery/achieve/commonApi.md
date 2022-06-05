@@ -1,6 +1,6 @@
 # 常用API实现（上）
 
-## 遍历相关
+## 遍历系列
 
 ### each
 
@@ -92,7 +92,7 @@ $(obj).each(function (index, element) {
 `map`和`each`很相像，都可以用于遍历对象、数组，区别在于：
 * `map`如果遍历的是数组，则`callback`回调参数的位置和`each`是相反的。
 * `map`的`this`指向window对象，而不是当前遍历的元素。
-* `map`通常用于加工数组或对象，所以`map`的返回值是一个数组，如果 而`each`返回被遍历的对象。
+* `map`通常用于加工数组或对象，所以`map`的返回值是一个数组，而`each`返回被遍历的对象。
 * `map`的`return`是用来加工的，所以不存在`return true`或`return false`来控制循环。
 
 具体实现如下：
@@ -145,16 +145,16 @@ jQuery.fn.extend({
 ```
 :::
 
-## 筛选相关
+## 筛选系列
 
 ### get
 `get(index)`：将jQuery对象里指定的元素返回。
 
 | 参数 | 描述 |
 | - | - |
-| 正数 | 获取jQuery对象里指定的元素返回。|
-| 负数 | 倒着获取并返回。|
-| 省略 | 将调用者jQuery对象转为一个数组返回。|
+| 正数 | 检索jQuery对象里指定的元素返回。|
+| 负数 | 倒着检索并返回。|
+| 省略 | 将调用者jQuery对象转为一个JS数组返回。|
 
 ```js
 jQuery.fn.extend({
@@ -174,12 +174,12 @@ jQuery.fn.extend({
 ```
 
 ### eq
-`eq(index)`：获取jQuery对象里指定的元素，并继续把该元素包装成jQuery对象的形式返回。
+`eq(index)`：获取jQuery对象里指定的元素，并把该元素包装成jQuery对象的形式返回。
 
 | 参数 | 描述 |
 | - | - |
-| 正数 | 获取jQuery对象里指定的元素，并将其包装成jQuery对象返回。|
-| 负数 | 倒着获取并返回。|
+| 正数 | 检索jQuery对象里指定的元素，并将其包装成jQuery对象返回。|
+| 负数 | 倒着检索并返回。|
 | 省略 | 返回一个新的jQuery对象。|
 
 ```js
@@ -199,6 +199,7 @@ jQuery.fn.extend({
   }
 })
 ```
+
 ### first & last
 
 * `first()`：获取jQuery对象中的第一个元素，并以jQuery对象的形式返回。

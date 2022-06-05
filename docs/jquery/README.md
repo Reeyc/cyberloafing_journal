@@ -13,8 +13,6 @@
 * [动画相关API](/jquery/base/animate.md)
 * [网络请求API](/jquery/base/ajax.md)
 
----
-
 ## jQuery实现原理
 
 * [jQuery基础结构](/jquery/achieve/structure.md)
