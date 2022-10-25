@@ -33,7 +33,7 @@ Vuex通常由以下几个核心概念所构建而成：
 **Vuex的完整流程**\
 组件中触发Action，Action提交Mutations，Mutations修改State。组件根据State或Getters来渲染页面。具体如下图
 
-![vuex流程](/assets/img/vuex.png)
+![vuex流程](../../.vuepress/public/assets/img/vuex.png)
 
 ## State
 Vuex通过`store`选项，提供了一种机制将状态从根组件注入到每一个子组件中。子组件就能通过`this.$store`访问到store的实例

@@ -264,7 +264,7 @@ class App extends React.Component {
 }
 ```
 
-![NavLink](/assets/img/navlink.png)
+![NavLink](../.vuepress/public/assets/img/navlink.png)
 
 ## Redirect 组件
 

@@ -238,7 +238,7 @@ LoadModule headers_module modules/mod_headers.so
 ```
 重启服务器后浏览网站，看到请求的资源文件确实变小了，而且也都经过了`Gzip`压缩。
 
-![gzip](/assets/img/gzip.png)
+![gzip](../../.vuepress/public/assets/img/gzip.png)
 
 ## 首屏Loading动画
 若是使用了所有以上的方案之后，加载速度还是没能达到预期，此时除了从**代码层面优化**或者**提升服务器配置带宽**等等之外。还可以使用首屏Loading动画，此项并非真正意义上的优化加载速度，而是在对应的资源文件还未加载完毕之前，制造一个`loading`动画来优化用户体验。

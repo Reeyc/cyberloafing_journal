@@ -14,7 +14,7 @@ MVC这种设计模式的缺点是，控制层进行相关的业务逻辑时，�
 * **`View`**：视图层，将数据展示。
 * **`ViewModel`**：视图模型层，业务逻辑。
 
-![MVVM](/assets/img/mvvm.png)
+![MVVM](../../.vuepress/public/assets/img/mvvm.png)
 
 通过对比，发现**MVVM**比**MVC**只有一处不同，就是没有Control控制层，取而代之的是ViewModel视图模型层。其实，这个ViewModel就是Vue本身，它的工作和Control是一样的，也是View和Model的中转站，负责业务逻辑的处理。
 

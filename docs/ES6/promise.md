@@ -74,7 +74,7 @@ function foo() {
 回调函数实现异步的缺点是，异步多级依赖的情况下会层层嵌套，代码难以阅读和维护。\
 更重要的是，多个回调函数嵌套会造成代码的强耦合，如果其中的某一个回调需要修改，有可能造成外面的回调与里面的回调也要跟着修改
 
-![回调地狱](/assets/img/callback.png)
+![回调地狱](../.vuepress/public/assets/img/callback.png)
 
 ### 异常处理
 异步操作不支持`try/catch`捕获`callBack`内部异常。\

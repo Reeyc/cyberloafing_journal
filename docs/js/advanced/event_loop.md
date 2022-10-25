@@ -17,7 +17,7 @@ JavaScript为什么是单线程，而不是多线程？
 
 同步任务与异步任务的运行流程图如下：
 
-![事件循环](/assets/img/event-loop.png)
+![事件循环](../../.vuepress/public/assets/img/event-loop.png)
 
 可以看到，同步任务进入**主线程**，即主执行栈，异步任务进入**任务队列**，主线程内的任务执行完毕为空，会去任务队列读取对应的任务，推入主线程执行。上述过程的不断重复就是事件循环。
 ```js
@@ -82,7 +82,7 @@ console.log(2)
 
 事件循环，宏任务，微任务的关系如图所示：
 
-![事件循环](/assets/img/macro-micro.png)
+![事件循环](../../.vuepress/public/assets/img/macro-micro.png)
 
 按照这个流程，它的执行机制是：
 1. 执行一个宏任务，如果遇到微任务就将它放到微任务的**事件队列**中。

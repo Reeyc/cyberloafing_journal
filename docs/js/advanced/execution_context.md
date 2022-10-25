@@ -41,7 +41,7 @@ console.log('继续执行全局代码');
 4. 当`inner`函数执行完毕了，将它所处的执行上下文从调用栈中移除，继续执行`outer`函数未执行完的代码
 5. 当`outer`函数执行完毕了，将它所处的执行上下文从调用栈中移除，继续执行全局内未执行完的代码
 
-![execution](/assets/img/execution.png)
+![execution](../../.vuepress/public/assets/img/execution.png)
 
 可以得出，调用栈的 **栈顶** 永远是当前正在执行的函数执行上下文，执行完毕则被移除调用栈。\
 而 **栈底** 永远是全局执行上下文，它会在浏览器关闭之后才被移除调用栈。

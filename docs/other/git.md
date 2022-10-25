@@ -70,7 +70,7 @@ clip < ~/.ssh/id_rsa.pub
 
 title自定义，key为秘钥，把刚刚生成的秘钥粘贴进去保存即可。
 
-![Github-SSH](/assets/img/git-ssh.png)
+![Github-SSH](../.vuepress/public/assets/img/git-ssh.png)
 
 这样一来你的本地账户就跟你的Github远程账户所关联了起来，将来使用本地账户git clone远程Github账户上的项目就可以使用SSH的方式了。
 ```shell

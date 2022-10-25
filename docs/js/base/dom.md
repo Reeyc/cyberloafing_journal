@@ -4,7 +4,7 @@
 * **文档** Document：表示整个HTML网页的文档（也就是.html文件）
 * **对象** Obeject：将网页中的每一个部分都转化为对象（标签、属性、文本、甚至注释等等..）
 * **模型** Model：表示对象之间的关系，方便我们获取对象（DOM树）
-![dom-tree](/assets/img/dom-tree.png)
+![dom-tree](../../.vuepress/public/assets/img/dom-tree.png)
 
 ## 节点
 节点是网页中很重要的一个概念，网页就是由节点组成的，网页中的每一个部分都是节点，比如文档，标签，属性，文本，注释等等都是一个节点。\

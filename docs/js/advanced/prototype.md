@@ -27,7 +27,7 @@ mc2.__proto__ === MyClass.prototype //true
 
 mc.__proto__ === mc2.__proto__ //true
 ```
-![prototype](/assets/img/prototype1.png)
+![prototype](../../.vuepress/public/assets/img/prototype1.png)
 
 当实例对象访问属性时，如果自身存在属性，就访问自身的属性，如果自身没有，就会通过`__proto__`到构造函数的原型中访问。
 
@@ -193,6 +193,6 @@ Function.prototype.__proto__.__proto__ //null
 ```
 其实就像一根链子，链子的每一个环都是原型对象`prototype`，而衔接每一个环的地方就是指针`__proto__`。就形成了所谓的原型链，下图就是一个默认的原型链。
 
-![prototype](/assets/img/prototype2.png)
+![prototype](../../.vuepress/public/assets/img/prototype2.png)
 
 <Vssue />

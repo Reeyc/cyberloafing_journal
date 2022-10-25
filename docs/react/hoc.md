@@ -75,7 +75,7 @@ class App extends React.Component {
 
 如果这个HOC包装类多个组件，那么在`React Development Tools`调试工具中，这些组件的名称都会是`Mouse`，因为这些包装后的组件其实就是HOC的返回值，也就是上例中的`Mouse`组件。这样不方便我们进行调试。
 
-![HOC](/assets/img/hoc.png)
+![HOC](../.vuepress/public/assets/img/hoc.png)
 
 解决方案：React组件都有一个`displayName`的静态属性，该属性的值决定了该组件在`React Development Tools`调试工具中展示的名称。
 ```jsx
