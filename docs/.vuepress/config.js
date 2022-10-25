@@ -1,7 +1,7 @@
 const path = require("path")
 
 module.exports = {
-  // base: "/cyberloafing_journal/",
+  base: "/blog/",
   title: "Cyberloafing Journal",
   description: "网络闲散日志",
   head: [
@@ -45,11 +45,16 @@ module.exports = {
       { text: "React", link: "/react/" },
       { text: "Typescript", link: "/ts/" },
       {
-        text: "工程化",
+        text: "Other",
         ariaLabel: "Language Menu",
         items: [
-          { text: "Webpack", link: "/engineering/webpack" },
-          { text: "Vite", link: "/engineering/vite" }
+          { text: "Git", link: "/other/git/" },
+          { text: "Nginx", link: "/other/nginx/" },
+          { text: "Axios", link: "/other/axios/" },
+          { text: "Npm", link: "/other/npm/" },
+          { text: "Uni-App", link: "/other/uni-app/" },
+          { text: "Webpack", link: "/other/webpack/" },
+          { text: "Vite", link: "/other/vite/" }
         ]
       }
       // { text: "面经", link: "/Interview/" },
@@ -229,12 +234,12 @@ module.exports = {
           ]
         }
       ],
-      "/engineering/": [
+      "/other/": [
         {
-          title: "前端工程化",
+          title: "Other",
           sidebarDepth: 2,
           collapsable: false,
-          children: ["/engineering/webpack", "/engineering/vite"]
+          children: ["/other/git", "/other/nginx", "/other/axios", "/other/npm", "/other/uni-app", "/other/webpack", "/other/vite"]
         }
       ],
       "/Interview/": [
