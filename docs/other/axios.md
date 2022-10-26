@@ -78,7 +78,7 @@ axios.patch(url[, data[, config]])
 
 使用`axios.get()`传递请求参数有2种方式
 
-1. **写在选项对象的`params`属性中** <Badge text="推荐"/>：
+1. **写在配置对象的`params`属性中** <Badge text="推荐"/>：
 ```js
 axios.get("./data.json", {
   params: { x: 1 }
@@ -167,6 +167,8 @@ axios.all([
   axios.get("./data.json?x=1")
 ]).then(res => {
   console.log(res)
+}).catch(err => {
+  console.log(err)
 })
 ```
 
@@ -213,10 +215,12 @@ const instace = axios.create({
   timeout: 3000 // 超时时间
 })
 
+// http://www.example.com/data.json
 instace.get("data.json").then(res => {
   console.log(res)
 })
 
+// http://www.example.com/data.json
 instace.post("data.json").then(res => {
   console.log(res)
 })
@@ -244,19 +248,19 @@ axios("add", {
 })
 ```
 
-* **`headers`**：设置请求头信息
+* **`headers`**：设置请求头信息。
 ```js
 axios({
   headers: {'X-Requested-With': 'XMLHttpRequest'}
 })
 ```
-* **`timeout`**：设置请求超时的信息，单位是毫秒，如果在这段时间内还没有收到服务端的响应数据，将中断本次请求
+* **`timeout`**：设置请求超时的信息，单位是毫秒，如果在这段时间内还没有收到服务端的响应数据，将中断本次请求。
 ```js
 axios({
   timeout: 1000 * 60 * 5 // 5min超时
 })
 ```
-* **`withCredentials`**：跨域请求时，是否携带cookie信息
+* **`withCredentials`**：跨域请求时，是否携带cookie信息。
 ```js
 axios({
   withCredentials: true // 跨域时，携带cookie信息
@@ -278,7 +282,7 @@ axios({
 })
 ```
 :::warning 注意
-因为`transformRequest`返回的是字符串形式的参数，如果使用了`transformRequest`修改了post的参数对象，那么请求的对象参数会变成`【object Object】`，此时需要引入`Qs`这个库，将其转为正常参数。
+因为`transformRequest`返回的是字符串形式的参数，如果使用了`transformRequest`修改了post的参数对象，那么请求的对象参数会变成`[object Object]`，此时需要引入`Qs`这个库，将其转为正常参数。
 ```js
 axios({
   url: "./data.json",
