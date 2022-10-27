@@ -331,6 +331,12 @@ axios({
 ```
 :::
 
+* **`onUploadProgress`**：处理上传进度的回调函数，函数内的形参包含了上传进度的一系列信息。
+
+* **`onDownloadProgress`**：处理下载进度的回调函数，函数内的形参包含了下载进度的一系列信息。
+
+* **`cancelToken`**：指定该请求的cancel Token，可用于[取消请求](/other/axios.md#取消请求)。
+
 ## 全局URL
 
 在实际开发中，请求的接口地址大多指向同一个域名，只是接口的路径文件不同，例如：
@@ -417,4 +423,160 @@ axios({
 
 ## 取消请求
 
+axios跟ajax一样用于发送http请求，ajax采用的是`xhr.abort()`方法来取消请求。axios底层也是采用`abort()`来取消，只不过axios将它给封装了一下。
+
+1. 首先需要生成一个`source`对象，并通过`source`对象来生成`cancelToken`，用于标识当前请求。
+```js
+const CancelToken = axios.CancelToken
+const source = CancelToken.source() // 生成source对象
+```
+
+2. 将这个`cancelToken`挂载到当前请求的配置对象上。
+```js
+axios({
+  url: "./data.json",
+  cancelToken: source.token // 将cancelToken挂载到配置对象上
+})
+```
+
+3. 调用`source`对象的`cancel()`方法用于取消请求。`source()`方法有一个可选参数，参数接收一个描述字符串，当请求被取消时，在`catch()`回调中，可以通过`回调参数.message`来获取该段描述。
+```js
+source && source.cancel("请求被取消") // 取消请求
+```
+
+---
+
+下面是一个利用`cancelToken`实现**取消上传**文件功能，并且具有**暂停上传**和**继续上传**的Demo：
+
+```vue
+<template>
+  <div>
+    上传进度：{{ progress.rate }}%
+    <br />
+    选择文件：
+    <input type="file" name="file" @change="changeHandler" />
+    <button @click="sendAjax">上传文件</button>
+    <button @click="cancel">暂停上传</button>
+    <button @click="resume">继续上传</button>
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+export default {
+  data() {
+    return {
+      file: null,
+      source: null,
+      progress: {
+        rate: 0, // 比例
+        currentLoaded: 0, // 当前进度
+        totalLoaded: 0, // 总进度
+      },
+    };
+  },
+  methods: {
+    // 选择文件
+    changeHandler(e) {
+      this.file = e.target.files[0];
+    },
+    // 上传文件
+    sendAjax() {
+      this.uploadRequest(this.file);
+    },
+    // 继续上传
+    resume() {
+      // 获取剩余数据
+      var fileData = this.file.slice(
+        this.progress.currentLoaded,
+        this.file.size
+      );
+      this.uploadRequest(fileData);
+    },
+    // 取消上传
+    cancel() {
+      this.source.cancel("请求被取消");
+    },
+    // 上传请求
+    uploadRequest(file) {
+      var CancelToken = axios.CancelToken;
+      this.source = CancelToken.source(); // 获取source对象
+
+      var fd = new FormData();
+      fd.append("file", file); // 初始化表单对象
+
+      var oldValue = 0;
+      var difValue = 0;
+
+      axios
+        .post("/upload", fd, {
+          onUploadProgress: (newValue) => {
+            // 处理进度
+            difValue = newValue.loaded - oldValue; // 差值
+            this.progress.currentLoaded += difValue; // 当前进度
+            this.progress.totalLoaded = this.file.size; // 总进度
+            // 百分比
+            var progress =
+              (this.progress.currentLoaded / this.progress.totalLoaded) * 100;
+            this.progress.rate =
+              Math.ceil(progress) > 100 ? 100 : Math.ceil(progress);
+            oldValue = newValue.loaded; // 更新旧值
+          },
+          cancelToken: this.source.token, // 携带标识
+        })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    }
+  }
+};
+</script>
+
+```
+
 ## 拦截器
+
+axios的拦截器可以在请求发起之前，对请求的配置对象进行加工处理，以及数据响应之前，对响应的数据进行处理。
+
+**`axios.interceptors.request.use(requestSuccess, requestFailed)`**：请求拦截器，在请求发起之前，执行`requestSuccess`回调函数，若请求失败，则执行`requestFailed`回调函数。
+
+* `requestSuccess`的参数就是当前请求的配置对象，且必须将该配置对象返回。
+* `requestFailed`的参数包含了请求失败的信息。
+
+---
+
+**`axios.interceptors.request.use(responseSuccess, responseFailed)`**：响应拦截器，当接口正常响应时，执行`responseSuccess`，响应异常则会执行`responseFailed`回调函数。
+
+* `responseSuccess`的参数就是axios响应对象，可以在这里进行数据处理。同样的，`responseSuccess`必须将该响应对象返回。
+* `responseFailed`的参数包含了响应失败的信息。
+
+:::warning
+拦截器通常用于拦截整个配置对象或者响应对象本身，例如请求头、响应状态码等等。而`transformRequest`、`transformResponse`可以用来处理请求的参数或者响应对象的数据。
+:::
+
+使用拦截器实现一个cookie通信机制：
+```js
+// 添加请求拦截器 (获取cookie发送)
+axios.interceptors.request.use(
+  config => {
+    var token = localStorage.getItem("token")
+    if (token) config.headers["token"] = token
+    return config
+  },
+  function (error) {
+    return Promise.reject(error)
+  }
+)
+
+// 添加响应拦截器 (接收cookie保存)
+axios.interceptors.response.use(
+  response => {
+    localStorage.setItem("token", response.data.token)
+    return response
+  },
+  function (error) {
+    return Promise.reject(error)
+  }
+)
+
+axios("./data.json")
+```
