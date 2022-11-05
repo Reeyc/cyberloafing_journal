@@ -1,6 +1,6 @@
 # Props
 
-React 的`props`属性主要用于组件间的通信。
+React 的`props`属性主要用于组件间的数据传递。
 
 ## 父子组件通信
 
@@ -50,6 +50,25 @@ class Example extends React.Component {
 
 export default Example;
 ```
+
+:::tip 批量传递
+利用对象解构的方式可以批量传递多个数据：
+```jsx {9}
+class App extends React.Component {
+  params = {
+    x: 1,
+    y: 2
+  }
+  render() {
+    return (
+      <div className="App">
+        <Child {...this.params}></Child>
+      </div>
+    )
+  }
+}
+```
+:::
 
 ---
 
@@ -314,9 +333,9 @@ class Child extends React.Component {
 - 当子节点只有一个时，`props.children`为对应的子节点。
 - 当子节点为多个时，`props.children`为一个数组，数组的每个元素对应每个子节点。
 
-## 类型校验
+## 类型约束
 
-为了将来方便维护，建议父组件向子组件传递数据时，对数据进行校验。
+为了将来方便维护，建议父组件向子组件传递数据时，对数据进行约束。
 
 需要先引入`PropTypes`，这个包在通过`create-react-app`脚手架创建项目时，就已经自动帮我们安装了。
 
@@ -324,7 +343,7 @@ class Child extends React.Component {
 import PropTypes from "prop-types";
 ```
 
-引入后，就可以在接收数据的组件下方使用，注意是组件的下方，而不是在组件里边。
+引入后，需要给接收数据的组件加上一个静态属性`propTypes`，来实现约束效果：
 
 ```jsx
 //子
@@ -338,7 +357,7 @@ class Example extends React.Component {
   }
 }
 
-//约束
+//给Example组件加上propTypes静态属性
 Example.propTypes = {
   content: PropTypes.string, //传过来的content必须是string类型
   data: PropTypes.object.isRequired, //传过来的data必须是object类型，且不可省略
@@ -394,6 +413,42 @@ Example.propTypes = {
 Example.defaultProps = {
   content: "hello react", //当content没有传过来时，其值默认为 hello react
 };
+```
+
+### 约束简写
+
+类的静态属性可以使用ES6的`static`关键字在类内部声明：
+
+```jsx
+//子
+class Example extends React.Component {
+  static propTypes = {
+    content: PropTypes.string,
+    data: PropTypes.object.isRequired,
+  };
+  handleClick() {
+    // TypeError: Cannot assign to read only property 'content' of object '#<Object>'
+    this.props.content = "update";
+  }
+  render() {
+    return <button onClick={this.handleClick.bind(this)}>click</button>;
+  }
+}
+```
+
+### 函数式组件的类型约束
+
+类本身就是组件，所以`propTypes`写在类的静态属性上实现约束效果，而函数组件跟类组件其实是一样的，其本身也是组件，只需要给函数加上`propTypes`即可：
+
+```jsx
+function Example(props) {
+  return <h1>function component</h1>
+}
+
+Example.propTypes = {
+  content: PropTypes.number,
+  data: PropTypes.object.isRequired
+}
 ```
 
 <Vssue />

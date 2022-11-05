@@ -123,8 +123,10 @@ class Hello extends React.Component {
 
 React 事件获取事件对象，Vue 是在绑定事件时传递一个`$event`参数来获取，而 React 获取事件对象则和原生 JS 一样，在事件响应函数内通过第一个参数获取。
 
-:::warning
-React 中的事件也叫合成事件，React 内部作了处理，其事件对象兼容所有的浏览器，将来不必担心兼容性的问题。
+:::tip
+1. React中采用的是**自定义事件**，也叫**合成事件**，React对事件内部作了处理，也就是把原生事件都封装了一遍，因此触发的不是原生DOM事件。其目的是为了处理浏览器的**兼容性**问题。
+
+2. React中的事件机制都采用了 [事件委托](/js/base/event.html#事件委托) 的方式，触发的元素都委托给了最外层的元素，其目的是为了**高效**，避免每个组件的多个元素绑定相同事件。
 :::
 
 下面是一个通过事件对象阻止浏览器默认行为的例子：
@@ -206,5 +208,15 @@ class Hello extends React.Component {
   }
 }
 ```
+
+## 组件三大核心属性
+
+* **[state](/react/state.md)**：收集组件状态。
+* **[props](/react/props.md)**：收集外界传递进组件的数据。
+* **[refs](/react/refs.md)**：收集组件内的DOM元素。
+
+:::warning
+函数组件不可以使用`state`和`refs`特性，react在16.8.0版本开始提供了Hooks API帮助在函数组件中使用这些特性。
+:::
 
 <Vssue />
