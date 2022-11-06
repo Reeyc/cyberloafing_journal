@@ -7,7 +7,7 @@
 ## 受控组件
 在HTML中，表单元素是可输入的，换言之，表单元素有自己的可变状态。而React认为，所有可变的状态，都应当放入`state`内追踪。所以，React需要将表单组件的状态揽入`state`内管理。
 
-在Vue中，有`v-model`双向绑定指令可以使Vue更方便的控制表单元素的值。而React则需要自己绑定值和监听事件来控制`state`的值。
+在Vue中，有`v-model`语法糖双向绑定指令可以使Vue更方便的控制表单元素的值。而React则需要自己绑定值和监听事件来控制`state`的值。
 
 1. 需要自己通过`value`绑定值。
 2. 监听表单元素值的变化事件，动态修改`state`内的值。
@@ -32,6 +32,7 @@ class Hello extends React.Component {
 ```
 
 ## 多受控组件封装
+下面是一个利用**函数柯里化**特性实现的多受控组件封装例子：
 
 ```jsx
 class Hello extends React.Component {
@@ -42,35 +43,35 @@ class Hello extends React.Component {
     val4: false,
     val5: ""
   }
-  elChange = e => {
-    //2. 在事件响应函数内动态修改state内的值
-    const { type, name, value } = e.target
-    if (type === "checkbox") {
-      this.setState({ [name]: e.target.checked })
-    } else {
-      this.setState({ [name]: value })
+  handleChange = name => {
+    return e => {
+      const { type, value } = e.target
+      if (type === "checkbox") {
+        this.setState({ [name]: e.target.checked })
+      } else {
+        this.setState({ [name]: value })
+      }
     }
+  }
+  getData = () => {
+    console.log(this.state)
   }
   render() {
     return (
       <div>
-        {/* 1. 监听元素的change事件 */}
-        <input type="text" name="val1" value={this.state.val1} onChange={this.elChange} />
-        <input type="textarea" name="val2" value={this.state.val2} onChange={this.elChange} />
+        <input type="text" value={this.state.val1} onChange={this.handleChange("val1")} />
+        <textarea value={this.state.val2} onChange={this.handleChange("val2")}></textarea>
 
-        <br />
+        <input type="checkbox" checked={this.state.val3} onChange={this.handleChange("val3")} />
+        <input type="checkbox" checked={this.state.val4} onChange={this.handleChange("val4")} />
 
-        <input type="checkbox" name="val3" checked={this.state.val3} onChange={this.elChange} />
-        <input type="checkbox" name="val4" checked={this.state.val4} onChange={this.elChange} />
-
-        <br />
-
-        <select name="val5" value={this.state.val5} onChange={this.elChange}>
-          <option value="all">all</option>
-          <option value="bj">bj</option>
-          <option value="sh">sh</option>
-          <option value="gz">gz</option>
+        <select value={this.state.val5} onChange={this.handleChange("val5")}>
+          <option value="beijing">beijing</option>
+          <option value="shanghai">shanghai</option>
+          <option value="guangzhou">guangzhou</option>
         </select>
+
+        <button onClick={this.getData}>getData</button>
       </div>
     )
   }

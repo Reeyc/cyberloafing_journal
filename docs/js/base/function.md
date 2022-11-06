@@ -447,10 +447,16 @@ var result = recursive(5)
 console.log(result) //15
 ```
 
+## 闭包
+
+点击跳转另一篇文章：[函数的闭包和柯里化](/js/advanced/memory_reclamation.html#闭包)。
+
 ## 严格模式
-JS文件中的严格模式：在文件首行写上`"use strict"`（就像HTML文件中的`doctype`文档声明一样，如果有严格模式就要严格按照规则写代码）。\
+JS文件中的严格模式：在文件首行写上`"use strict"`（就像HTML文件中的`doctype`文档声明一样，如果有严格模式就要严格按照规则写代码）。
+
 函数中的严格模式：
-`use strict`会将他下面的所有代码都执行严格模式，将`use strict`写在函数之前一行，或者函数内首行都行。\
+`use strict`会将他下面的所有代码都执行严格模式，将`use strict`写在函数之前一行，或者函数内首行都行。
+
 严格模式下的函数会被看成是方法，谁调用这个函数，函数内的`this`就是谁。如果是全局函数，直接调用这个函数，`this`是`undefined`，必须要用**window**来调用才会是**window**，这就是严格模式下的`this`。
 ```js
 'use strict'

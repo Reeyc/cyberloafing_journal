@@ -121,7 +121,7 @@ class Hello extends React.Component {
 
 ### 事件对象
 
-React 事件获取事件对象，Vue 是在绑定事件时传递一个`$event`参数来获取，而 React 获取事件对象则和原生 JS 一样，在事件响应函数内通过第一个参数获取。
+React获取事件对象和原生JS一样，在事件响应函数内通过第一个参数获取。
 
 :::tip
 1. React中采用的是**自定义事件**，也叫**合成事件**，React对事件内部作了处理，也就是把原生事件都封装了一遍，因此触发的不是原生DOM事件。其目的是为了处理浏览器的**兼容性**问题。
@@ -147,9 +147,87 @@ class Hello extends React.Component {
 }
 ```
 
+### 事件参数
+
+在绑定事件时，需要注意带括号和不带括号的区别，实际上，加上括号代表的是**函数调用**，也就是说函数会在模板渲染时就已调用，此时绑定的是函数调用的返回值。不加括号代表的是正常绑定**函数本身**。
+
+这一点，Vue框架内部做了处理。而在React中，内部没有做处理，所以绑定事件需要注意：
+```jsx {11,12}
+class Hello extends React.Component {
+  handleClick(e) {
+    console.log("不带括号") // 初始化时不执行，点击时正常执行
+  }
+  handleClick2(e) {
+    console.log("带括号") // 初始化时已经执行，点击不会执行
+  }
+  render() {
+    return (
+      <>
+        <div onClick={this.handleClick}>click</div>
+        <div onClick={this.handleClick2()}>click2</div>
+      </>
+    )
+  }
+}
+```
+
+但是有的情况需要自己传递一些自定义的参数到事件函数内，就不可避免的需要加上括号了。此时有两种方式可以避免绑定事件为返回值`undefined`的问题：
+
+1. 绑定内联函数，在内联函数内获取事件对象，再调用外层事件函数传递**事件对象**和**自定义参数**。
+
+```jsx {10-12}
+class Hello extends React.Component {
+  handleClick(e, params) {
+    console.log(e, params, "带括号")
+  }
+  render() {
+    return (
+      <>
+        {/* 传递自定义参数 */}
+        <div
+          onClick={event => {
+            this.handleClick(event, "cuctom")
+          }}
+        >
+          click
+        </div>
+      </>
+    )
+  }
+}
+```
+
+2. 将事件函数的返回值设置为一个**高阶函数**，这种方式就是应用了函数柯里化的写法 <Badge text="推荐"/>。
+
+:::tip 高阶函数的定义
+当一个函数符合下面两个规范中的任何一个，那么该函数就是高阶函数。
+1. 函数A接收一个函数作为**参数**。
+2. 函数A的**返回值**是一个函数。
+
+出现上面两种情况之一，函数A就可称为高阶函数。
+:::
+```jsx {7-9}
+class Hello extends React.Component {
+  handleClick(params) {
+    // 绑定的函数内返回一个函数，这个返回的函数才是真正的事件处理函数
+    return e => {
+      console.log(e, params, "带括号")
+    }
+  }
+  render() {
+    return (
+      <>
+        {/* 传递自定义参数 */}
+        <div onClick={this.handleClick('custom')}>click</div>
+      </>
+    )
+  }
+}
+```
+
 ### 事件响应函数内的 this
 
-在 JSX 中绑定事件，事件响应函数内的`this`为`undefined`，这不是 React 的问题，而是 Javascript 本就存在的。如果你将函数赋值给一个变量，然后通过变量调用函数，此时函数内部的 this 就会丢失。
+在JSX中绑定事件，事件响应函数内的`this`为`undefined`，这不是React的问题，而是Javascript本就存在的特性。函数内部的`this`在执行时绑定，而非定义时。而React的执行环境为严格模式，如果没有显式的指定函数调用对象，那么函数内的`this`为`undefined`。
 
 ```js
 const obj = {
@@ -162,7 +240,9 @@ const obj = {
 obj.func(); //1
 
 const temp = obj.func;
-temp(); //在严格模式下，此时的this为undefined，打印undefined.x就会直接报错了
+
+//在严格模式下，此时的this为undefined，打印undefined.x就会直接报错了
+temp();
 ```
 
 #### 解决方案

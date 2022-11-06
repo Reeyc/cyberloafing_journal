@@ -256,7 +256,7 @@ export default {
 ```
 
 ## v-on
-`v-on`绑定的数据的属性为JavaScript的事件名（去除`on`前缀），属性值为事件响应函数
+`v-on`绑定的数据的属性为JavaScript的事件名（省略`on`前缀），属性值为事件响应函数。
 ```vue
 <template>
   <div>
@@ -276,12 +276,15 @@ export default {
 </script>
 ```
 * `v-on`也用得非常多，Vue也提供了一个简写，就是一个`@`符号。
-* `v-on`不仅能绑定事件，还可以简单的逻辑运算
+* `v-on`不仅能绑定事件，还可以简单的**逻辑运算**。
+* `v-on`绑定的值为事件响应函数，传递的参数就是**事件对象**。
 ```vue
 <template>
   <div>
-    <!-- 点击将Hello修改为World -->
-    <div @click="msg='World'">{{msg}}</div>
+    <!-- 获取事件对象 -->
+    <input type="text" @change="getEventObj" />
+    <!-- 简单的逻辑运算 -->
+    <div @click="msg = 'World'">{{ msg }}</div>
   </div>
 </template>
 
@@ -289,12 +292,39 @@ export default {
 export default {
   data() {
     return {
-      msg: "Hello"
+      msg: "Hello",
     };
-  }
+  },
+  methods: {
+    getEventObj(event) {
+      console.log(event);
+    },
+  },
 };
 </script>
 ```
+`v-on`绑定的事件带不带括号都可以，效果都是一样的，若是加上括号可以自己传递一些自定义的参数，此时函数的参数就相当于覆盖掉了，想要获取事件对象，就需要手动传递一个`$event`参数来获取。
+```vue
+<template>
+  <div>
+    <input type="text" @change="getEventObj" />
+    <input type="text" @change="getEventObj($event, 'custom')" />
+  </div>
+</template>
+
+<script>
+export default {
+  methods: {
+    getEventObj(event, params) {
+      console.log(event, params);
+    },
+  },
+};
+</script>
+```
+:::tip
+实际上，加上括号代表的是**函数调用**，绑定的是函数调用的返回值，但是Vue内部作了处理，加上括号也可以绑定到函数本身。
+:::
 
 ## v-model
 `v-bind`能将数据绑定到视图上，但是当视图发生了改变，并不能返回到数据上，而双向数据就是将视图发生的改变返回到数据中。\
