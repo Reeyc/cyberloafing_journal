@@ -44,7 +44,7 @@ npm uninstall [package] --save # 删除包，并删除依赖包
 ```
 
 :::tip 注意
-`--save` 会增加或者删除`dependencies`下的包信息，均仅在 **npm@5** 版本之前生效。在 **npm@5** 之后，安装或删除包，都会自动同步到`dependencies`下，所以，**npm@5** 版本后不需要再加`--save`。
+在 **npm@5** 版本之前，`--save` 会增加或者删除`dependencies`下的包信息。而在 **npm@5** 版本之后不需要再加`--save`，安装或删除包都会自动同步到`dependencies`下。
 :::
 
 #### 更新
@@ -179,6 +179,10 @@ npm install --global cnpm # 全局安装淘宝镜像cnpm
 
 cnpm install jquery --save # 将来使用cnpm替换npm管理包
 ```
+
+:::warning
+需要注意的是，通过cnpm指令安装的依赖包，如果不加`--save`后缀是无法记录到`dependencies`里面的。
+:::
 
 2. 配置 **npm** 的默认下载链接为 **cnpm**，也就是淘宝的镜像链接，这种方式不必安装 **cnpm**。
 ```shell
