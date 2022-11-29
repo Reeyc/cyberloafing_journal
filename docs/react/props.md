@@ -117,10 +117,13 @@ export default Example;
 
 ## 兄弟组件通信
 
-兄弟组件通信其实是结合了父传子 + 子传父的方式来实现的。首先两个兄弟组件都拥有一个共同的父组件，作为两个组件沟通的桥梁。
+### 状态提升
+结合了父传子 + 子传父的方式来实现。将两个兄弟组件共有的父组件作为两个组件沟通的桥梁。
 
 - 传输方：向父组件传输数据。
 - 接收方：接受从父组件传递过来的数据。
+
+这种方式官方称之为[状态提升](https://react.docschina.org/docs/lifting-state-up.html)，顾名思义，将两个组件需要的状态state提升至父组件来管理。
 
 ```jsx {11,12,20,26}
 class Parent extends React.Component {
@@ -155,6 +158,69 @@ class Child2 extends React.Component {
   }
 }
 ```
+
+### 发布订阅
+
+发布订阅是常用于实现异步通信的一种方式。可以自己手写一个发布订阅模式，也可以使用现成的库：
+```shell
+npm i pubsub-js
+```
+```js
+import PubSub from "pubsub-js"
+```
+`pubsub-js`是一个用于实现发布订阅效果的js库。
+
+- `subscribe()`用于接收消息，参数一是接收的消息名称，参数二是接收到消息时执行的回调函数，回调的参数就是<u>消息名称</u>和发布时携带过来的<u>数据</u>。
+- `publish()`用于发布消息，参数一是发布的消息名称，参数二是携带的数据。
+
+如果组件A要向组件B通信，那么在组件B内使用`subscribe()`订阅消息，接收数据。组件A内使用`publish()`发布消息，传送数据，即可实现兄弟组件通信。
+
+```jsx {16-18,30}
+class Parent extends React.Component {
+  render() {
+    return (
+      <>
+        <Child1 />
+        <Child2 />
+      </>
+    )
+  }
+}
+
+class Child1 extends React.Component {
+  state = { count: 0 }
+  componentDidMount() {
+    // 订阅消息
+    PubSub.subscribe("countChange", (_, count) => {
+      this.setState({ count })
+    })
+  }
+  render() {
+    return <div>count: {this.state.count}</div>
+  }
+}
+
+class Child2 extends React.Component {
+  state = { count: 0 }
+  handleCount = () => {
+    this.setState({ count: this.state.count + 1 }, () => {
+      // 发布消息
+      PubSub.publish("countChange", this.state.count)
+    })
+  }
+  render() {
+    return <button onClick={this.handleCount}>click</button>
+  }
+}
+```
+
+:::tip
+发布订阅模式的应用不仅限于兄弟组件通信，凡是有能够订阅消息的组件和发布消息的组件，就能实现通信。
+:::
+
+:::warning 注意
+但需要注意的是，当组件A要发布消息时，必须保证组件B已经提前订阅了消息，否则是无法收到消息的。例如，组件A发布了消息，此时组件B还未渲染，组件B就无法收到该消息。
+:::
 
 ## 跨级组件传值
 

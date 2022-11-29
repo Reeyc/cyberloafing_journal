@@ -151,7 +151,15 @@ ReactDOM.render(
 
 ## 条件渲染
 
-JSX 的条件渲染无法像 Vue 一样提供`v-if`指令直接在模板内部进行。而是需要在外部定义函数来判断条件，在模板内调用函数来实现条件渲染。
+JSX 的条件渲染无法像 Vue 一样提供`v-if`指令直接在模板内部进行。而是需要自己手动通过变量来判断需要展示的DOM：
+```jsx
+let isLoading = true;
+
+ReactDOM.render(<div>
+  { isLoading ? <h1>数据正在加载中，请稍后...</h1> : <h1>数据已经加载完毕</h1> }
+</div>, document.getElementById("root"));
+```
+或者在外部定义函数来判断条件，在模板内调用函数来实现条件渲染。
 
 ```jsx
 let isLoading = true;

@@ -49,6 +49,50 @@ function debounce(fn, delay) {
 }
 ```
 
+## 发布订阅
+```js
+//发布订阅
+class EventEmitter {
+  constructor() {
+    this.subs = {} //保存所有不同的事件类型
+  }
+  //绑定事件
+  on(event, cb) {
+    if (this.subs[event]) { //每种类型的事件用不同数组保存, 如果事件已存在, 则添加响应函数
+      this.subs[event].push(cb)
+    } else {
+      this.subs[event] = [] //如果事件不存在, 则创建事件数组, 并添加响应函数
+      this.subs[event].push(cb)
+    }
+  }
+  //解绑事件
+  off(event, offCb) {
+    if (this.subs[event]) {
+      let index = this.subs[event].findIndex(cb => cb === offCb) //获取要解绑的事件的索引
+      this.subs[event].splice(index, 1) //解绑事件
+      if (!this.subs[event].length) delete this.subs[event] //当前事件类型为空时, 删除数组
+    }
+  }
+  //触发事件
+  trigger(event, ...arg) {
+    this.subs[event] && this.subs[event].forEach(cb => { //循环触发该类型中未解绑的事件
+      cb(...arg)
+    })
+  }
+}
+
+let example = new EventEmitter()
+
+example.on("demo", () => console.log("Hello World")) //绑定事件
+example.trigger("demo") //触发事件 Hello World
+
+example.on("demo", () => console.log("Bay")) //再次绑定事件
+example.trigger("demo") //触发多个事件 Hello World Bay
+
+example.off("demo", () => console.log("Hello World")) //解绑某个事件
+example.trigger("demo") //再触发 Bay
+```
+
 ## call & apply & bind
 ## 闭包
 ## Event Loop
