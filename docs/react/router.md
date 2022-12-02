@@ -1,13 +1,13 @@
-# 路由
+# React Router
 
 :::tip
 本章内容基于 `react-router-dom` v5 版本，v6 版本的改变暂未更新。
 :::
 
-## React Router
+## 路由
 
 - **`react-router`**：路由核心库，包含诸多和路由功能相关的核心代码。
-- **`react-router-dom`**：利用核心库，结合实际的页面，实现跟页面路由相关的功能。
+- **`react-router-dom`**：利用核心库，结合实际的页面，实现跟Web页面路由相关的功能。
 
 安装使用`react-router-dom`库即可
 
@@ -43,6 +43,21 @@ window.onpopstate; //监听历史跳转的事件
 - **`BrowserRouter`**：使用 history 模式路由。 <Badge text="推荐"/>
 
 这两个组件通常情况下只会使用一次，在应用的最外层使它包裹整个页面。
+
+```jsx
+import React from "react"
+import ReactDOM from "react-dom"
+import { BrowserRouter as Router } from "react-router-dom"
+
+import App from "./App"
+
+ReactDOM.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  document.getElementById("root")
+)
+```
 
 ## Route 组件
 
@@ -95,10 +110,11 @@ class App extends React.Component {
 class App extends React.Component {
   render() {
     /**
-     * 当pathname值为以下几种都会匹配成功：
-     * /music        //匹配成功
-     * /music/aa     //匹配成功
-     * /music/aa/bb  //匹配成功
+     * 当pathname为以下几种值时：
+     * /music        匹配成功
+     * /music/aa     匹配成功
+     * /music/aa/bb  匹配成功
+     * /aa/music/bb  匹配不成功
      */
     console.log(window.location.pathname);
     return (
@@ -145,6 +161,9 @@ class App extends React.Component {
   }
 }
 ```
+:::tip
+开启精确匹配可能会导致无法继续匹配 [二级路由](/react/router.html#嵌套路由)，除了默认路由以外，其余路由请谨慎开启精确匹配。
+:::
 
 ### sensitive
 
@@ -268,7 +287,7 @@ class App extends React.Component {
 
 ## Redirect 组件
 
-重定向组件，当加载到该组件时，会无刷新的跳转页面。类似于 vue 中路由记录的`redirect`字段。
+重定向组件，当加载到该组件时，会无刷新的跳转页面。类似于 vue 中路由记录的`redirect`字段。Redirect组件常用于兜底的操作，所以一般会配合Switch组件使用，并写于其他路由的最下方。
 
 其他属性：
 
@@ -342,6 +361,150 @@ class Home extends React.Component {
 }
 ```
 
+## 动态路由参数
+
+动态路由参数即params参数，跟vue-router一样，注册路由时，在路由路径以冒号:拼接一个自定义key值来声明params参数。将来在传递该参数时，需要动态拼接到路径后面即可。
+
+```jsx {6-7,10-11}
+class App extends React.Component {
+  render() {
+    return (
+      <Router>
+        {/* 2. 传递id参数和cid参数 */}
+        <Link to={`/music/${1}/${2}`}>跳转音乐路由</Link>
+        <Link to={`/music/${1}/${2}`}>跳转电影路由</Link>
+        <Switch>
+          {/* 1. 声明id参数和cid参数 */}
+          <Route path="/music/:id/:cid" component={Music}></Route>
+          <Route path="/movie/:id/:cid" component={Movie}></Route>
+          <Route path="/" component={Default}></Route>
+        </Switch>
+      </Router>
+    );
+  }
+}
+```
+
+在组件内，`props.match.params`是一个对象，可以通过该对象来获取这些动态路由参数。
+
+```jsx {3}
+class Music extends Component {
+  render() {
+    const { id, cid } = this.props.match.params
+    console.log(id, cid) // 1, 2
+    return <div>音乐</div>
+  }
+}
+```
+
+## 路由查询参数
+
+路由查询参数不需要在注册路由时声明参数，只需要在跳转路由的路径中，手动将参数拼接成`urlencoded`的形式。
+
+```jsx {6-7,10-11}
+class App extends React.Component {
+  render() {
+    return (
+      <Router>
+        {/* 传递id参数和cid参数 */}
+        <Link to="/music/?id=1&cid=2">跳转音乐路由</Link>
+        <Link to="/movie/?id=3&cid=4">跳转电影路由</Link>
+        <Switch>
+          <Route path="/music" component={Music}></Route>
+          <Route path="/movie" component={Movie}></Route>
+          <Route path="/" component={Default}></Route>
+        </Switch>
+      </Router>
+    );
+  }
+}
+```
+
+将来在组件中，可以通过`props.location.search`参数来获取。
+
+```jsx {3}
+class Music extends Component {
+  render() {
+    const { search } = this.props.location
+    console.log(search) // ?id=1&cid=2
+    return <div>音乐</div>
+  }
+}
+```
+
+但是注意，获取到的search参数是原始的`urlencoded`字符串，react并没有帮你处理成JS对象的结构，所以需要自己进行数据转换。
+
+推荐安装一个库，**`qs`**：用于`urlencoded`字符串和JS对象之间的转换。
+
+```shell
+npm i qs -S
+```
+```js
+import qs from "qs"
+```
+
+- **`qs.stringify(obj)`**：将一个JS对象转换为`urlencoded`格式的字符串。
+- **`qs.parse(str)`**：将一个`urlencoded`格式的字符串转换为JS对象。
+
+使用`qs`库转换数据，就可以正常的获取到路由查询参数了：
+```jsx
+class Music extends Component {
+  render() {
+    const { search } = this.props.location
+    const { id, cid } = qs.parse(search)
+    console.log(id, cid) // 1, 2
+    return <div>音乐</div>
+  }
+}
+```
+
+## 路由state参数
+
+除了 **params参数** 和 **search参数** 之外，还可以使用 **state参数** 进行路由传参：注册路由的`to`属性除了绑定字符串路径以外，还能绑定对象，对象的属性介绍如下：
+
+ - **`pathname`**: 路由路径
+ - **`state`**：state参数
+
+```jsx {6-7}
+class App extends React.Component {
+  render() {
+    return (
+      <Router>
+        {/* 传递id参数和cid参数 */}
+        <Link to={{ pathname: "/music", state: { id: 1, cid: 2 } }}>跳转音乐路由</Link>
+        <Link to={{ pathname: "/movie", state: { id: 3, cid: 4 } }}>跳转电影路由</Link>
+        <Switch>
+          <Route path="/music" component={Music}></Route>
+          <Route path="/movie" component={Movie}></Route>
+          <Route path="/" component={Default}></Route>
+        </Switch>
+      </Router>
+    );
+  }
+}
+```
+
+将来在组件中，可以通过`props.location.state`参数来获取，参数是一个JS对象，也就是你从`state`属性传过来的对象。
+
+```jsx
+class Music extends Component {
+  render() {
+    const { id, cid } = this.props.location.state
+    console.log(id, cid) // 1, 2
+    return <div>音乐</div>
+  }
+}
+```
+
+**state参数** 与其他两者的区别是，**params参数** 和 **search参数** 都会显示的将参数带到浏览器地址栏上，而 **state参数** 则不会，react将 **state参数** 保存在了浏览器`history`对象身上。即使刷新页面 **state参数** 也不会丢失。
+
+:::danger 注意
+**state参数** 的弊端也在此：
+
+1. 由于数据都储存在`history`对象上，当用户清除浏览器缓存，再次刷新页面，**state参数** 就会丢失。
+2. 如果使用的是 Hash Router，则内部没有使用到`history`对象，刷新也会导致 **state参数** 丢失。
+:::
+
 ## 编程式导航
 
 编程式导航就是通过 JS 代码控制路由跳转，Vue 中通过`this.$router`实现了编程式导航。
@@ -360,6 +523,8 @@ class Home extends React.Component {
 :::
 
 ```jsx
+import { BrowserRouter as Router, Route, withRouter } from "react-router-dom"
+
 const Music = () => <div>音乐</div>;
 const Movie = () => <div>电影</div>;
 
@@ -393,6 +558,65 @@ class App extends React.Component {
 
         <NewBth></NewBth>
       </Router>
+    );
+  }
+}
+```
+
+在编程式导航中传递路由参数其实和使用`<Link>`组件是一样的，**params参数** 和 **search参数** 只需要对路由路径进行手动拼接数据即可。**params参数** 一样要记得在注册路由的时候声明参数。
+
+```jsx
+class Bth extends React.Component {
+  handlePush = (path) => {
+    this.props.history.push(path);
+  };
+  render() {
+    return (
+      <>
+        {/* 传递params参数 */}
+        <button onClick={this.handlePush.bind(this, "/music/1/2")}>
+          前往音乐页面
+        </button>
+        {/* 传递query参数 */}
+        <button onClick={this.handlePush.bind(this, "/movie?id=1&cid=2")}>
+          前往电影页面
+        </button>
+      </>
+    );
+  }
+}
+
+const NewBth = withRouter(Bth);
+
+class App extends React.Component {
+  render() {
+    return (
+      <Router>
+        <Route path="/music/:id/:cid" component={Music}></Route>
+        <Route path="/movie" component={Movie}></Route>
+
+        <NewBth></NewBth>
+      </Router>
+    );
+  }
+}
+```
+
+而 **state参数** 则是在`push()`或`replace()`的第二个参数进行传递：
+
+```jsx
+class Bth extends React.Component {
+  handlePush = (path, state) => {
+    this.props.history.push(path, state);
+  };
+  render() {
+    return (
+      <>
+        {/* 传递state参数 */}
+        <button onClick={this.handlePush.bind(this, "/music", { id: 1, cid: 2 })}>
+          前往音乐页面
+        </button>
+      </>
     );
   }
 }

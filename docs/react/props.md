@@ -388,7 +388,7 @@ class App extends React.Component {
 
 class Child extends React.Component {
   render() {
-    console.log(this.props);
+    console.log(this.props); // {children: Array(4)}
     return null;
   }
 }
@@ -398,6 +398,45 @@ class Child extends React.Component {
 
 - 当子节点只有一个时，`props.children`为对应的子节点。
 - 当子节点为多个时，`props.children`为一个数组，数组的每个元素对应每个子节点。
+
+除了子节点数据以外，`children`也可以像一个普通属性一样传递：
+```jsx
+class App extends React.Component {
+  render() {
+    return <Child children={1}></Child>
+  }
+}
+
+class Child extends React.Component {
+  render() {
+    console.log(this.props) // {children: 1}
+    return null
+  }
+}
+```
+:::warning
+当组件标签内有内容时，这些内容优先级更高，会覆盖默认传递的`children`属性：
+```jsx
+class App extends React.Component {
+  render() {
+    return (
+      <Child children={1}>
+        文本节点
+        <p>JSX节点</p>
+        {() => {}}
+      </Child>
+    )
+  }
+}
+
+class Child extends React.Component {
+  render() {
+    console.log(this.props) // {children: Array(3)}
+    return null
+  }
+}
+```
+:::
 
 ## 类型约束
 

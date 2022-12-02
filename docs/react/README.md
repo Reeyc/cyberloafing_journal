@@ -10,6 +10,6 @@
 - [Render-props](/react/render_props.md)
 - [高阶组件](/react/hoc.md)
 - [动画](/react/animate.md)
-- [路由](/react/router.md)
+- [React Router](/react/router.md)
 - [Redux](/react/redux.md)
 - [Hooks](/react/hooks.md)
