@@ -401,7 +401,7 @@ class Music extends Component {
 
 路由查询参数不需要在注册路由时声明参数，只需要在跳转路由的路径中，手动将参数拼接成`urlencoded`的形式。
 
-```jsx {6-7,10-11}
+```jsx {6-7}
 class App extends React.Component {
   render() {
     return (
@@ -496,7 +496,7 @@ class Music extends Component {
 }
 ```
 
-**state参数** 与其他两者的区别是，**params参数** 和 **search参数** 都会显示的将参数带到浏览器地址栏上，而 **state参数** 则不会，react将 **state参数** 保存在了浏览器`history`对象身上。即使刷新页面 **state参数** 也不会丢失。
+**state参数** 与其他两者的区别是，**params参数** 和 **search参数** 都会显式的将参数带到浏览器地址栏上，而 **state参数** 则不会，react将 **state参数** 保存在了浏览器`history`对象身上。即使刷新页面 **state参数** 也不会丢失。
 
 :::danger 注意
 **state参数** 的弊端也在此：
