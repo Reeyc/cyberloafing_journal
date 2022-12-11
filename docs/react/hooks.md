@@ -1,3 +1,3 @@
-# Hook
+# Hooks
 
 <Vssue />

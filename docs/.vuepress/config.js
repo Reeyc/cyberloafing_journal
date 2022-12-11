@@ -21,19 +21,19 @@ module.exports = {
   plugins: [
     ["@vuepress/nprogress"],
     ["@vuepress/back-to-top"],
-    ["reading-progress"],
-    [
-      "@vssue/vuepress-plugin-vssue",
-      {
-        platform: "github", //v3的platform是github，v4的是github-v4
-        locale: "zh", //语言
-        owner: "Reeyc", //github账户名
-        repo: "cyberloafing_journal", //github一个项目的名称
-        clientId: "065e72b5ff237807bdc0", //注册的Client ID
-        clientSecret: "62b07d3fc7997d0a42fdaddd93c7fa58fb8b7220", //注册的Client Secret
-        autoCreateIssue: true // 自动创建评论，默认是false，最好开启，这样首次进入页面的时候就不用去点击创建评论的按钮了。
-      }
-    ]
+    ["reading-progress"]
+    // [
+    //   "@vssue/vuepress-plugin-vssue",
+    //   {
+    //     platform: "github", //v3的platform是github，v4的是github-v4
+    //     locale: "zh", //语言
+    //     owner: "Reeyc", //github账户名
+    //     repo: "cyberloafing_journal", //github一个项目的名称
+    //     clientId: "065e72b5ff237807bdc0", //注册的Client ID
+    //     clientSecret: "62b07d3fc7997d0a42fdaddd93c7fa58fb8b7220", //注册的Client Secret
+    //     autoCreateIssue: true // 自动创建评论，默认是false，最好开启，这样首次进入页面的时候就不用去点击创建评论的按钮了。
+    //   }
+    // ]
   ],
   themeConfig: {
     logo: "/assets/img/logo.png",
@@ -202,15 +202,18 @@ module.exports = {
             "/react/jsx",
             "/react/component",
             "/react/state",
-            "/react/props",
+            "/react/props1",
+            "/react/props2",
             "/react/refs",
             "/react/controlled",
             "/react/life_cycle",
             "/react/render_props",
             "/react/hoc",
             "/react/animate",
-            "/react/router",
+            "/react/router_v5",
+            "/react/router_v6",
             "/react/redux",
+            "/react/react_redux",
             "/react/hooks"
           ]
         }

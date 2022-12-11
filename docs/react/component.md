@@ -7,6 +7,18 @@ React 中创建组件的两种方式：
 - **函数组件**：通过函数来创建组件。
 - **类组件**：通过类来创建组件。
 
+---
+
+组件三大核心属性
+
+* **[state](/react/state.md)**：收集组件状态。
+* **[props](/react/props1.md)**：收集外界传递进组件的数据。
+* **[refs](/react/refs.md)**：收集组件内的DOM元素。
+
+:::warning
+函数组件不可以使用`state`和`refs`特性，react在16.8.0版本开始提供了Hooks API帮助在函数组件中使用这些特性。
+:::
+
 ## 函数组件
 
 函数组件通常返回一段 JSX 代码，用于描述该组件的结构。
@@ -206,7 +218,7 @@ class Hello extends React.Component {
 
 出现上面两种情况之一，函数A就可称为高阶函数。
 :::
-```jsx {7-9}
+```jsx {4-6}
 class Hello extends React.Component {
   handleClick(params) {
     // 绑定的函数内返回一个函数，这个返回的函数才是真正的事件处理函数
@@ -289,14 +301,120 @@ class Hello extends React.Component {
 }
 ```
 
-## 组件三大核心属性
+## 组件更新机制
 
-* **[state](/react/state.md)**：收集组件状态。
-* **[props](/react/props.md)**：收集外界传递进组件的数据。
-* **[refs](/react/refs.md)**：收集组件内的DOM元素。
+在React中，父组件重新渲染时，也会重新渲染子组件，但只会渲染当前组件子树（局部渲染,当前组件以其所有子组件）。
 
-:::warning
-函数组件不可以使用`state`和`refs`特性，react在16.8.0版本开始提供了Hooks API帮助在函数组件中使用这些特性。
-:::
+![React组件更新机制](/assets/img/component-update.png)
+
+上图中，组件`<App>`内包含两个`<Parent>`组件，每个`<Parent>`组件内又分别包含两个`<Child>`组件：
+
+> 当`<Parent>`组件更新时，其对应的两个`<Child>`组件也会更新。其同级的`<Parent>`组件和其子组件不会更新。而当`<App>`组件更新时，图上所有的组件都会更新，因为所有的组件都是`<App>`组件的子组件。
+
+正是这种机制，会引发效率上的问题：当组件更新时，会带动该组件下的所有子组件一起更新，如果子组件需要的状态没有发生变化，那么这个子组件就没必要更新，避免造成性能的消耗。
+
+---
+
+下面是两个优化方案：
+
+
+### shouldComponentUpdate
+
+`shouldComponentUpdate`是一个 [生命周期](/react/life_cycle.html#shouldcomponentupdate) 钩子函数，它在组件的`render`函数之前执行。
+
+- 参数：变化后的`props`，变化后的`state`。
+- 返回值：必须返回一个布尔类型的值，该值用于决定`render`函数是否执行。
+
+思路：在子组件内部，通过`shouldComponentUpdate`的参数来判断，变化前后的`props`和`state`来决定组件是否更新，来减少性能的消耗。
+
+下面是一个获取随机数的例子，当连续两次获取到的随机数一样，不触发组件更新：
+
+```jsx {18-21}
+class App extends React.Component {
+  state = { count: 0 }
+  handleClick = () => {
+    this.setState(state => ({ count: Math.floor(Math.random() * 3) }))
+  }
+  render() {
+    console.log("根组件更新")
+    return (
+      <>
+        <button onClick={this.handleClick}>获取随机数</button>
+        <Example count={this.state.count} />
+      </>
+    )
+  }
+}
+
+class Example extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    // 当count的值和上次一样，不触发组件更新
+    return this.props.count !== nextProps.count
+  }
+  render() {
+    console.log("子组件更新")
+    return <div>{this.props.count}</div>
+  }
+}
+```
+
+### React.PureComponent
+
+`React.PureComponent`和`React.Component`相似，区别在于`PureComponent`是纯组件，内部实现了`shouldComponentUpdate`自动对比`props`和`state`，而不需要我们再去手动对比。
+
+PrueComponent对比规则：
+- 基本类型：对比值。
+- 引用类型：对比引用地址。
+
+`PrueComponent`不会去对比对象的深层属性，换言之，如果对象中包含复杂的结构，此时要拷贝一份对象，覆盖原对象的引用地址，才能触发`PrueComponent`的对比规则。
+
+---
+
+如下代码中，`newObj`其实只是把`obj`对象复制了过来，而他们两的引用地址是没有发生改变的，所以在`<Example>`组件中，`this.props.obj === nextProps.obj`，因此`<Example>`组件永远也不会触发`render`更新。
+
+```jsx {6}
+class App extends React.Component {
+  state = {
+    obj: { count: 0 }
+  }
+  handleClick = () => {
+    const newObj = this.state.obj // 相同引用地址
+    newObj.count = Math.floor(Math.random() * 3)
+
+    this.setState(state => {
+      return { obj: newObj }
+    })
+  }
+  render() {
+    console.log("根组件更新")
+    return (
+      <>
+        <button onClick={this.handleClick}>获取随机数</button>
+        <Example obj={this.state.obj} />
+      </>
+    )
+  }
+}
+
+class Example extends React.PureComponent {
+  render() {
+    console.log("子组件更新")
+    return <div>{this.props.obj.count}</div>
+  }
+}
+```
+
+正确的写法是将引用类型拷一份出来，用一个新的对象来赋值，这样两个对象就属于不同的引用地址，就能有效的触发`React.PureComponent`内部的对比规则了。
+
+```js {2}
+handleClick = () => {
+  const newObj = { ...this.state.obj } // 新的引用地址
+  newObj.count = Math.floor(Math.random() * 3)
+
+  this.setState(state => {
+    return { obj: newObj }
+  })
+}
+```
 
 <Vssue />
