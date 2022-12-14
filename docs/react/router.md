@@ -1,7 +1,7 @@
-# React-Router-V5
+# React-Router
 
 :::tip
-本文基于 `react-router-dom` v5 版本，v6 版本的改变请查看 [React-Router-V6](/react/router_v6.html)。
+本文基于 `react-router-dom` v5 版本，v6 版本的变化请查看 [React-Router-V6](/react/router_v6.html)。
 :::
 
 ## 路由
@@ -621,5 +621,60 @@ class Bth extends React.Component {
   }
 }
 ```
+
+## 路由懒加载
+
+路由懒加载可以有效避免SPA应用首屏加载时间过长的问题。
+
+> 所有的js文件都会在应用初始化时加载，而如果使用了路由懒加载，对应的路由组件则会被分开打包，直到使用该组件时才会加载。这样可以有效避免了首屏加载的资源过多的问题。
+
+#### lazy
+`lazy`是react导出的一个函数，用于懒加载组件。
+
+```js
+// 同步加载组件
+import Music from "./pages/Music"
+import Movie from "./pages/Movie"
+import Default from "./pages/Default"
+```
+```js
+// 通过lazy懒加载组件（异步加载）
+const Music = lazy(() => import("./pages/Music"))
+const Movie = lazy(() => import("./pages/Movie"))
+const Default = lazy(() => import("./pages/Default"))
+```
+
+#### Suspense
+`<Suspense />`是React的内置组件，它的`fallback`属性指向一个组件，该组件会在异步路由还未载入完毕时展示，可以用作类似Loading的效果。
+
+```jsx
+// 通过lazy懒加载组件
+const Music = lazy(() => import("./pages/Music"))
+const Movie = lazy(() => import("./pages/Movie"))
+const Default = lazy(() => import("./pages/Default"))
+
+class App extends React.Component {
+  render() {
+    return (
+      <Router>
+        <Link to="/music">跳转音乐路由</Link>
+        <Link to="/movie">跳转电影路由</Link>
+        {/* 懒加载必须配合<Suspense>组件使用 */}
+        <Suspense fallback={<h1>loading...</h1>}>
+          <Routes>
+            <Route path="/music" element={<Music />}></Route>
+            <Route path="/movie" element={<Movie />}></Route>
+            <Route path="/" element={<Default />}></Route>
+          </Routes>
+        </Suspense>
+      </Router>
+    )
+  }
+}
+```
+
+:::warning
+当开启`lazy`懒加载组件时，必须配合`<Suspense />`组件一起使用，否则React会抛出异常。
+:::
 
 <Vssue />

@@ -189,7 +189,7 @@ export default store;
 ```
 
 :::tip
-`reducer`第一次调用是由store自动触发的，传入的`state`参数是`undefined`，传入的`action.type`参数是Redux生成的随机字符串，目的是为了避免与开发者定义的`type`相同。
+`reducer`第一次调用是`createStore`挂载时触发的，传入的`state`参数是`undefined`，传入的`action.type`参数是Redux生成的随机字符串，目的是为了避免与开发者定义的`type`相同。
 :::
 
 :::tip
@@ -213,9 +213,8 @@ import {
 class index extends React.Component {
   constructor(props) {
     super(props);
-    // 首次调用getState()，store就自动调用reducer
-    this.state = store.getState();
 
+    this.state = store.getState();
     // 订阅Redux的状态，同步到组件state
     store.subscribe(() => {
       this.setState(store.getState());
