@@ -37,7 +37,7 @@ function Example(props) {
 export default Example;
 ```
 
-- 子组件如果是**类组件**，需要通过`this.props`来获取传递过来的数据。
+- 子组件如果是**class组件**，需要通过`this.props`来获取传递过来的数据。
 
 ```jsx {5}
 import React from "react";

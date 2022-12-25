@@ -174,7 +174,7 @@ class App extends React.Component {
 ```
 
 :::warning 注意
-使用 `React.createRef()` 来绑定组件时，组件必须是**类组件**，**函数组件**是无法获取到实例的。如上面例子中，`<Child />`组件必须是类组件。
+使用 `React.createRef()` 来绑定组件时，组件必须是**class组件**，**函数组件**是无法获取到实例的。如上面例子中，`<Child />`组件必须是class组件。
 :::
 
 <Vssue />

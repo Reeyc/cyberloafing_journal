@@ -3,7 +3,7 @@
 
 ## Props 的初始化
 
-使用类组件时，如果使用了`constructor`构造函数：
+使用class组件时，如果使用了`constructor`构造函数：
 
 ```jsx {12}
 class Hello extends React.Component {
@@ -264,7 +264,7 @@ class Example extends React.Component {
 
 ### 函数式组件的类型约束
 
-类本身就是组件，所以`propTypes`写在类的静态属性上实现约束效果，而函数组件跟类组件其实是一样的，其本身也是组件，只需要给函数加上`propTypes`即可：
+类本身就是组件，所以`propTypes`写在类的静态属性上实现约束效果，而函数组件跟class组件其实是一样的，其本身也是组件，只需要给函数加上`propTypes`即可：
 
 ```jsx
 function Example(props) {

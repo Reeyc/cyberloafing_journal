@@ -150,7 +150,7 @@ git push origin -d home-Swiper # 删除远程分支
 git branch -m oldName newName # oldName是旧分支名, newName是新分支名
 ```
 
-### 分支切换时未提交
+### 缓存工作区状态
 本地代码未提交时切换分支的话，可以先将本地代码给 隐藏 `"stash"` 起来。然后切换别的分支，当开发完毕时，再切换回来恢复隐藏的代码。
 ```shell
 git stash # 将当前改动的代码隐藏

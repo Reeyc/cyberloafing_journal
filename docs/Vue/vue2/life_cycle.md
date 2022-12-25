@@ -200,4 +200,65 @@ export default {
 </script>
 ```
 
+## 监听子组件生命周期
+
+在父组件中，可以通过 `@hook:xxx` 的方式监听子组件的生命周期：
+
+```vue
+<template>
+  <!-- 监听<Child>子组件的mounted生命周期 -->
+  <Child ref="child" @hook:mounted="childMounted" />
+</template>
+
+<script>
+import Child from "@/components/Child"
+export default {
+  components: { Child },
+  created() {
+    console.log(this.$refs.child) // undefined
+  },
+  mounted() {
+    console.log(this.$refs.child) // VueComponent { … }
+  },
+  methods: {
+    childMounted() {
+      console.log(this.$refs.child) // VueComponent { … }
+    }
+  }
+}
+</script>
+```
+
+## 父子组件生命周期执行顺序
+
+**初始化**
+1. 父`beforeCreate`
+2. 父`created`
+3. 父`beforeMount`
+4. 子`beforeCreate`
+5. 子`created`
+6. 子`beforeMount`
+7. 子`mounted`
+8. 父`mounted`
+
+---
+
+**子组件更新**
+1. 父`beforeUpdate`
+2. 子`beforeUpdate`
+3. 子`updated`
+4. 父`updated`
+
+**父组件更新**
+1. 父`beforeUpdate`
+2. 父`updated`
+
+---
+
+**父组件销毁**
+1. 父`beforeDestroy`
+2. 子`beforeDestroy`
+3. 子`destroyed`
+4. 父`destroyed`
+
 <Vssue />
