@@ -1,7 +1,8 @@
 export default {
   data() {
     return {
-      wx: "Hooks__"
+      wx: "Hooks__",
+      wechat: require("./public/assets/img/wechat.png")
     }
   },
   mounted() {
@@ -16,7 +17,7 @@ export default {
             <span>Wechat: ${this.wx}</span>
             <span class="icon iconfont icon-copy"></span>
             <div class="_wechat-img">
-              <img src="../../assets/img/wechat.png" />
+              <img src="${this.wechat}" />
             </div>
         `
 
