@@ -214,6 +214,8 @@ module.exports = {
             "/react/router_v6",
             "/react/redux",
             "/react/react_redux",
+            "/react/mobx",
+            "/react/mobx-react",
             "/react/hooks"
           ]
         }

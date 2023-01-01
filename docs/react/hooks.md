@@ -247,6 +247,14 @@ function B() {
 
 export default A
 ```
+:::tip 省略 Provider
+如果不使用`<Provider.value>`传递数据的话，`useContext`获取到的数据就是`createContext`默认传入的数据：
+```js
+const MyContext = createContext({ name: "Luci", age: 17 })
+
+const { name } = useContext(MyContext) // Luci
+```
+:::
 
 ## useReducer
 

@@ -1,6 +1,6 @@
 # React-Redux
 
-React-Redux 是 React 官方为了集成 [Redux](/react/redux.md) 作为 React 集中式状态管理而发布的库。  
+React-Redux 是 React 官方为了集成 [Redux](/react/redux.md) 作为 React 集中式状态管理而发布的工具。  
 
 ```sh
 npm i react-redux -S
