@@ -193,6 +193,28 @@ class App extends React.Component {
 }
 ```
 
+### index
+
+当省略了`path`属性时，`index`属性就可以用于匹配默认的子路由，下面代码中，当路由路径不为`/movie`的时候都匹配`<Music>`路由：
+
+```jsx
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+
+const Music = () => <div>音乐</div>
+const Movie = () => <div>电影</div>
+
+class App extends React.Component {
+  render() {
+    return (
+      <Router>
+        <Route index component={Music}></Route>
+        <Route path="/movie" component={Movie}></Route>
+      </Router>
+    )
+  }
+}
+```
+
 ## Switch 组件
 
 多个 Route 组件的`path`同时匹配，会将所有匹配上的 Route 组件都展示。如果给这些 Route 组件加上`Switch`组件包裹，那么只会匹配第一个成功的 Route 组件，不会继续往后匹配。
@@ -361,9 +383,9 @@ class Home extends React.Component {
 }
 ```
 
-## 动态路由参数
+## 路由params参数
 
-动态路由参数即params参数，跟vue-router一样，注册路由时，在路由路径以冒号:拼接一个自定义key值来声明params参数。将来在传递该参数时，需要动态拼接到路径后面即可。
+跟vue-router一样，react-router注册路由时，在路由路径以冒号:拼接一个自定义key值来声明params参数。将来在传递该参数时，需要动态拼接到路径后面即可。
 
 ```jsx {6-7,10-11}
 class App extends React.Component {
@@ -385,7 +407,7 @@ class App extends React.Component {
 }
 ```
 
-在组件内，`props.match.params`是一个对象，可以通过该对象来获取这些动态路由参数。
+在组件内，`props.match.params`是一个对象，可以通过该对象来获取这些路由params参数。
 
 ```jsx {3}
 class Music extends Component {
@@ -397,9 +419,9 @@ class Music extends Component {
 }
 ```
 
-## 路由查询参数
+## 路由search参数
 
-路由查询参数不需要在注册路由时声明参数，只需要在跳转路由的路径中，手动将参数拼接成`urlencoded`的形式。
+路由search参数不需要在注册路由时声明参数，只需要在跳转路由的路径中，手动将参数拼接成`urlencoded`的形式。
 
 ```jsx {6-7}
 class App extends React.Component {
@@ -446,7 +468,7 @@ import qs from "qs"
 - **`qs.stringify(obj)`**：将一个JS对象转换为`urlencoded`格式的字符串。
 - **`qs.parse(str)`**：将一个`urlencoded`格式的字符串转换为JS对象。
 
-使用`qs`库转换数据，就可以正常的获取到路由查询参数了：
+使用`qs`库转换数据，就可以正常的获取到路由search参数了：
 ```jsx
 class Music extends Component {
   render() {
@@ -518,9 +540,9 @@ class Music extends Component {
 - **`go(n)`**：前进或者后退到某个页面，n 表示要前进或者后退的页面数量（正数表示前进，负数表示后退，-1 表示返回到上个页面）。
 - **`listen(callback)`**：监听`location`对象，`callback`的参数就是变化后的`location`对象。
 
-:::warning
+### 非路由组件内使用history
+
 在 React 中，只有通过路由渲染的组件才拥有`props.history`这个对象，而其他组件是没有的。如果其他组件也想要使用`props.history`这个对象，需要通过内置的高阶组件`withRouter`来赋予。
-:::
 
 ```jsx
 import { BrowserRouter as Router, Route, withRouter } from "react-router-dom"
@@ -562,6 +584,57 @@ class App extends React.Component {
   }
 }
 ```
+
+### 非路由上下文内使用history
+
+高阶组件`withRouter`只用赋予React组件`history`，而如果在React组件之外使用`history`对象，例如：api模块中、store模块中...等等，就需要借助`history`这个库来实现：
+
+```sh
+npm i history -S
+```
+```js
+// @/utils/history.js
+import { createBrowserHistory } from 'history'
+
+const history = createBrowserHistory()
+
+export default history
+```
+使用`unstable_HistoryRouter`生成路由上下文，并传递`history`对象
+```jsx
+// @/index.js
+import React from "react"
+import ReactDOM from "react-dom/client"
+import App from "@/App"
+
+import { unstable_HistoryRouter as Router } from "react-router-dom"
+import { history } from "@/utils/history"
+
+const root = ReactDOM.createRoot(document.getElementById("root"))
+root.render(
+  <Router history={history}>
+    <App />
+  </Router>
+)
+```
+在需要使用`history`的地方导入就可以直接使用了。
+```js
+// @/api/http.js
+import axios from "axios"
+import { history } from "@/utils/history"
+
+axios.interceptors.response.use(
+  response => response.data,
+  error => {
+    if (error.response.status === 401) {
+      history.push("/login") // 路由跳转
+    }
+    return Promise.reject(error)
+  }
+)
+```
+
+### 编程式导航传参
 
 在编程式导航中传递路由参数其实和使用`<Link>`组件是一样的，**params参数** 和 **search参数** 只需要对路由路径进行手动拼接数据即可。**params参数** 一样要记得在注册路由的时候声明参数。
 
@@ -638,6 +711,8 @@ import Movie from "./pages/Movie"
 import Default from "./pages/Default"
 ```
 ```js
+import { lazy } from "react"
+
 // 通过lazy懒加载组件（异步加载）
 const Music = lazy(() => import("./pages/Music"))
 const Movie = lazy(() => import("./pages/Movie"))
@@ -648,6 +723,8 @@ const Default = lazy(() => import("./pages/Default"))
 `<Suspense />`是React的内置组件，它的`fallback`属性指向一个组件，该组件会在异步路由还未载入完毕时展示，可以用作类似Loading的效果。
 
 ```jsx
+import { lazy, Suspense } from "react"
+
 // 通过lazy懒加载组件
 const Music = lazy(() => import("./pages/Music"))
 const Movie = lazy(() => import("./pages/Movie"))
@@ -676,5 +753,42 @@ class App extends React.Component {
 :::warning
 当开启`lazy`懒加载组件时，必须配合`<Suspense />`组件一起使用，否则React会抛出异常。
 :::
+
+### 闪屏现象
+
+`<Suspense />`包裹的路由都会在使用时才加载，而如果一些公共的路由组件，例如`<Layout />`，也被`<Suspense />`包裹时，每次刷新都会出现闪屏现象。
+
+正确的做法是，公共的路由组件使用同步加载，而其他的页面路由才使用懒加载，并且`<Suspense />`只包裹使用了懒加载的路由即可。下面代码中的路由注册是采用了 [React-Router-V6](/react/router_v6.html) 的路由表写法：
+
+```js
+import { lazy, Suspense } from "react"
+
+import Layout from "@/pages/Layout" // 公共布局组件同步加载
+
+const Home = lazy(() => import("@/pages/Home"))
+const Article = lazy(() => import("@/pages/Article"))
+const Publish = lazy(() => import("@/pages/Publish"))
+const Login = lazy(() => import("@/pages/Login"))
+
+const lazyload = children => {
+  // Suspense只包裹懒加载路由
+  return <Suspense fallback={<h1>loading...</h1>}>{children}</Suspense>
+}
+
+const routes = [
+  { path: "/login", element: lazyload(<Login />) },
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      { index: true, element: lazyload(<Home />) },
+      { path: "article", element: lazyload(<Article />) },
+      { path: "publish", element: lazyload(<Publish />) }
+    ]
+  }
+]
+
+export default routes
+```
 
 <Vssue />

@@ -173,7 +173,7 @@ export default new Router({
 如果一个路由记录中定义了`components`，则渲染时不会再去找`component`。
 :::
 
-## 动态路由参数
+## 路由params参数
 在路由记录的`path`属性里，以冒号`:`拼接一个自定义`key`值。
 ```js
 export default new Router({
@@ -212,7 +212,7 @@ Vue渲染的时候，不会把**Key**也渲染上去：`xxx.html#/user/1`。
 如果定义了`path`又定义了`name`，那么`path`会失效。优先级：**`name > path > params`**。`name`和`params`不会冲突，通常是它们两一块使用，`path`则定义在路由记录内。
 :::
 
-## 路由查询参数
+## 路由query参数
 在`<router-link>`组件中，`to`属性对应的对象，有一个属性`query`，也对应一个键值对对象。
 
 * **`key`**：查询参数的**key**。
@@ -251,15 +251,16 @@ export default {
 </script>
 ```
 
-### 路由信息对象属性
+路由信息对象的属性：
  * **`path`**：当前路由的路径，不含查询参数。
  * **`fullpath`**：当前路由完整由路径，包含查询参数。
  * **`name`**：路由名称。
- * **`params`**：动态路由参数。
- * **`query`**：路由查询参数。
+ * **`params`**：路由params参数。
+ * **`query`**：路由query参数。
  * **`hash`**：路由hash值。
  * **`meta`**：保存字段信息。
- * 更多属性请查阅[官网](https://router.vuejs.org/zh/api/#路由对象属性)...
+ 
+更多属性请查阅[官网](https://router.vuejs.org/zh/api/#路由对象属性)...
 
 ## 嵌套路由
 在某个路由加载的组件之中，又有别的路由，这种情况叫做嵌套路由。简单点说，就是要在外层路由中加载各种内层路由。
@@ -322,7 +323,7 @@ export default new Router({
 
 在结构一模一样的情况下，应该定义一个组件，这个组件相当于一个渲染模板。监听路由变化时，动态修改组件的内容即可，这种方式也叫做**动态路由匹配**。这种模式和公共组件的复用很类似，所以这种动态路由会多用于公共组件上。
 * 监听路由变化：`watch`、`导航守卫`。
-* 传递数据：路由出口相当于要渲染的子组件，可以通过组件传参的方式传递动态路由参数给这个视图渲染的子组件。
+* 传递数据：路由出口相当于要渲染的子组件，可以通过组件传参的方式传递动态params参数给这个视图渲染的子组件。
 ```js
 export default new Router({
   routes: [
@@ -334,7 +335,7 @@ export default new Router({
         {
           //渲染模板组件
           name: "comDesc",
-          path: "/home/:id", //传递一个动态路由参数，让watch监听参数变化作相应
+          path: "/home/:id", //传递一个路由params参数，让watch监听参数变化作相应
           component: ComDesc
         }
       ]
@@ -359,7 +360,7 @@ export default {
   },
   watch: {
     $route(to, from) {
-      this.msg = to.params.id //当动态路由参数发生变化，取出变化的参数，传递给子组件
+      this.msg = to.params.id //当路由参数发生变化，取出变化的参数，传递给子组件
     }
   }
 }

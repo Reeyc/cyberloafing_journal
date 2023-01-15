@@ -35,7 +35,7 @@ export default Counter
 
 当组件内的`state`发生变化，整个函数组件都会重新渲染。函数在重复渲染时都会获取到该`state`的最新值。如上面例子中，每次更新`count`后，函数内总能获取到最新的`count`值。
 
-### setXxx的第二种写法
+### setXxx函数写法
 
 setXxx支持传入函数，接收原本的状态值，返回新的状态值，新的状态值将会覆盖掉原来的状态值。
 ```jsx {4-7}
@@ -175,9 +175,94 @@ function Counter() {
 }
 ```
 
+### 调用函数
+
+如果某个函数只在`useEffect`内执行，建议将该函数声明到`useEffect`内部而不是外部，避免组件rerender造成函数重新声明。变量也是如此。
+
+并且当函数内有异步操作时，`useEffect`也可以更好的管理内部声明的异步状态：
+```jsx {9,11-19}
+import { useState, useEffect } from "react"
+
+export default function useFetch(url, options) {
+  const [data, setData] = useState(null)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    // 异步状态
+    let isUnmounted = false
+    // 将函数声明在useEffect内部
+    const fetchData = async () => {
+      try {
+        const res = await fetch(url, options)
+        const json = await res.json()
+        if (!isUnmounted) setData(json)
+      } catch (error) {
+        if (!isUnmounted) setError(error)
+      }
+    }
+    fetchData()
+    return () => {
+      isUnmounted = true
+    }
+  }, [url])
+
+  return { data, error }
+}
+```
+
+### 多个useEffect
+
+当多个`useEffect`同时存在时，会按照书写书写顺序从上至下执行：
+```jsx
+export default function Index() {
+  useEffect(() => {
+    console.log("1")
+  })
+  useEffect(() => {
+    console.log("2")
+  })
+  return null
+}
+```
+同时触发了update时，顺序一样也是从上至下执行：
+```jsx
+export default function Index() {
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    console.log("1")
+  }, [count])
+
+  useEffect(() => {
+    console.log("2")
+  }, [count])
+
+  return (
+    <div>
+      <h3>count：{count}</h3>
+      <button onClick={() => setCount(count + 1)}>click</button>
+    </div>
+  )
+}
+```
+
+建议将不同依赖项的逻辑抽离成多个`useEffect`，而不是耦合在一起：
+```jsx
+useEffect(() => {
+  getDetail()
+}, [route.id])
+
+useEffect(() => {
+  getList()
+}, [params])
+```
+
+
 ## useRef
 
-用于管理组件内所标识的DOM元素。用法跟`React.createRef()`很像，`useRef()`返回一个ref对象，将该ref对象通过`ref`属性绑定到元素上，就可以通过该对象的`current`属性获取到绑定的DOM元素。
+`useRef()`主要有两大作用：管理DOM元素/组件实例、缓存变量。
+### 管理元素
+用法跟`React.createRef()`类似，`useRef()`返回一个ref对象，将该ref对象通过`ref`属性绑定到元素/组件上，就可以通过该对象的`current`属性获取到绑定的DOM元素/组件实例。
 
 传入的参数为初始化数据，通常传入`null`或者省略参数。
 
@@ -202,6 +287,40 @@ function Counter() {
 
 export default Counter
 ```
+### 缓存变量
+众所周知，在React中，组件内部的状态发生变化，组件便会rerender，其内部声明的一些变量也会因此重新初始化。而通过`useRef()`来声明的变量可以暂存起来，当组件rerender时，该变量还会保存之前的状态，并不会重新初始化。
+
+当你的变量将来会被修改时，建议使用`useRef()`来声明。
+```jsx {5-6,13-14}
+import { useState, useEffect, useRef } from "react"
+
+export default function Index() {
+  const [count, setCount] = useState(0)
+  let initData = null
+  let refData = useRef(null)
+
+  console.log("render initData：", initData)
+  console.log("render refData：", refData.current)
+  console.log("################################")
+
+  useEffect(() => {
+    initData = { x: 1, y: 2 }
+    refData.current = { x: 1, y: 2 }
+
+    console.log("update initData：：", initData)
+    console.log("update refData：", refData.current)
+    console.log("################################")
+  }, [])
+
+  return (
+    <div>
+      <h3>count：{count}</h3>
+      <button onClick={() => setCount(count + 1)}>click</button>
+    </div>
+  )
+}
+```
+注意，修改ref变量的`current`属性不会引起组件rerender。
 
 ## useContext
 
@@ -413,7 +532,7 @@ const [userState, dispatch] = useReducer(userReducer, {
 
 ## useMemo
 
-`useMemo`通常作为优化性能的手段被使用。类似于Vue中的`computed`，`useMemo`可以用来**缓存变量**，以避免两次渲染间的重复计算。
+`useMemo`通常作为优化性能的手段被使用。类似于Vue中的`computed`，`useMemo`可以用来**缓存计算变量的逻辑**，以避免两次渲染间的重复计算。
 
 `useMemo`用法和`useEffect`类似，接收一个函数和一个依赖项数组，函数会在初始化时执行一次，并且会在依赖项发生改变时，重新执行。
 
