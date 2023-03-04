@@ -117,7 +117,7 @@ function delCookie(key, path) {
 ## localStorage & sessionStorage
 `sessionStorage`和`localStorage`是H5的API，也是本地储存，而且空间更大，可以算是cookie的升级版。
 * `sessionStorage`储存大小为5M。关闭浏览器窗口清除
-* `localStorage`储存大小为20M。永久储存（除非手动删除）
+* `localStorage`储存大小为5M。永久储存（除非手动删除）
 
 两者的相同点：本地储存、都是**window**对象的属性、储存类型都是字符串、相同的API
 
@@ -139,7 +139,7 @@ localStorage.clear()
 sessionStorage.clear()
 ```
 ::: tip
-如果是对象会储存为`[object Object]`，可以用JSON形式存对象
+如果是对象会储存为`[object Object]`，可以用JSON序列化形式存对象。同样使用JSON反序列化读取。
 :::
 
 <Vssue />
