@@ -178,4 +178,106 @@ console.log("script end")
 'then2' // 新的宏任务内事件队列微任务执行完毕
 ```
 
+## 异步函数的返回值
+
+下面这一段代码中，输出的结果是0、1、2、3、4、5。如何解释 4 会输出在 3 和 5 的中间呢。
+```js
+Promise.resolve()
+  .then(() => {
+    console.log(0)
+    return Promise.resolve()
+  })
+  .then(() => {
+    console.log(4)
+  })
+
+Promise.resolve()
+  .then(() => {
+    console.log(1)
+  })
+  .then(() => {
+    console.log(2)
+  })
+  .then(() => {
+    console.log(3)
+  })
+  .then(() => {
+    console.log(5)
+  })
+// 输出：0、1、2、3、4、5
+```
+
+其实在v8引擎内部的实现中，对`then`回调函数的返回值，和`async`函数的返回值做了特殊处理，针对其不同的返回值，实际上的表现会有所不同。
+
+这里的观点你基本不会在任何书上看到，全部来自于v8引擎内部实现，下面分别看看。
+
+* return：非`thenable`、非`promise`（不等待）
+* return：`thenable`（等待 1个then的时间）
+* return：`promise`（等待 2个then的时间）
+
+:::tip Thenable
+在ECMAScript暴露的异步结构中，实现了`then()`方法的对象就被认为是实现了`thenable`接口。
+```js
+const thenable = {
+  then(resolve, reject) {}
+}  
+// 我们认为这就是一个 thenable 接口
+```
+:::
+
+上面的例子中，两个`Promise.resolve()`在主线程中被执行，它们2个分别产生了一个`promise`，该`promise`的首个`then`回调函数被依次放进微任务队列中，所以先执行了0、1。
+
+其次继续往下执行，由于第一个`then`返回的是一个`promise`，因此它之后的一个`then`会在异步队列中等待2个`then`的时间才执行。所以最终输出2、3，才到4，最后输出5。
+
+---
+
+async函数的return值也是同理遵循该规则：
+
+```js
+async function foo() {
+  return "foo"
+}
+foo().then(() => console.log("a"))
+Promise.resolve()
+  .then(() => console.log("b"))
+  .then(() => console.log("c"))
+// 输出结果：a b c
+```
+
+上面例子中，`foo`函数为一个async函数，它没有返回`thenable`和`promise`，因此 a、b、c 被放进微任务队列之后按顺序执行。
+
+如果稍加改造foo函数的返回值：
+
+```js
+async function foo() {
+  return {
+    then(resolved) {
+      resolved()
+    }
+  }
+}
+foo().then(() => console.log("a"))
+Promise.resolve()
+  .then(() => console.log("b"))
+  .then(() => console.log("c"))
+// 输出结果：b a c
+```
+
+上面例子中，`foo`函数依旧为一个async函数，不同的是，其返回值被改成了`thenable`，所以它下一个`then`会等待 1个`then`的时间执行，最终输出结果是 b a c。
+
+再把`foo`返回值改造成一个`promise`：
+
+```js
+async function foo() {
+  return Promise.resolve()
+}
+foo().then(() => console.log("a"))
+Promise.resolve()
+  .then(() => console.log("b"))
+  .then(() => console.log("c"))
+// 输出结果：b c a
+```
+
+`foo`返回了一个`promise`，按照规则，`console.log("a")`需要等待两个`then`的时间才会执行，所以最终输出的顺序是 b c a。
+
 <Vssue />
