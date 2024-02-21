@@ -1,7 +1,7 @@
 const path = require("path")
 
 module.exports = {
-  base: "/blog/",
+  // base: "/blog/",
   title: "Cyberloafing Journal",
   description: "网络闲散日志",
   head: [
