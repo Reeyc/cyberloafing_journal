@@ -6,6 +6,7 @@ export default {
     }
   },
   mounted() {
+    document.title = "Cyberloafing Journal - 个人日志文章记录"
     setTimeout(() => {
       const hasWechat = document.querySelector("._wechat")
 
@@ -30,7 +31,7 @@ export default {
         wechat.onclick = this.showWechat
         wechatCopy.onclick = this.copyText
 
-        document.onclick = function() {
+        document.onclick = function () {
           wechatImg.style.display = "none"
         }
       }
