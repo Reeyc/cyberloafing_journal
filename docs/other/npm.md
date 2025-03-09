@@ -151,6 +151,26 @@ npm i eslint --save-dev # 把依赖包描述加进devDependencies中
 
 * **版本锁定**：当我们把包给删了，执行`npm install`重新下载回来，默认会下载最新版本的包。有时我们更希望包是原来那个版本的，否则项目中可能会引发兼容性问题，此时如有果`pack.lock.json`文件，**npm** 会直接从这里寻找版本号，从而防止下载到最新版本的包。
 
+## npm发布
+
+1. npm官网创建账户：[https://www.npmjs.com/](https://www.npmjs.com/)
+2. 本地项目内初始化npm
+:::warning 注意
+- npm镜像源要切为官方的：`npm config set registry https://registry.npmjs.org/`
+- npm名称不可重复，可以在npm官网search
+:::    
+3. 项目内登录`npm login`
+4. 项目内发布`npm publish`
+5. 建立git远程仓库，并上传代码 <Badge text="可选"/>
+6. 后续有改动：
+    - 发布npm
+      - 补丁修复(补丁版本) `npm version patch`
+      - 增加功能(次版本) `npm version minor`
+      - 不兼容的更改(主版本) `npm version major`
+    - 上传代码 <Badge text="可选"/>
+
+推荐：虽然上传到npm后代码也可以被其他人使用，但将代码托管到GitHub等平台是推荐的做法。
+
 ## rimraf
 由于 **npm** 会把依赖包中的各种依赖关系包都给下载下来（例如：a包依赖b包，b包又依赖c包等等...），所以`node_modules`目录会变得非常庞大，如果因为某些原因需要删除这个目录并重新安装依赖包，直接右键删除会非常慢，这时可以通过`rimraf`插件来协助快速删除`node_modules`目录。
 ```shell

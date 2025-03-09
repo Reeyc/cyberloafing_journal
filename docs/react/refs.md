@@ -177,4 +177,38 @@ class App extends React.Component {
 使用 `React.createRef()` 来绑定组件时，组件必须是**class组件**，**函数组件**是无法获取到实例的。如上面例子中，`<Child />`组件必须是class组件。
 :::
 
+在类组件中，`ref`会直接绑定到类实例，可以通过`this.refName.current`访问到类的实例，并调用其方法。
+
+但是函数组件没有实例的概念，它仅仅是一个纯函数，渲染并返回UI。也就是说，传递给函数组件的`ref`会丢失，无法直接绑定到该组件的实例。
+
+## forwardRef
+
+`forwardRef`用于解决函数组件无法接收`ref`的问题，它让你能够将`ref`转发到函数组件内部的DOM元素或者其他子组件中。
+
+`forwardRef`是一个函数，它接受一个函数组件作为参数，并返回一个新的组件。这个新组件可以将`ref`属性转发给其子组件：
+
+```jsx
+// 函数组件（使用了forwardRef进行包裹）
+const MyButton = React.forwardRef((props, ref) => {
+  return <button ref={ref}>Click me</button>
+})
+
+function App() {
+  const buttonRef = React.createRef()
+
+  const handleClick = () => {
+    //可以通过 ref 调用 MyButton 内部的 DOM 元素方法
+    buttonRef.current.focus()
+  }
+
+  return (
+    <div>
+      <MyButton ref={buttonRef} />
+      <button onClick={handleClick}>Focus the button</button>
+    </div>
+  )
+}
+```
+上述例子中，`<APP/>`将`ref`传递给`<MyButton/>`，而`<MyButton/>`组件使用了`forwardRef`进行包裹，因此当你在`<APP/>`调用`buttonRef.current.focus()`时，实际上是调用了`<MyButton/>`组件内的button元素的`focus()`方法。
+
 <Vssue />

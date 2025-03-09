@@ -257,6 +257,38 @@ useEffect(() => {
 }, [params])
 ```
 
+### useLayoutEffect
+
+`useLayoutEffect`跟`useEffect`的作用基本相同，唯一的区别就是回调函数调用的时机不同：
+
+众所周知，浏览器的[渲染流程](/js/advanced/render.html)是先更新DOM Tree，再绘制Render Tree。`useEffect`就是等待DOM Tree跟Render Tree都执行完毕之后，才会异步执行回调函数。**只有一次回流、重绘的代价**。
+
+而`useLayoutEffect`会在DOM Tree更新完毕时就同步执行回调函数，会阻塞页面的渲染。
+
+正因如此，`useLayoutEffect`通常用于操作DOM的场景，从而避免页面抖动的现象。
+
+```jsx
+export default function Index() {
+  const [size, setSize] = useState(null)
+  const divRef = useRef()
+
+  useLayoutEffect(() => {
+    const { width, height } = divRef.current.getBoundingClientRect()
+    // 在页面渲染完成之前改变状态
+    setSize({ width, height })
+  }, [])
+
+  return (
+    <div>
+      <div ref={divRef} style={{ width: "200px", height: "100px", backgroundColor: "red" }}></div>
+      {size && (
+        <p>Width: {size.width}px, Height: {size.height}px</p>
+      )}
+    </div>
+  )
+}
+```
+
 
 ## useRef
 

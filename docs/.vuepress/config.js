@@ -1,7 +1,7 @@
 const path = require("path")
 
 module.exports = {
-  // base: "/blog/",
+  // base: "/reeyc/",
   title: "Cyberloafing Journal",
   description: "网络闲散日志",
   head: [
@@ -213,6 +213,7 @@ module.exports = {
             "/react/router",
             "/react/router_v6",
             "/react/redux",
+            "/react/redux_middleware",
             "/react/react_redux",
             "/react/mobx",
             "/react/mobx-react",
