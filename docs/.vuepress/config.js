@@ -1,7 +1,17 @@
 const path = require("path")
 
+const githubClientInfo = {
+  development: {
+    clientId: "d820182a416bddb06238",
+    clientSecret: "ed15f29f24ffdaef52fc5d03a423012f7dfa20b5"
+  },
+  production: {
+    clientId: "065e72b5ff237807bdc0",
+    clientSecret: "62b07d3fc7997d0a42fdaddd93c7fa58fb8b7220"
+  }
+}
+
 module.exports = {
-  // base: "/reeyc/",
   title: "Cyberloafing Journal",
   description: "网络闲散日志",
   head: [
@@ -29,8 +39,8 @@ module.exports = {
         locale: "zh", //语言
         owner: "Reeyc", //github账户名
         repo: "cyberloafing_journal", //github一个项目的名称
-        clientId: "065e72b5ff237807bdc0", //注册的Client ID
-        clientSecret: "62b07d3fc7997d0a42fdaddd93c7fa58fb8b7220", //注册的Client Secret
+        clientId: githubClientInfo[process.env.NODE_ENV].clientId, //注册的Client ID
+        clientSecret: githubClientInfo[process.env.NODE_ENV].clientSecret, //注册的Client Secret
         autoCreateIssue: true // 自动创建评论，默认是false，最好开启，这样首次进入页面的时候就不用去点击创建评论的按钮了。
       }
     ]
