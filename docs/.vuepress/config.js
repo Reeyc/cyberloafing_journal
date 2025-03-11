@@ -227,7 +227,8 @@ module.exports = {
             "/react/react_redux",
             "/react/mobx",
             "/react/mobx-react",
-            "/react/hooks"
+            "/react/hooks",
+            "/react/dva_js"
           ]
         }
       ],

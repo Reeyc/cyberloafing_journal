@@ -468,7 +468,7 @@ const store = createStore(
 - `action`: 当前执行的 action。
 - `next state`: 执行action 后的 state。
 
-## redux-toolkit
+<!-- ## redux-toolkit -->
 
 ## redux-persist
 手动通过localstorage维护state的存取可以实现持久化，但是需要手动管理数据。推荐使用`redux-persist`插件来管理数据持久化：
