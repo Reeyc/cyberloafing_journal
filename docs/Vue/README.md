@@ -10,9 +10,7 @@
 * [动画](/vue/vue2/animate.md)
 * [VueRouter](/vue/vue2/vue_router.md)
 * [Vuex](/vue/vue2/vuex.md)
-* [组件通信汇总](/vue/vue2/communication.md)
-* [打包优化汇总](/vue/vue2/pack.md)
-* [Vue2响应式原理](/vue/vue2/reactive.md)
+
 
 ## Vue3
 
@@ -25,3 +23,13 @@
 * [hook的概念](/vue/vue3/hook.md)
 * [内置组件](/vue/vue3/internal.md)
 * [Pinia](/vue/vue3/pinia.md)
+
+## 进阶
+
+* [虚拟DOM](/vue/advanced/virtual_dom.md)
+* [Diff算法分析](/vue/advanced/diff.md)
+* [MVVM](/vue/advanced/mvvm.md)
+* [Vue2响应式原理](/vue/advanced/vue2_reactive.md)
+* [Vue3响应式原理](/vue/advanced/vue3_reactive.md)
+* [组件通信汇总](/vue/advanced/communication.md)
+* [打包优化汇总](/vue/advanced/pack.md)

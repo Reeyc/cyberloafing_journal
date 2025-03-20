@@ -47,7 +47,7 @@ module.exports = {
  ```
 :::warning
 * 在`main.js`中，相应的框架/库，例如**vue**、**element-ui**都不需要`import`引入了。如果项目中使用了**eslint**校验，可以在文件首行写上`/* eslint-disable */`禁止校验当前文件。\
-有人说不引入对应框架/库的话会报`xxx is not a defined`等等类似错误，那是因为使用的是CDN资源，抛出的**全局变量**与在项目中使用的**全局变量**对不上，只需要改过即可。
+若是报`xxx is not a defined`等等类似错误，那是因为使用的是CDN资源，抛出的**全局变量**与在项目中使用的**全局变量**对不上，只需要改过即可。
 ```js
 Vue.use(Router) //替换为Vue.use(VueRouter) 
 

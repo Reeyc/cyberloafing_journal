@@ -11,7 +11,31 @@
 .table-scroll
   overflow-x scroll
 
-/************************/
+/************ copy ************/
+
+.code-copy-added
+  background transparent !important
+  .code-copy
+    position absolute
+    top 0
+    left 0
+    right 0
+    svg
+      position absolute
+      right 40px
+      top 10px
+      opacity 1 !important
+      width 16px
+      height 16px
+      & + span
+        position absolute
+        top 8px
+        right 60px
+
+.demo-code-content-copy
+  display none // 隐藏插件 @vuepress-reco/extract-code 的复制效果
+
+/*******************************/
 
 .navbar 
   white-space nowrap

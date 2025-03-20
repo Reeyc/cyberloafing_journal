@@ -29,6 +29,8 @@ module.exports = {
     lineNumbers: true // 代码块显示行号
   },
   plugins: [
+    ["@vuepress-reco/extract-code"],
+    ["vuepress-plugin-code-copy", true],
     ["@vuepress/nprogress"],
     ["@vuepress/back-to-top"],
     ["reading-progress"],
@@ -59,10 +61,10 @@ module.exports = {
         ariaLabel: "Language Menu",
         items: [
           { text: "Git", link: "/other/git/" },
-          { text: "Nginx", link: "/other/nginx/" },
+          // { text: "Nginx", link: "/other/nginx/" },
           { text: "Axios", link: "/other/axios/" },
           { text: "Npm", link: "/other/npm/" },
-          { text: "Uni-App", link: "/other/uni-app/" },
+          // { text: "Uni-App", link: "/other/uni-app/" },
           { text: "Webpack", link: "/other/webpack/" },
           { text: "Vite", link: "/other/vite/" }
         ]
@@ -180,10 +182,7 @@ module.exports = {
             "/vue/vue2/multiplex",
             "/vue/vue2/animate",
             "/vue/vue2/vue_router",
-            "/vue/vue2/vuex",
-            "/vue/vue2/communication",
-            "/vue/vue2/pack",
-            "/vue/vue2/reactive"
+            "/vue/vue2/vuex"
           ]
         },
         {
@@ -200,6 +199,20 @@ module.exports = {
             "/vue/vue3/hook",
             "/vue/vue3/internal",
             "/vue/vue3/pinia"
+          ]
+        },
+        {
+          title: "进阶",
+          sidebarDepth: 2,
+          collapsable: false,
+          children: [
+            "/vue/advanced/virtual_dom",
+            "/vue/advanced/diff",
+            "/vue/advanced/mvvm",
+            "/vue/advanced/vue2_reactive",
+            "/vue/advanced/vue3_reactive",
+            "/vue/advanced/communication",
+            "/vue/advanced/pack"
           ]
         }
       ],
@@ -257,7 +270,8 @@ module.exports = {
           title: "Other",
           sidebarDepth: 2,
           collapsable: false,
-          children: ["/other/git", "/other/nginx", "/other/axios", "/other/npm", "/other/uni-app", "/other/webpack", "/other/vite"]
+          children: ["/other/git", "/other/axios", "/other/npm", "/other/webpack", "/other/vite"]
+          // children: ["/other/git", "/other/nginx", "/other/axios", "/other/npm", "/other/uni-app", "/other/webpack", "/other/vite"]
         }
       ],
       "/Interview/": [
