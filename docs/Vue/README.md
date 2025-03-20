@@ -26,10 +26,10 @@
 
 ## 进阶
 
-* [虚拟DOM](/vue/advanced/virtual_dom.md)
-* [Diff算法分析](/vue/advanced/diff.md)
 * [MVVM](/vue/advanced/mvvm.md)
 * [Vue2响应式原理](/vue/advanced/vue2_reactive.md)
 * [Vue3响应式原理](/vue/advanced/vue3_reactive.md)
+* [虚拟DOM](/vue/advanced/virtual_dom.md)
+* [Diff算法分析](/vue/advanced/diff.md)
 * [组件通信汇总](/vue/advanced/communication.md)
 * [打包优化汇总](/vue/advanced/pack.md)

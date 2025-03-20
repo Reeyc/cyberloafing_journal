@@ -206,11 +206,11 @@ module.exports = {
           sidebarDepth: 2,
           collapsable: false,
           children: [
-            "/vue/advanced/virtual_dom",
-            "/vue/advanced/diff",
             "/vue/advanced/mvvm",
             "/vue/advanced/vue2_reactive",
             "/vue/advanced/vue3_reactive",
+            "/vue/advanced/virtual_dom",
+            "/vue/advanced/diff",
             "/vue/advanced/communication",
             "/vue/advanced/pack"
           ]
