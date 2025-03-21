@@ -1,15 +1,15 @@
 # Vue3响应式原理
 
-Vue3跟Vue2一样，通过对对象的属性劫持 + **发布/订阅** 模式来实现的数据响应式。只不过Vue2使用的是`Object.defineProperty`，而Vue3用的是ES6的`Proxy`代理对象实现。
+Vue3跟Vue2一样，通过对象的 **属性劫持** + **依赖收集** + **触发更新** 来实现的数据响应式。只不过Vue2使用的是`Object.defineProperty`，而Vue3用的是ES6的`Proxy`代理对象实现。
 
 `Proxy`支持监听对象进行的访问、赋值等操作，Vue3在这些操作发生时通知相关依赖以维护响应式系统的更新：
 
-> 当我们将一个数据对象定义为响应式对象（`reactive`）时，Vue3将在这个对象上建立一个`Proxy`，这个`Proxy`会监视这个对象的所有属性，并收集相关依赖。每当属性发生变化时，`Proxy`会自动通知相关依赖进行更新，从而实现响应式的更新。
+> 当我们将一个数据对象定义为响应式对象（`reactive`）时，Vue3将在这个对象上建立一个`Proxy`，`Proxy`在这个对象属性被访问时收集依赖，在属性被修改时触发更新，从而实现高效的响应式系统。
 
 ## 创建响应式对象 reactive
-通过ES6的`Proxy`创建响应式对象。
-- 通过`getter`监听对象的**读取**操作，并触发`track`函数。
-- 通过`setter`监听对象的**赋值**操作，并触发`trigger`函数。
+通过ES6的`Proxy`创建响应式对象，并通过`track`和`trigger`进行依赖追踪和触发更新：
+- `getter`负责监听对象属性的**读取**，并调用`track`进行依赖收集。
+- `setter`负责监听对象属性的**赋值**，并调用`trigger`触发更新。
 ```js
 function reactive(target) {
   return new Proxy(target, {
@@ -31,7 +31,7 @@ function reactive(target) {
 ```
 
 ## 依赖收集函数 track
-Vue3维护一个`WeakMap`，用于管理所有的`reactive`响应式对象。所有的`reactive`对象维护一个`Map`来管理该对象所有属性的副作用集合（`set`结构）。
+Vue3维护一个`WeakMap`，用于管理所有的`reactive`响应式对象。所有的`reactive`对象维护一个`Map`来管理该对象所有属性的副作用集合（`Set`结构）。
 ```js
 // 管理所有的reactive响应式对象
 const targetMap = new WeakMap()
