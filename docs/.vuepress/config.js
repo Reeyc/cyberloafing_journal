@@ -261,7 +261,8 @@ module.exports = {
             "/ts/interface",
             "/ts/generic",
             "/ts/operator",
-            "/ts/decorator"
+            "/ts/decorator",
+            "/ts/declare"
           ]
         }
       ],

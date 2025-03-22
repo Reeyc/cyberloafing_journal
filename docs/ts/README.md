@@ -11,3 +11,4 @@
 * [泛型](/ts/generic.md)
 * [操作符](/ts/operator.md)
 * [装饰器](/ts/decorator.md)
+* [类型声明文件](/ts/declare.md)
